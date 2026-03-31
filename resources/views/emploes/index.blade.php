@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
-@section('title', __('emploes_page.title') . ' | UMKA Kindergarten CRM')
+@section('title', __('menu.emploes'))
 
 @section('content')
   <div class="row">
     <div class="col-6">
       <div class="pagetitle">
-        <h1>{{ __('emploes_page.employees') }}</h1>
+        <h1>{{ __('menu.emploes') }}</h1>
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
-            <li class="breadcrumb-item active">{{ __('emploes_page.employees') }}</li>
+            <li class="breadcrumb-item active">{{ __('menu.emploes') }}</li>
           </ol>
         </nav>
       </div>

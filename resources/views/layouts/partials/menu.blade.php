@@ -1,7 +1,7 @@
 <li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['emploes_index','emploes_show']) ? '' : 'collapsed' }}" href="{{ route('emploes_index') }}">
     <i class="bi bi-house-heart"></i>
-    <span>Hodimlar</span>
+    <span>{{ __('menu.emploes') }}</span>
   </a>
 </li>
 

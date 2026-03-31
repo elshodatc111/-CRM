@@ -2,8 +2,6 @@
 
 return [
     // Sahifa matnlari
-    'title' => 'Xodimlar',
-    'employees' => 'Xodimlar',
     'add_new' => 'Yangi xodim qo\'shish',
     'employees_list' => 'Xodimlar ro\'yxati',
     'fio' => 'FIO',
