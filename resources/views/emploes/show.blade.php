@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', __('menu.dashboard') . ' | UMKA Kindergarten CRM')
+@section('title', 'UMKA Kindergarten CRM')
 
 @section('content')
   <div class="pagetitle">

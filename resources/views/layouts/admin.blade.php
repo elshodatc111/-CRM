@@ -58,7 +58,15 @@
         $(".guvoxnoma_serya").inputmask("AAAA");
         $(".guvoxnoma_raqam").inputmask("999999999");
         $(".passport").inputmask("AA 9999999");
-        $("#amount").inputmask({
+        $("#amount0").inputmask({
+            alias: "numeric",
+            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
+            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
+            autoGroup: true,         // Avtomatik guruhlash
+            rightAlign: false,       // Matnni chapdan boshlab yozish
+            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
+        });
+        $("#amount1").inputmask({
             alias: "numeric",
             groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
             digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
@@ -67,6 +75,30 @@
             removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
         });
         $("#amount2").inputmask({
+            alias: "numeric",
+            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
+            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
+            autoGroup: true,         // Avtomatik guruhlash
+            rightAlign: false,       // Matnni chapdan boshlab yozish
+            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
+        });
+        $("#amount3").inputmask({
+            alias: "numeric",
+            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
+            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
+            autoGroup: true,         // Avtomatik guruhlash
+            rightAlign: false,       // Matnni chapdan boshlab yozish
+            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
+        });
+        $("#amount4").inputmask({
+            alias: "numeric",
+            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
+            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
+            autoGroup: true,         // Avtomatik guruhlash
+            rightAlign: false,       // Matnni chapdan boshlab yozish
+            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
+        });
+        $("#amount5").inputmask({
             alias: "numeric",
             groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
             digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
