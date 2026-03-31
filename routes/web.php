@@ -19,6 +19,7 @@ Route::group([
             Route::get('/', [HomeController::class, 'index'])->name('home');
             Route::get('/empoes', [EmploesController::class, 'index'])->name('emploes_index');
             Route::get('/emploes/{id}', [EmploesController::class, 'show'])->name('emploes_show');
+            Route::post('/emploes', [EmploesController::class, 'store'])->name('emploes_store');
         });
         
     });

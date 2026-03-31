@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Emploes\EmployeeStoreRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class EmploesController extends Controller{
 
@@ -15,5 +17,13 @@ class EmploesController extends Controller{
 
     public function show($id){
         return view('emploes.show', compact('id'));
+    }
+
+    public function store(EmployeeStoreRequest $request){
+        $validated = $request->validated();
+        $validated['password'] = Hash::make(Str::slug($request->phone));
+        $validated['status'] = 'true';
+        User::create($validated);
+        return redirect()->back()->with('success', __('emploes_page.success_message'));
     }
 }
