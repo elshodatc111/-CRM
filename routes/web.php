@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\web\{AuthController, HomeController, EmploesController};
+use App\Http\Controllers\web\{AuthController, HomeController, EmploesController, EmploesLeadController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -20,6 +20,8 @@ Route::group([
             Route::get('/empoes', [EmploesController::class, 'index'])->name('emploes_index');
             Route::get('/emploes/{id}', [EmploesController::class, 'show'])->name('emploes_show');
             Route::post('/emploes', [EmploesController::class, 'store'])->name('emploes_store');
+            Route::get('/empoesLead', [EmploesLeadController::class, 'index'])->name('emploesLead_index');
+            Route::get('/emploesLead/{id}', [EmploesLeadController::class, 'show'])->name('emploesLead_show');
         });
         
     });

@@ -1,4 +1,11 @@
 <li class="nav-item">
+  <a class="nav-link {{ request()->routeIs(['home']) ? '' : 'collapsed' }}" href="">
+    <i class="bi bi-house-heart"></i>
+    <span>{{ __('menu.dashboard') }}</span>
+  </a>
+</li>
+
+<li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['emploes_index','emploes_show']) ? '' : 'collapsed' }}" href="{{ route('emploes_index') }}">
     <i class="bi bi-house-heart"></i>
     <span>{{ __('menu.emploes') }}</span>
@@ -6,11 +13,12 @@
 </li>
 
 <li class="nav-item">
-  <a class="nav-link {{ request()->routeIs(['home']) ? '' : 'collapsed' }}" href="">
+  <a class="nav-link {{ request()->routeIs(['emploesLead_index','emploesLead_show']) ? '' : 'collapsed' }}" href="{{ route('emploesLead_index') }}">
     <i class="bi bi-house-heart"></i>
-    <span>{{ __('menu.dashboard') }}</span>
+    <span>{{ __('menu.emploesLead') }}</span>
   </a>
 </li>
+
 
 <li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['emploes_davomad','kid_davomad_show_all_groups','kid_davomad_show']) ? '' : 'collapsed' }}" data-bs-target="#davomad-nav" data-bs-toggle="collapse" href="#">
