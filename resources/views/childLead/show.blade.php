@@ -1,115 +1,164 @@
 @extends('layouts.admin')
 
-@section('title', __('menu.dashboard') . ' | UMKA Kindergarten CRM')
+@section('title', "Ariza haqida")
 
 @section('content')
-  <div class="pagetitle">
-    <h1>{{ __('menu.dashboard') }}</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('menu.dashboard') }}</li>
-      </ol>
-    </nav>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="pagetitle">
+      <h1>Ariza haqida</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
+          <li class="breadcrumb-item"><a href="{{ route('childLead_index') }}">{{ __('menu.childLead') }}</a></li>
+          <li class="breadcrumb-item active">Ariza haqida</li>
+        </ol>
+      </nav>
+    </div>
   </div>
+  @if($childLead['status'] == 'new' || $childLead['status'] == 'pending')
+  <div class="col-lg-6" style="text-align: right">
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#leadCancel">Arizani bekor qilish</button>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#leadSuccess">Bolani qabul qilish</button>
+  </div>
+  @endif
+</div>
 
-  <section class="section dashboard">
-    <div class="row">
-
-      {{-- Xush kelibsiz kartasi --}}
-      <div class="col-lg-12">
-        <div class="card info-card welcome-card">
-          <div class="card-body">
-            <h5 class="card-title">{{ __('dashboard.welcome_title') }} <span>| {{ Auth::user()->role }}</span></h5>
-            
-            <div class="d-flex align-items-center">
-              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-primary-light">
-                <i class="bi bi-person-check text-primary" style="font-size: 2rem;"></i>
-              </div>
-              <div class="ps-3">
-                <h6>{{ Auth::user()->name }}</h6>
-                <p class="text-muted small pt-2 ps-1 mb-0">
-                  {{ __('dashboard.login_success_msg') }}
-                </p>
+<section class="section dashboard">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card info-card welcome-card">
+        <div class="card-body">
+          <h5 class="card-title w-100">
+            <div class="row">
+              <div class="col-6">Ariza haqida</div>
+              <div class="col-6" style="text-align: right">
+                @if($childLead['status'] == 'new')
+                <span class="badge bg-info text-white">Yangi</span>
+                @elseif($childLead['status'] == 'pending')
+                <span class="badge bg-warning text-white">Jarayonda</span>
+                @elseif($childLead['status'] == 'success')
+                <span class="badge bg-success text-white">Qabul qilindi</span>
+                @else
+                <span class="badge bg-danger text-white">Bekor qilindi</span>
+                @endif
               </div>
             </div>
-          </div>
+          </h5>
+          <table class="table table-bordered" style="font-size: 12px">
+            <tr><th>Bola FIO</th><td style="text-align: right">{{ $childLead['name'] }}</td></tr>
+            <tr><th>Ota onasi</th><td style="text-align: right">{{ $childLead['ota_ona'] }}</td></tr>
+            <tr><th>Telefon raqam</th><td style="text-align: right">{{ $childLead['phone'] }}</td></tr>
+            <tr><th>Qo'shimcha telefon</th><td style="text-align: right">{{ $childLead['phone_two'] }}</td></tr>
+            <tr><th>Tug'ilgan kuni</th><td style="text-align: right">{{ $childLead['address'] }}</td></tr>
+            <tr><th>Jinsi</th><td style="text-align: right">{{ $childLead->tkun->format('Y-m-d') }}</td></tr>
+            <tr><th>Holati</th><td style="text-align: right">{{ $childLead['jinsi']=='male'?"O'gil bola":"Qiz bola"}}</td></tr>
+            <tr><th>Ro'yhatga olindi</th><td style="text-align: right">{{ $childLead->creator->name }}</td></tr>
+            <tr><th>Ro'yhatga oldi</th><td style="text-align: right">{{ $childLead['created_at']->format("Y-m-d h:i") }}</td></tr>
+            <tr><td colspan="2" class="text-center">{{ $childLead['description'] }}</td></tr>
+          </table>            
         </div>
       </div>
-
-      {{-- Bu yerga kelajakda statistika vidjetlarini qo'shishingiz mumkin --}}
-      
+    </div>      
+    <div class="col-lg-6">
+      <div class="card info-card welcome-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ __('emploes_lead_page_show.eslatmalar') }}</span></h5>
+          <div class="notes-wrapper" style="max-height: 300px; overflow-y: auto; overflow-x: hidden;height: 300px;">
+            <table class="table table-bordered table-hover" style="font-size: 12px">
+              <thead class="bg-light" style="position: sticky; top: 0; z-index: 1;">
+                <tr class="text-center">
+                  <th>{{ __('emploes_lead_page_show.eslatma_matni') }}</th>
+                  <th>{{ __('emploes_lead_page_show.menejer') }}</th>
+                  <th>{{ __('emploes_lead_page_show.eslatma_vaqti') }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse($childLeadNote as $note)
+                  <tr>
+                    <td>{{ $note->content }}</td>
+                    <td class="text-center text-nowrap">{{ $note->admin ? $note->admin->name : 'Noma\'lum' }}</td>
+                    <td class="text-end text-nowrap">{{ $note->created_at->format('d.m.Y H:i') }}</td>
+                  </tr>
+                @empty
+                <tr>
+                  <td colspan="3" class="text-center">{{ __('emploes_lead_page_show.no_notes') }}</td>
+                </tr>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+          <hr>    
+          <form action="{{ route('childLead_store_node') }}" method="post">
+            @csrf
+            <div class="row g-2">
+              <div class="col-9">
+                <input type="hidden" name="type" value="childLead">
+                <input type="hidden" name="user_id" value="{{ $childLead->id }}">
+                <input type="text" name="content" class="form-control" required autocomplete="off">
+              </div>
+              <div class="col-3">
+                <button type="submit" class="btn btn-primary w-100"><i class="bi bi-send"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
 
-
-  <div class="modal fade" id="create_emploes" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post" class="needs-validation" novalidate>
+<div class="modal fade" id="leadCancel" tabindex="-1" aria-hidden="true">
+  <form action="{{ route('childLead_cancel') }}" method="post">
     @csrf 
-    {{-- 'modal-lg' klassi modalni kengaytiradi --}}
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">
+            <i class="bi bi-shield-lock me-2"></i> Arizani bekor qilish
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>        
+        <div class="modal-body p-4">          
+          <div class="row g-1">
+            <input type="hidden" name="user_id" value="{{ $childLead->id }}">
+            <label for="content">Arizani bekor qilish sababi</label>
+            <textarea name="content" class="form-control" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="submit" class="btn btn-danger px-5 shadow-sm">Bekor qilish</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="leadSuccess" tabindex="-1" aria-hidden="true">
+  <form action="#" method="post">
+    @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title">
-            <i class="bi bi-shield-lock me-2"></i>{{ __('emploes_page.parolni_yangilash') }}
+            <i class="bi bi-shield-lock me-2"></i> Arizani qabul qilish
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        
-        <div class="modal-body p-4">
-          <input type="hidden" name="user_id" id="modal_user_id">
-
-          <div class="row g-4"> {{-- 'g-4' oraliqni biroz kattalashtiradi --}}
-            {{-- Yangi parol --}}
-            <div class="col-md-6"> {{-- 'col-md-6' qilib yonma-yon qo'yish ham mumkin keng modalda --}}
-              <label for="new_password" class="form-label fw-bold">{{ __('auth.password') }}</label>
-              <div class="input-group">
-                <span class="input-group-text bg-light"><i class="bi bi-key text-primary"></i></span>
-                <input type="password" name="password" 
-                       class="form-control @error('password') is-invalid @enderror" 
-                       id="new_password" 
-                       placeholder="******"
-                       required>
-                <button class="btn btn-outline-secondary toggle-password" type="button">
-                  <i class="bi bi-eye"></i>
-                </button>
-              </div>
-              @error('password')
-                <div class="text-danger small mt-1">{{ $message }}</div>
-              @enderror
-            </div>
-
-            {{-- Parolni tasdiqlash --}}
-            <div class="col-md-6">
-              <label for="password_confirmation" class="form-label fw-bold">{{ __('auth.password_confirm') }}</label>
-              <div class="input-group">
-                <span class="input-group-text bg-light"><i class="bi bi-check2-circle text-success"></i></span>
-                <input type="password" name="password_confirmation" 
-                       class="form-control" 
-                       id="password_confirmation" 
-                       placeholder="******"
-                       required>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-4 p-3 bg-light rounded border-start border-primary border-4">
-             <small class="text-dark">
-               <i class="bi bi-info-circle-fill text-primary me-1"></i> 
-               <strong>Eslatma:</strong> {{ __('auth.password_min_error') }}
-             </small>
+        </div>        
+        <div class="modal-body p-4">          
+          <div class="row g-1">
+            <input type="hidden" name="user_id" value="{{ $childLead->id }}">
+            <label for="new_password">ssssss</label>
+            <input type="password" name="password" class="form-control" required>
+            <label for="new_password">ssssss</label>
+            <input type="password" name="password" class="form-control" required>
           </div>
         </div>
-
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">
-            {{ __('emploes_page.cancel') }}
-          </button>
-          <button type="submit" class="btn btn-primary px-5 shadow-sm">
-            <i class="bi bi-save me-1"></i> {{ __('emploes_page.save') }}
-          </button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary px-5 shadow-sm">Saqlash</button>
         </div>
       </div>
     </div>

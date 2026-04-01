@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChildLead\StoreChildLeadRequest;
 use App\Models\ChildLead;
+use App\Models\Note;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,9 @@ class ChildLeadController extends Controller{
     }
 
     public function show($id){
-        return view('childLead.show', compact('id'));
+        $childLead = ChildLead::findOrFail($id);
+        $childLeadNote = Note::where('user_id',$id)->where('type','childLead')->get();
+        return view('childLead.show', compact('childLead','childLeadNote'));
     }
 
     public function store(StoreChildLeadRequest $request){
@@ -49,5 +52,39 @@ class ChildLeadController extends Controller{
         });
         return back()->with('success', 'Yangi ariza qo\'shildi');
     }
+
+    public function note(Request $request){
+        $validated = $request->validate([
+            'content' => 'required|string',
+            'user_id' => 'required|exists:user_leads,id',
+            'type'    => 'required|string',
+        ]);
+        Note::create([
+            'type'     => $validated['type'],
+            'user_id'  => $validated['user_id'],
+            'admin_id' => Auth::id(),
+            'content'  => $validated['content'],
+        ]);
+        $userLead = ChildLead::findOrFail($validated['user_id']);
+        $userLead->update(['status'  => 'pending']);
+        return redirect()->back()->with('success', __('emploes_lead_page_show.note_success'));
+    }
+
+    public function cancel(Request $request){
+        $validated = $request->validate([
+            'content' => 'required|string',
+            'user_id' => 'required|exists:user_leads,id',
+        ]);
+        $userLead = ChildLead::findOrFail($validated['user_id']);
+        $userLead->update(['status'  => 'cancel']);
+        Note::create([
+            'type'     => 'childLead',
+            'user_id'  => $validated['user_id'],
+            'admin_id' => Auth::id(),
+            'content'  => $validated['content'],
+        ]);
+        return redirect()->back()->with('success',"Ariza bekor qilindi.");
+    }
+
 
 }

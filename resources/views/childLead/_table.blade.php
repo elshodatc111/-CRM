@@ -25,7 +25,7 @@
                     @if($child->status=='new')
                         <span class="badge bg-primary">{{ __('childLead.new') }}</span>
                     @elseif($child->status=='pending')
-                        <span class="badge bg-warnint text-white">{{ __('childLead.pending') }}</span>
+                        <span class="badge bg-warning text-white">{{ __('childLead.pending') }}</span>
                     @elseif($child->status=='success')
                         <span class="badge bg-success">{{ __('childLead.success') }}</span>
                     @else
