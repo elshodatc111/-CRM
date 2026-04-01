@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\web\{AuthController, HomeController, EmploesController, EmploesLeadController};
+use App\Http\Controllers\web\{AuthController, ChildController, HomeController, EmploesController, EmploesLeadController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -17,15 +17,23 @@ Route::group([
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::middleware(['role:superadmin,direktor,admin'])->prefix('admin')->group(function () {
             Route::get('/', [HomeController::class, 'index'])->name('home');
+            # Hodimlar
             Route::get('/empoes', [EmploesController::class, 'index'])->name('emploes_index');
             Route::get('/emploes/{id}', [EmploesController::class, 'show'])->name('emploes_show');
             Route::post('/emploes', [EmploesController::class, 'store'])->name('emploes_store');
+            # Hodimlarga kelgan leadlar
             Route::get('/empoesLead', [EmploesLeadController::class, 'index'])->name('emploesLead_index');
             Route::get('/emploesLead/{id}', [EmploesLeadController::class, 'show'])->name('emploesLead_show');
             Route::post('/emploesLead', [EmploesLeadController::class, 'store'])->name('emploesLead_store');
             Route::post('/emploesLead/success', [EmploesLeadController::class, 'success'])->name('emploesLead_success');
             Route::post('/emploesLead/note', [EmploesLeadController::class, 'note'])->name('emploesLead_note');
             Route::post('/emploesLead/cancel', [EmploesLeadController::class, 'cancel'])->name('emploesLead_cancel');
+            # Bolalar
+            Route::get('/child', [ChildController::class, 'index'])->name('child_index');
+            Route::get('/child/{id}', [ChildController::class, 'show'])->name('child_show');
+            # Bolalardan kelgan leadlar
+            Route::get('/childLead', [ChildController::class, 'index'])->name('childLead_index');
+            Route::get('/childLead/{id}', [ChildController::class, 'show'])->name('childLead_show');
         });
         
     });

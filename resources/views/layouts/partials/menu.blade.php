@@ -19,6 +19,20 @@
   </a>
 </li>
 
+<li class="nav-item">
+  <a class="nav-link {{ request()->routeIs(['child_index','child_show']) ? '' : 'collapsed' }}" href="{{ route('child_index') }}">
+    <i class="bi bi-house-heart"></i>
+    <span>{{ __('menu.child') }}</span>
+  </a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link {{ request()->routeIs(['childLead_index','childLead_show']) ? '' : 'collapsed' }}" href="{{ route('childLead_index') }}">
+    <i class="bi bi-house-heart"></i>
+    <span>{{ __('menu.childLead') }}</span>
+  </a>
+</li>
+
 
 <li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['emploes_davomad','kid_davomad_show_all_groups','kid_davomad_show']) ? '' : 'collapsed' }}" data-bs-target="#davomad-nav" data-bs-toggle="collapse" href="#">

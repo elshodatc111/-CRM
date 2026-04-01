@@ -4,5 +4,6 @@ return [
     'dashboard' => 'Bosh sahifa',
     'emploes' => 'Hodimlar',
     'emploesLead' => 'Lead Hodimlar',
-    'notes' => 'Eslatmalar',
+    'child' => 'Bolalar',
+    'childLead' => 'Lead Bolalar',
 ];
