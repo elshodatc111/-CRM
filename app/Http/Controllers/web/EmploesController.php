@@ -23,6 +23,7 @@ class EmploesController extends Controller{
         $validated = $request->validated();
         $validated['password'] = Hash::make(Str::slug($request->phone));
         $validated['status'] = 'true';
+        $validated['addres'] = $request->address;
         User::create($validated);
         return redirect()->back()->with('success', __('emploes_page.success_message'));
     }
