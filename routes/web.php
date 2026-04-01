@@ -22,6 +22,7 @@ Route::group([
             Route::post('/emploes', [EmploesController::class, 'store'])->name('emploes_store');
             Route::get('/empoesLead', [EmploesLeadController::class, 'index'])->name('emploesLead_index');
             Route::get('/emploesLead/{id}', [EmploesLeadController::class, 'show'])->name('emploesLead_show');
+            Route::post('/emploesLead', [EmploesLeadController::class, 'store'])->name('emploesLead_store');
         });
         
     });

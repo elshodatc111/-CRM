@@ -55,6 +55,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
     <script>
         $(".phone").inputmask("+998 99 999 9999");
+        $(".phone2").inputmask("99 999 9999");
         $(".guvoxnoma_serya").inputmask("AAAA");
         $(".guvoxnoma_raqam").inputmask("999999999");
         $(".passport").inputmask("AA 9999999");
