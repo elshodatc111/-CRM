@@ -37,7 +37,8 @@ Route::group([
             Route::post('/childLead/store', [ChildLeadController::class, 'store'])->name('childLead_store');
             # Guruhlar
             Route::get('/groups',[GroupController::class, 'index'])->name('groups_index');
-            Route::get('/groups/{id}',[GroupController::class, 'show'])->name('groups_show');
+            Route::get('/groups/{id}',[GroupController::class, 'show'])->name('groups_show');            
+            Route::post('/groups/create',[GroupController::class, 'store'])->name('groups_store');
         });
         
     });
