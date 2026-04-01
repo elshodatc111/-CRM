@@ -6,4 +6,5 @@ return [
     'emploesLead' => 'Lead Hodimlar',
     'child' => 'Bolalar',
     'childLead' => 'Lead Bolalar',
+    'groups' => "Guruhlar",
 ];

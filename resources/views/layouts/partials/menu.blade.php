@@ -33,6 +33,14 @@
   </a>
 </li>
 
+<li class="nav-item">
+  <a class="nav-link {{ request()->routeIs(['groups_index','groups_show']) ? '' : 'collapsed' }}" href="{{ route('groups_index') }}">
+    <i class="bi bi-house-heart"></i>
+    <span>{{ __('menu.groups') }}</span>
+  </a>
+</li>
+
+
 
 <li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['emploes_davomad','kid_davomad_show_all_groups','kid_davomad_show']) ? '' : 'collapsed' }}" data-bs-target="#davomad-nav" data-bs-toggle="collapse" href="#">

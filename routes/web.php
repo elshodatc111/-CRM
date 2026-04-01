@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, HomeController, EmploesController, EmploesLeadController};
+use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, HomeController, EmploesController, EmploesLeadController, GroupController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -35,6 +35,9 @@ Route::group([
             Route::get('/childLead', [ChildLeadController::class, 'index'])->name('childLead_index');
             Route::get('/childLead/{id}', [ChildLeadController::class, 'show'])->name('childLead_show');
             Route::post('/childLead/store', [ChildLeadController::class, 'store'])->name('childLead_store');
+            # Guruhlar
+            Route::get('/groups',[GroupController::class, 'index'])->name('groups_index');
+            Route::get('/groups/{id}',[GroupController::class, 'show'])->name('groups_show');
         });
         
     });
