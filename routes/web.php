@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\web\{AuthController, ChildController, HomeController, EmploesController, EmploesLeadController};
+use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, HomeController, EmploesController, EmploesLeadController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -32,8 +32,9 @@ Route::group([
             Route::get('/child', [ChildController::class, 'index'])->name('child_index');
             Route::get('/child/{id}', [ChildController::class, 'show'])->name('child_show');
             # Bolalardan kelgan leadlar
-            Route::get('/childLead', [ChildController::class, 'index'])->name('childLead_index');
-            Route::get('/childLead/{id}', [ChildController::class, 'show'])->name('childLead_show');
+            Route::get('/childLead', [ChildLeadController::class, 'index'])->name('childLead_index');
+            Route::get('/childLead/{id}', [ChildLeadController::class, 'show'])->name('childLead_show');
+            Route::post('/childLead/store', [ChildLeadController::class, 'store'])->name('childLead_store');
         });
         
     });
