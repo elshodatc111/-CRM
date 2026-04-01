@@ -3,12 +3,12 @@
         <thead class="table-light text-center">
             <tr>
                 <th>#</th>
-                <th>FIO</th>
-                <th>Telefon raqam</th>
-                <th>Tugilgan kuni</th>
-                <th>Manzili</th>
-                <th>Holati</th>
-                <th>Ro'yhatga olindi</th>
+                <th>{{ __('childLead.fio') }}</th>
+                <th>{{ __('childLead.asosiy_phone') }}</th>
+                <th>{{ __('childLead.tkun') }}</th>
+                <th>{{ __('childLead.address') }}</th>
+                <th>{{ __('childLead.xolat') }}</th>
+                <th>{{ __('childLead.registr') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -23,20 +23,20 @@
                 <td>{{ $child->address }}</td>
                 <td class="text-center">
                     @if($child->status=='new')
-                        <span class="badge bg-primary">Yangi</span>
+                        <span class="badge bg-primary">{{ __('childLead.new') }}</span>
                     @elseif($child->status=='pending')
-                        <span class="badge bg-warnint text-white">Larayonda</span>
+                        <span class="badge bg-warnint text-white">{{ __('childLead.pending') }}</span>
                     @elseif($child->status=='success')
-                        <span class="badge bg-success">Qabul qilindi</span>
+                        <span class="badge bg-success">{{ __('childLead.success') }}</span>
                     @else
-                        <span class="badge bg-danger">Bekor qilindi</span>
+                        <span class="badge bg-danger">{{ __('childLead.cancel') }}</span>
                     @endif
                 </td>
                 <td class="text-center">{{ $child->created_at->format('d.m.Y H:i') }}</td>
             </tr>
             @empty
             <tr>
-                <td colspan="8" class="text-center">Arizalar mavjud emas</td>
+                <td colspan="8" class="text-center">{{ __('childLead.not_found') }}</td>
             </tr>
             @endforelse
         </tbody>

@@ -25,23 +25,23 @@ class StoreChildLeadRequest extends FormRequest {
 
     public function attributes(): array {
         return [
-            'name'      => 'Bolaning F.I.O',
-            'phone'     => 'Asosiy telefon',
-            'phone_two' => 'Qo\'shimcha telefon',
-            'ota_ona'   => 'Ota-onasi ismi',
-            'address'   => 'Yashash manzili',
-            'tkun'      => 'Tug\'ilgan sanasi',
-            'jinsi'     => 'Jinsi',
+            'name'      => __('childLead.fio'),
+            'phone'     => __('childLead.asosiy_phone'),
+            'phone_two' => __('childLead.qoshimcha_phone'),
+            'ota_ona'   => __('childLead.ota_onasi'),
+            'address'   => __('childLead.address'),
+            'tkun'      => __('childLead.tkun'),
+            'jinsi'     => __('childLead.jinsi'),
         ];
     }
 
     public function messages(): array {
         return [
-            'required' => ':attribute maydonini toʻldirish majburiy.',
-            'string'   => ':attribute matn koʻrinishida boʻlishi kerak.',
-            'max'      => ':attribute maydoni :max belgidan oshmasligi kerak.',
-            'date'     => ':attribute notoʻgʻri sana formatida.',
-            'before'   => ':attribute bugungi sanadan oldin boʻlishi shart.',
+            'required' => ':attribute'.__('childLead.required'),
+            'string'   => ':attribute'.__('childLead.string'),
+            'max'      => ':attribute'.__('childLead.max'),
+            'date'     => ':attribute'.__('childLead.date'),
+            'before'   => ':attribute'.__('childLead.before'),
             'in'       => 'Tanlangan :attribute notoʻgʻri.',
         ];
     }
