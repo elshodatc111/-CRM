@@ -27,45 +27,38 @@ class StoreEmployeeFromLeadRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
+    public function messages(): array{
         return [
-            'required' => ':attribute maydonini toʻldirish majburiy.',
-            'exists'   => 'Tanlangan :attribute tizimda mavjud emas.',
-            'in'       => 'Tanlangan :attribute notoʻgʻri.',
-            'date'     => ':attribute sana formati xato.',
-            'string'   => ':attribute matn koʻrinishida boʻlishi kerak.',
-            'max'      => ':attribute juda uzun.',
+            'required' => ':attribute '.__(('emploes_lead_page_show.maydonni_toldirish_majburiy')).'.',
+            'exists'   => __('emploes_lead_page_show.tanlangan') . ':attribute ' . __('emploes_lead_page_show.tizimda_mavjud_emas'),
+            'in'       => __('emploes_lead_page_show.tanlangan') .' :attribute '.__('emploes_lead_page_show.notogri').'.',
+            'date'     => ':attribute ' . __('emploes_lead_page_show.sana_formati_xato') . '.',
+            'string'   => ':attribute ' . __('emploes_lead_page_show.matn_korinishida_bolishi_kerak') . '.',
+            'max'      => ':attribute '.__('emploes_lead_page_show.juda_uzun').'.',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'user_lead_id' => 'Lead ID',
-            'name'         => 'FIO',
-            'phone'        => 'Telefon raqam',
-            'phone_two'    => 'Qoʻshimcha telefon raqami',
-            'address'      => 'Yashash manzili',
-            'salary'       => 'Ish haqi',
-            'tkun'         => 'Tugʻilgan sana',
-            'pasport'      => 'Pasport maʻlumotlari',
-            'role'         => 'Lavozim',
-            'about'        => 'Xodim haqida',
+            'user_lead_id' => __('emploes_lead_page_show.user_lead_id'),
+            'name'         => __('emploes_lead_page_show.name'),
+            'phone'        => __('emploes_lead_page_show.phone'),
+            'phone_two'    => __('emploes_lead_page_show.phone_two'),
+            'address'      => __('emploes_lead_page_show.address'),
+            'salary'       => __('emploes_lead_page_show.salary'),
+            'tkun'         => __('emploes_lead_page_show.tkun'),
+            'pasport'      => __('emploes_lead_page_show.pasport'),
+            'role'         => __('emploes_lead_page_show.role'),
+            'about'        => __('emploes_lead_page_show.about'),
         ];
     }
 
-    protected function passedValidation(): void
-    {
+    protected function passedValidation(): void{
         $this->merge([
-            // Pasportdan probellarni olib tashlash va katta harfga o'tkazish
             'pasport'   => str_replace(' ', '', strtoupper($this->pasport)),
-            
-            // Telefon raqamlaridan barcha probellarni butkul tozalash
             'phone'     => preg_replace('/\s+/', '', $this->phone),
             'phone_two' => $this->phone_two ? preg_replace('/\s+/', '', $this->phone_two) : null,
-            
-            // Ish haqidan probel va vergullarni tozalab, songa aylantirish
             'salary'    => (int) str_replace([' ', ','], '', $this->salary),
         ]);
     }

@@ -84,7 +84,7 @@ class EmploesLeadController extends Controller{
         ]);
         $userLead = UserLead::findOrFail($validated['user_id']);
         $userLead->update(['status'  => 'pending']);
-        return redirect()->back()->with('success', __('empoles_lead_page.note_success'));
+        return redirect()->back()->with('success', __('emploes_lead_page_show.note_success'));
     }
 
     public function cancel(Request $request){
@@ -100,6 +100,6 @@ class EmploesLeadController extends Controller{
         ]);
         $userLead = UserLead::findOrFail($validated['user_lead_id']); 
         $userLead->update(['status'  => 'cancel']);
-        return redirect()->back()->with('success', __('empoles_lead_page.cancel_success'));
+        return redirect()->back()->with('success', __('emploes_lead_page_show.cancel_success'));
     }   
 }
