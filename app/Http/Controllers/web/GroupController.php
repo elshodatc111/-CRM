@@ -5,6 +5,8 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Models\Group;
+use App\Models\GroupChild;
+use App\Models\GroupUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +14,15 @@ use Illuminate\Support\Facades\Auth;
 class GroupController extends Controller{
     
     public function index(){
-        $group = Group::where('status','aktiv')->get();
+        $groups = Group::where('status','aktiv')->get();
+        $group = [];
+        foreach ($groups as $key => $value) {
+            $group[$key]['id'] = $value->id;
+            $group[$key]['group_name'] = $value->group_name;
+            $group[$key]['group_price'] = $value->group_price;
+            $group[$key]['childs'] = count(GroupChild::where('group_id',$value->id)->get());
+            $group[$key]['users'] = count(GroupUser::where('group_id',$value->id)->get());
+        }
         return view('group.index',compact('group'));
     }
 
@@ -28,7 +38,7 @@ class GroupController extends Controller{
             'status' => $request['status'],
             'created_by' => Auth::id(),
         ]);
-        return redirect()->back()->with('success', 'Guruh muvaffaqiyatli ochildi!');
+        return redirect()->back()->with('success', __('groups.new_group_success'));
     }
 
 }
