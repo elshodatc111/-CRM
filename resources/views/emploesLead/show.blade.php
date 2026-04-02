@@ -16,8 +16,6 @@
 
   <section class="section dashboard">
     <div class="row">
-
-      {{-- Xush kelibsiz kartasi --}}
       <div class="col-lg-8">
         <div class="card info-card welcome-card">
           <div class="card-body">
