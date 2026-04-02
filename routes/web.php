@@ -42,6 +42,11 @@ Route::group([
             Route::get('/groups',[GroupController::class, 'index'])->name('groups_index');
             Route::get('/groups/{id}',[GroupController::class, 'show'])->name('groups_show');            
             Route::post('/groups/create',[GroupController::class, 'store'])->name('groups_store');
+            Route::post('/groups/create/user',[GroupController::class, 'storeUser'])->name('groups_store_user');
+            Route::post('/groups/delete/user',[GroupController::class, 'deleteUser'])->name('groups_delete_user');
+            Route::post('/groups/update',[GroupController::class, 'updateUpdate'])->name('groups_update');
+            Route::post('/groups/delete',[GroupController::class, 'deleteGroup'])->name('groups_delete');
+            Route::post('/groups/delete/child',[GroupController::class, 'deleteChild'])->name('groups_delete_child');
         });
         
     });
