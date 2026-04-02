@@ -1,115 +1,195 @@
 @extends('layouts.admin')
 
-@section('title', __('menu.dashboard') . ' | UMKA Kindergarten CRM')
+@section('title', "Bola haqida")
 
 @section('content')
-  <div class="pagetitle">
-    <h1>{{ __('menu.dashboard') }}</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('menu.dashboard') }}</li>
-      </ol>
-    </nav>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="pagetitle">
+        <h1>Bola haqida</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('child_index') }}">{{ __('menu.child') }}</a></li>
+            <li class="breadcrumb-item active">Bola haqida</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="col-lg-6" style="text-align: right">
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tulov"><i class="bi bi-wallet2 me-1"></i> To'lov qilish</button>
+      <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target="#chegirma"><i class="bi bi-percent me-1"></i> Chegirma</button>
+      <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#taxrirlash"><i class="bi bi-pencil-square me-1"></i> Tahrirlash</button>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupAdd"><i class="bi bi-people-fill me-1"></i> Guruhga qo'shish</button>
+    </div>
   </div>
 
   <section class="section dashboard">
     <div class="row">
-
-      {{-- Xush kelibsiz kartasi --}}
       <div class="col-lg-12">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">{{ __('dashboard.welcome_title') }} <span>| {{ Auth::user()->role }}</span></h5>
+            <h5 class="card-title">sss</h5>
             
-            <div class="d-flex align-items-center">
-              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-primary-light">
-                <i class="bi bi-person-check text-primary" style="font-size: 2rem;"></i>
-              </div>
-              <div class="ps-3">
-                <h6>{{ Auth::user()->name }}</h6>
-                <p class="text-muted small pt-2 ps-1 mb-0">
-                  {{ __('dashboard.login_success_msg') }}
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
-
-      {{-- Bu yerga kelajakda statistika vidjetlarini qo'shishingiz mumkin --}}
-      
     </div>
   </section>
 
 
 
 
-  <div class="modal fade" id="create_emploes" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post" class="needs-validation" novalidate>
+<div class="modal fade" id="tulov" tabindex="-1" aria-hidden="true">
+  <form action="#" method="post">
     @csrf 
-    {{-- 'modal-lg' klassi modalni kengaytiradi --}}
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title">
-            <i class="bi bi-shield-lock me-2"></i>{{ __('emploes_page.parolni_yangilash') }}
+            <i class="bi bi-wallet2 me-2"></i>To'lov qilish
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        
         <div class="modal-body p-4">
-          <input type="hidden" name="user_id" id="modal_user_id">
-
-          <div class="row g-4"> {{-- 'g-4' oraliqni biroz kattalashtiradi --}}
-            {{-- Yangi parol --}}
-            <div class="col-md-6"> {{-- 'col-md-6' qilib yonma-yon qo'yish ham mumkin keng modalda --}}
-              <label for="new_password" class="form-label fw-bold">{{ __('auth.password') }}</label>
-              <div class="input-group">
-                <span class="input-group-text bg-light"><i class="bi bi-key text-primary"></i></span>
-                <input type="password" name="password" 
-                       class="form-control @error('password') is-invalid @enderror" 
-                       id="new_password" 
-                       placeholder="******"
-                       required>
-                <button class="btn btn-outline-secondary toggle-password" type="button">
-                  <i class="bi bi-eye"></i>
-                </button>
-              </div>
-              @error('password')
-                <div class="text-danger small mt-1">{{ $message }}</div>
-              @enderror
+          <div class="row">
+            <div class="col-6">
+              <label for="amount" class="mb-2">To'lov summasi</label>
+              <input type="text" name="amount" required class="form-control" id="amount1">
             </div>
-
-            {{-- Parolni tasdiqlash --}}
-            <div class="col-md-6">
-              <label for="password_confirmation" class="form-label fw-bold">{{ __('auth.password_confirm') }}</label>
-              <div class="input-group">
-                <span class="input-group-text bg-light"><i class="bi bi-check2-circle text-success"></i></span>
-                <input type="password" name="password_confirmation" 
-                       class="form-control" 
-                       id="password_confirmation" 
-                       placeholder="******"
-                       required>
-              </div>
+            <div class="col-6">
+              <label for="amount_type" class="mb-2">To'lov summasi</label>
+              <select name="" required class="form-select">
+                <option value="">Tanlang...</option>
+                <option value="">Naqt to'lov</option>
+                <option value="">Karta to'lov</option>
+                <option value="">Bank orqali to'lov</option>
+                <option value="">To'lov qaytarish</option>
+              </select>
             </div>
           </div>
+          <label for="start_comment" class="my-2">To'lov haqida</label>
+          <textarea name="start_comment" required class="form-control"></textarea>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
+          <button type="submit" class="btn btn-success px-5 shadow-sm">To'lov qilish</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
-          <div class="mt-4 p-3 bg-light rounded border-start border-primary border-4">
-             <small class="text-dark">
-               <i class="bi bi-info-circle-fill text-primary me-1"></i> 
-               <strong>Eslatma:</strong> {{ __('auth.password_min_error') }}
-             </small>
+<div class="modal fade" id="chegirma" tabindex="-1" aria-hidden="true">
+  <form action="#" method="post">
+    @csrf 
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-warning text-white">
+          <h5 class="modal-title">
+            <i class="bi bi-percent me-2"></i>Chegirma
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <label for="amount" class="mb-2">Chegirma summasi</label>
+          <input type="text" name="amount" required class="form-control" id="amount2">
+          <label for="start_comment" class="my-2">Chegirma haqida</label>
+          <textarea name="start_comment" required class="form-control"></textarea>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
+          <button type="submit" class="btn btn-warning text-white px-5 shadow-sm">Chegirmani saqlash</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="taxrirlash" tabindex="-1" aria-hidden="true">
+  <form action="#" method="post">
+    @csrf 
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-info text-white">
+          <h5 class="modal-title">
+            <i class="bi bi-pencil-square me-2"></i>Taxrirlash
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">          
+          <div class="row">
+            <div class="col-lg-6">
+              <label for="name" class="mb-2">Bola FIO</label>
+              <input type="text" name="name" required class="form-control">
+            </div>
+            <div class="col-lg-6">
+              <label for="ota_ona" class="mb-2">Ota onasi</label>
+              <input type="text" name="ota_ona" required class="form-control">
+            </div>
+            <div class="col-lg-6">
+              <label for="phone" class="my-2">Telefon raqam</label>
+              <input type="text" name="phone" required class="form-control phone">
+            </div>
+            <div class="col-lg-6">
+              <label for="phone_two" class="my-2">Qo'shimcha telefon raqam</label>
+              <input type="text" name="phone_two" required class="form-control phone">
+            </div>
+            <div class="col-lg-6">
+              <label for="address" class="my-2">Yashash manzili</label>
+              <input type="text" name="address" required class="form-control">
+            </div>
+            <div class="col-lg-6">
+              <label for="guvohnoma" class="my-2">Guvohnoma raqami</label>
+              <input type="text" name="	guvohnoma" required class="form-control">
+            </div>
+            <div class="col-lg-6">
+              <label for="tkun" class="my-2">Tug'ilgan kuni</label>
+              <input type="text" name="tkun" required class="form-control">
+            </div>
+            <div class="col-lg-6">
+              <label for="jinsi" class="my-2">Jinsi</label>
+              <select name="jinsi" id="" class="form-control" required>
+                <option value="">Tanlang...</option>
+                <option value="male">O'g'il bola</option>
+                <option value="female">Qiz bola</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="description" class="my-2">Bola haqida</label>
+              <textarea name="description" required class="form-control"></textarea>
+            </div>
           </div>
         </div>
-
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">
-            {{ __('emploes_page.cancel') }}
-          </button>
-          <button type="submit" class="btn btn-primary px-5 shadow-sm">
-            <i class="bi bi-save me-1"></i> {{ __('emploes_page.save') }}
-          </button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
+          <button type="submit" class="btn btn-info text-white px-5 shadow-sm">O'zgarishlarni saqlash</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="groupAdd" tabindex="-1" aria-hidden="true">
+  <form action="#" method="post">
+    @csrf 
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title">
+            <i class="bi bi-cash me-2"></i> Guruhga qo'shish
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <label for="group_id" class="mb-2">Guruhni tanlang</label>
+          <select name="group_id" class="form-select">
+            <option value="">Tanlang...</option>
+          </select>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary px-5 shadow-sm">Guruhga qo'shish</button>
         </div>
       </div>
     </div>

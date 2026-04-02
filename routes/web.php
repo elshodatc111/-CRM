@@ -8,7 +8,6 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
 ], function() {
-
     // Login sahifasi (Faqat mehmonlar uchun ochiq)
     Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
     Route::post('/login', [AuthController::class, 'postLogin'])->name('login_post')->middleware('guest');

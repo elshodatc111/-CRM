@@ -11,7 +11,7 @@ return new class extends Migration{
             $table->id();
             $table->foreignId('child_id')->constrained('children')->onDelete('cascade');
             $table->decimal('amount', 10,2);
-            $table->enum('amount_type',['cash','card','bank']);
+            $table->enum('amount_type',['cash','card','bank','return']);
             $table->string('description');
             $table->enum('status',['pending','success','cancel'])->default('pending');
             $table->foreignId('admin_id')->constrained('users')->onDelete('cascade');
