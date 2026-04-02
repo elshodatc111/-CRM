@@ -1,14 +1,15 @@
 @extends('layouts.admin')
 
-@section('title', "Guruh haqida")
+@section('title', __('group_show.title'))
 
 @section('content')
   <div class="pagetitle">
-    <h1>Guruh haqida</h1>
+    <h1>{{ __('group_show.title') }}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
-        <li class="breadcrumb-item active">Guruh haqida</li>
+        <li class="breadcrumb-item"><a href="{{ route('groups_index') }}">{{ __('menu.groups') }}</a></li>
+        <li class="breadcrumb-item active">{{ __('group_show.title') }}</li>
       </ol>
     </nav>
   </div>
@@ -21,11 +22,11 @@
             <h5 class="card-title w-100 text-center">{{ $group['group_name'] }}</h5>
             <table class="table table-borderd">
               <tr>
-                <th>Guruh narxi</th>
+                <th>{{ __('group_show.group_price') }}</th>
                 <td style="text-align: right">{{ number_format($group['group_price'], 0, '.', ' ') }} UZS</td>
               </tr>
               <tr>
-                <th>Guruh ochildi</th>
+                <th>{{ __('group_show.group_create') }}</th>
                 <td style="text-align: right">{{ $group->created_at->format('Y-m-d h:i') }}</td>
               </tr>
               <tr>
@@ -33,13 +34,22 @@
               </tr>
             </table>
             @if(auth()->user()->role=='direktor' || auth()->user()->role=='superadmin')
-            <button class="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#updateGroup"><i class="bi bi-pencil"></i> Guruhni taxrirlash</button>
-            <form action="{{ route('groups_delete') }}" method="post"
-              onsubmit="return confirm('Haqiqatan ham ushbu guruhni o\'chirmoqchimisiz?\nGuruh o\'chirilgach guruh haqidagi barcha malumotlar o\'chib ketadi.')">
+            @if($group->status=='aktiv')
+            <button class="btn btn-primary w-100"  data-bs-toggle="modal" data-bs-target="#updateGroup"><i class="bi bi-pencil"></i> {{ __('group_show.group_update') }}</button>
+            <form action="{{ route('groups_delete') }}" method="post" id="delete-group-form">
               @csrf 
               <input type="hidden" name="group_id" value="{{ $group->id }}">
-            <button type="submit" class="btn btn-danger w-100 mt-2"><i class="bi bi-trash"></i> Guruhni o'chirish</button>
+              <button type="button" onclick="confirmDelete()" class="btn btn-danger w-100 mt-2"><i class="bi bi-trash"></i> {{ __('group_show.group_del') }}</button>
             </form>
+            <script>
+              function confirmDelete() {
+                  const message = @json(__('group_show.group_del_about'));
+                  if (confirm(message)) {
+                      document.getElementById('delete-group-form').submit();
+                  }
+              }
+            </script>
+            @endif
             @endif
           </div>
         </div>
@@ -50,20 +60,22 @@
           <div class="card-body">
             <h5 class="card-title">
               <div class="row">
-                <div class="col-6">Guruh tarbiyachilari</div>
+                <div class="col-6">{{ __('group_show.group_all_user') }}</div>
+                @if($group->status=='aktiv')
                 <div class="col-6" style="text-align: right">
-                  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_user"><i class="bi bi-person-add"></i> Tarbiyachi qo'shish</button>
+                  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_user"><i class="bi bi-person-add"></i> {{ __('group_show.group_create_user') }}</button>
                 </div>
+                @endif
               </div>
             </h5>
             <table class="table table-bordered" style="font-size: 14px;">
               <thead>
                 <tr class="text-center">
                   <th>#</th>
-                  <th>Tarbiyachi</th>
-                  <th>Guruhga qo'shildi</th>
-                  <th>Guruhdagi holati</th>
-                  <th>Guruhdan o'chirildi</th>
+                  <th>{{ __('group_show.users') }}</th>
+                  <th>{{ __('group_show.group_plus') }}</th>
+                  <th>{{ __('group_show.group_status') }}</th>
+                  <th>{{ __('group_show.group_del_data') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,27 +85,35 @@
                   <td>{{ $item->user->name }} <i>
                     ( 
                       @if($item->user->role=='tarbiyachi')
-                      Tarbiyachi
+                      {{ __('group_show.tarbiyachi') }}
                       @else
-                      Yordamchi Tarbiyachi
+                      {{ __('group_show.yordamchi') }}
                       @endif 
                     )</i>
                   </td>
                   <td class="text-center">{{ $item->start_data->format("Y-m-d") }}</td>
                   <td class="text-center">
                     @if($item->is_active==true)
-                      Aktiv
+                      {{ __('group_show.aktiv') }}
                     @else
-                      NoAktiv
+                      {{ __('group_show.noaktiv') }}
                     @endif
                   </td>
                   <td class="text-center">
                     @if($item->is_active==true)
-                      <form action="{{ route('groups_delete_user') }}" method="post" onsubmit="return confirm('Haqiqatan ham ushbu tarbiyachini guruhdan o\'chirmoqchimisiz?')">
+                      <form action="{{ route('groups_delete_user') }}" method="post">
                         @csrf 
                         <input type="hidden" name="id" value="{{ $item['id'] }}" class="p-0 m-0">
-                        <button type="submit" class="btn btn-danger p-0 px-1 m-0"><i class="bi bi-trash"></i></button>
+                        <button type="button" onclick="confirmUserDelete()" class="btn btn-danger p-0 px-1 m-0"><i class="bi bi-trash"></i></button>
                       </form>
+                      <script>
+                        function confirmUserDelete() {
+                            const message = @json(__('group_show.del_user_abouts'));
+                            if (confirm(message)) {
+                                document.getElementById('delete-group-form').submit();
+                            }
+                        }
+                      </script>
                     @else
                       {{ $item->end_data->format('Y-m-d') }}
                     @endif
@@ -101,7 +121,7 @@
                 </tr>
                 @empty
                 <tr>
-                  <td class="text-center" colspan="5">Tarbiyachilar mavjud emas.</td>
+                  <td class="text-center" colspan="5">{{ __('group_show.notfountuser') }}</td>
                 </tr>
                 @endforelse
               </tbody>
@@ -114,18 +134,18 @@
         <div class="card info-card welcome-card">
           <div class="card-body">
             <h5 class="card-title">
-              Guruhdagi bolalar
+              {{ __('group_show.groups_childs') }}
             </h5>
             <table class="table table-bordered" style="font-size: 12px;">
               <thead>
                 <tr class="text-center">
                   <th>#</th>
-                  <th>Bola</th>
-                  <th>Guruhga qo'shildi</th>
-                  <th>Guruhga qoshdi</th>
-                  <th>Guruhdagi holati</th>
-                  <th>Guruhdan o'chirildi</th>
-                  <th>Guruhdan o'chirdi</th>
+                  <th>{{ __('group_show.child') }}</th>
+                  <th>{{ __('group_show.child_plus') }}</th>
+                  <th>{{ __('group_show.child_plus_admin') }}</th>
+                  <th>{{ __('group_show.chils_status') }}</th>
+                  <th>{{ __('group_show.child_delete') }}</th>
+                  <th>{{ __('group_show.child_del_admin') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -139,9 +159,9 @@
                   <td class="text-center">{{ $item->starter->name }}</td>
                   <td class="text-center">
                     @if($item->is_active)
-                    Aktiv
+                    {{ __('group_show.aktiv') }}
                     @else
-                    O'chirilgan
+                    {{ __('group_show.noaktiv') }}
                     @endif
                   </td>
                   <td class="text-center">
@@ -151,11 +171,19 @@
                   </td>
                   <td class="text-center">
                     @if($item->is_active)
-                      <form action="{{ route('groups_delete_child') }}" method="post" onsubmit="return confirm('Haqiqatan ham ushbu tarbiyachini guruhdan o\'chirmoqchimisiz?')">
+                      <form action="{{ route('groups_delete_child') }}" method="post">
                         @csrf 
                         <input type="hidden" name="id" value="{{ $item['id'] }}" class="p-0 m-0">
-                        <button type="submit" class="btn btn-danger p-0 px-1 m-0"><i class="bi bi-trash"></i></button>
+                        <button type="button" onclick="confirmChildDelete()" class="btn btn-danger p-0 px-1 m-0"><i class="bi bi-trash"></i></button>
                       </form>
+                      <script>
+                        function confirmChildDelete() {
+                            const message = @json(__('group_show.del_child_abouts'));
+                            if (confirm(message)) {
+                                document.getElementById('delete-group-form').submit();
+                            }
+                        }
+                      </script>
                     @else
                       {{ $item->ender->name }}
                     @endif
@@ -163,7 +191,7 @@
                 </tr>
                 @empty
                 <tr>
-                  <td colspan="7" class="text-center">Guruhdagi bolalar mavjud emas</td>
+                  <td colspan="7" class="text-center">{{ __('group_show.not_fount_child') }}</td>
                 </tr>
                 @endforelse
               </tbody>
@@ -180,19 +208,19 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title"><i class="bi bi-pencil me-2"></i> Guruhni taxrirlash</h5>
+          <h5 class="modal-title"><i class="bi bi-pencil me-2"></i> {{ __('group_show.group_update') }}</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>        
         <div class="modal-body p-4">
           <input type="hidden" name="group_id" value="{{ $group->id }}">
-          <label for="group_name" class="mb-2">Guruh nomi</label>
+          <label for="group_name" class="mb-2">{{ __('group_show.group_name') }}</label>
           <input type="text" name="group_name" required value="{{ $group->group_name }}" class="form-control">
-          <label for="group_price" class="mb-2">Guruh nomi</label>
+          <label for="group_price" class="mb-2">{{ __('group_show.group_price') }}</label>
           <input type="text" name="group_price" required value="{{ $group->group_price }}" class="form-control" id="amount1">
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-primary px-5 shadow-sm">Guruhni taxrirlash</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('group_show.cancel') }}</button>
+          <button type="submit" class="btn btn-primary px-5 shadow-sm">{{ __('group_show.group_update') }}</button>
         </div>
       </div>
     </div>
@@ -205,22 +233,22 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title"><i class="bi bi-person-add me-2"></i>Guruhga tarbiyachi qo'shish</h5>
+          <h5 class="modal-title"><i class="bi bi-person-add me-2"></i> {{ __('group_show.new_user') }}</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>        
         <div class="modal-body py-4">
           <input type="hidden" name="group_id" value="{{ $group->id }}">
-          <label for="" class="mb-2">Guruhga qo'shmoqchi bo'lgan tarbiyachini tanlang</label>
+          <label for="" class="mb-2">{{ __('group_show.new_user_about') }}</label>
           <select name="user_id" required class="form-select">
-            <option value=""> Tanlang... </option>
+            <option value=""> {{ __('group_show.tanlang') }} </option>
             @foreach ($newUser as $item)
-              <option value="{{ $item['user_id'] }}">{{ $item['name'] }} ({{ $item['role']=='tarbiyachi'?"Tarbiyachi":"Yordamchi tarbiyachi" }})</option>
+              <option value="{{ $item['user_id'] }}">{{ $item['name'] }} ({{ $item['role']=='tarbiyachi'?__('group_show.tarbiyachi'):__('group_show.yordamchi') }})</option>
             @endforeach
           </select>
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-primary px-5 shadow-sm">Guruhga qo'shish</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('group_show.cancel') }}</button>
+          <button type="submit" class="btn btn-primary px-5 shadow-sm">{{ __('group_show.group_plus') }}</button>
         </div>
       </div>
     </div>

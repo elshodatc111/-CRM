@@ -64,7 +64,7 @@ class GroupController extends Controller{
             'start_data' => now(),
             'is_active' => true,
         ]);
-        return redirect()->back()->with('success', "Guruhga yangi tarbiyachi qo'shildi");
+        return redirect()->back()->with('success', __('group_show.new_user'));
     }
 
     public function deleteUser(Request $request){
@@ -74,7 +74,7 @@ class GroupController extends Controller{
         $group->end_id = Auth::id();
         $group->is_active = false;
         $group->save();
-        return redirect()->back()->with('success', "Guruhdan tarbiyachisi o'chirildi");
+        return redirect()->back()->with('success', __('group_show.del_user'));
     }
 
     public function updateUpdate(Request $request){
@@ -82,7 +82,7 @@ class GroupController extends Controller{
         $group->group_name = $request->group_name;
         $group->group_price = $request->group_price;
         $group->save();
-        return redirect()->back()->with('success', "Guruhga malumotlari yangilandi");
+        return redirect()->back()->with('success', __('group_show.update_group'));
     }
 
     public function deleteChild(Request $request){
@@ -97,7 +97,7 @@ class GroupController extends Controller{
             $Child->is_active = false;
             $Child->save();
         });
-        return redirect()->back()->with('success', "Guruhdan bola o'chirildi");
+        return redirect()->back()->with('success', __('group_show.del_child'));
     }
 
     public function deleteGroup(Request $request){
@@ -114,7 +114,7 @@ class GroupController extends Controller{
                 Child::whereIn('id', $activeChildIds)->update(['is_active' => false]);
             }
         });
-        return redirect()->route('groups_index')->with('success', "Guruh o'chirildi");
+        return redirect()->route('groups_index')->with('success', __('group_show.del_group'));
     }
 
 }
