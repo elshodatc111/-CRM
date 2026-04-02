@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChildLead\StoreChildAdmissionRequest;
 use App\Http\Requests\ChildLead\StoreChildLeadRequest;
+use App\Models\Child;
 use App\Models\ChildLead;
+use App\Models\Group;
+use App\Models\GroupChild;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -32,7 +36,8 @@ class ChildLeadController extends Controller{
     public function show($id){
         $childLead = ChildLead::findOrFail($id);
         $childLeadNote = Note::where('user_id',$id)->where('type','childLead')->get();
-        return view('childLead.show', compact('childLead','childLeadNote'));
+        $groups = Group::where('status','aktiv')->get();
+        return view('childLead.show', compact('childLead','childLeadNote','groups'));
     }
 
     public function store(StoreChildLeadRequest $request){
@@ -50,7 +55,7 @@ class ChildLeadController extends Controller{
                 'status' => 'new'
             ]);            
         });
-        return back()->with('success', 'Yangi ariza qo\'shildi');
+        return back()->with('success', __('childLead_show.yangi_ariza_qoshildi'));
     }
 
     public function note(Request $request){
@@ -83,7 +88,43 @@ class ChildLeadController extends Controller{
             'admin_id' => Auth::id(),
             'content'  => $validated['content'],
         ]);
-        return redirect()->back()->with('success',"Ariza bekor qilindi.");
+        return redirect()->back()->with('success',__('childLead_show.ariza_bekor_qilindi'));
+    }
+
+    public function success(StoreChildAdmissionRequest $request){
+        DB::transaction(function () use ($request) {
+            $validated = $request->validated();
+            Note::create([
+                'type'     => 'childLead',
+                'user_id'  => $validated['user_id'],
+                'admin_id' => Auth::id(),
+                'content'  => "Bola ro'yxatga olindi",
+            ]);
+            $child = Child::create([
+                'name' => $validated['name'],
+                'phone' => $validated['phone'],
+                'phone_two' => $validated['phone_two'],
+                'ota_ona' => $validated['ota_ona'],
+                'address' => $validated['address'],
+                'guvohnoma' => $validated['guvohnoma'],
+                'tkun' => $validated['tkun'],
+                'balans' => 0,
+                'jinsi' => $validated['jinsi'],
+                'description' => $validated['description'],
+                'created_by' => Auth::id(),
+                'is_active' => true,
+            ]);
+            $userLead = ChildLead::findOrFail($validated['user_id']);
+            $userLead->update(['status'  => 'success', 'child_id' => $child->id]);
+            GroupChild::create([
+                'child_id' => $child->id,
+                'group_id' => $request->group_id,
+                'start_id' => Auth::id(),
+                'start_data' => now(),
+                'is_active' => true,
+            ]);
+            return redirect()->back()->with('success',__('childLead_show.ariza_qabul_qilindi'));
+        });
     }
 
 

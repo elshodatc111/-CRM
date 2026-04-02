@@ -37,6 +37,7 @@ Route::group([
             Route::post('/childLead/store', [ChildLeadController::class, 'store'])->name('childLead_store');
             Route::post('/childLead/cancel', [ChildLeadController::class, 'cancel'])->name('childLead_cancel');
             Route::post('/childLead/note',[ChildLeadController::class, 'note'])->name('childLead_store_node');
+            Route::post('/childLead/success',[ChildLeadController::class, 'success'])->name('childLead_success');
             # Guruhlar
             Route::get('/groups',[GroupController::class, 'index'])->name('groups_index');
             Route::get('/groups/{id}',[GroupController::class, 'show'])->name('groups_show');            
