@@ -50,4 +50,5 @@ return [
     'new_emploesLead' => 'Yangi nomzod arizasi',
     'status' => "Holati",
     'registered' => "Ro‘yxatga olindi",
+    'qabul' => "Qabul qilindi",
 ];

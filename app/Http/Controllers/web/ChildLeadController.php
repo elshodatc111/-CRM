@@ -37,7 +37,7 @@ class ChildLeadController extends Controller{
         $childLead = ChildLead::findOrFail($id);
         $childLeadNote = Note::where('user_id',$id)->where('type','childLead')->get();
         $groups = Group::where('status','aktiv')->get();
-        return view('childLead.show', compact('childLead','childLeadNote','groups'));
+        return view('childLead.show', compact('childLead','childLeadNote','groups')); 
     }
 
     public function store(StoreChildLeadRequest $request){
@@ -61,7 +61,7 @@ class ChildLeadController extends Controller{
     public function note(Request $request){
         $validated = $request->validate([
             'content' => 'required|string',
-            'user_id' => 'required|exists:user_leads,id',
+            'user_id' => 'required',
             'type'    => 'required|string',
         ]);
         Note::create([
@@ -71,14 +71,16 @@ class ChildLeadController extends Controller{
             'content'  => $validated['content'],
         ]);
         $userLead = ChildLead::findOrFail($validated['user_id']);
-        $userLead->update(['status'  => 'pending']);
+        if($userLead->status == 'new'){
+            $userLead->update(['status'  => 'pending']);
+        }
         return redirect()->back()->with('success', __('emploes_lead_page_show.note_success'));
     }
 
     public function cancel(Request $request){
         $validated = $request->validate([
             'content' => 'required|string',
-            'user_id' => 'required|exists:user_leads,id',
+            'user_id' => 'required',
         ]);
         $userLead = ChildLead::findOrFail($validated['user_id']);
         $userLead->update(['status'  => 'cancel']);
@@ -123,8 +125,8 @@ class ChildLeadController extends Controller{
                 'start_data' => now(),
                 'is_active' => true,
             ]);
-            return redirect()->back()->with('success',__('childLead_show.ariza_qabul_qilindi'));
         });
+        return redirect()->back()->with('success',__('childLead_show.ariza_qabul_qilindi'));
     }
 
 

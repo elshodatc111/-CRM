@@ -50,4 +50,5 @@ return [
     'new_emploesLead' => 'New candidate application',
     'status' => "Status",
     'registered' => "Registered",
+    'qabul' => "Accepted",
 ];

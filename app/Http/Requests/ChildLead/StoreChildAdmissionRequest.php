@@ -18,7 +18,7 @@ class StoreChildAdmissionRequest extends FormRequest{
 
     public function rules(): array{
         return [
-            'user_id'     => 'required|exists:user_leads,id',
+            'user_id'     => 'required',
             'name'        => 'required|string|max:255',
             'ota_ona'     => 'required|string|max:255',
             'address'     => 'required|string|max:500',

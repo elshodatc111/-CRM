@@ -34,40 +34,34 @@ class EmploesLeadController extends Controller{
         $request['phone'] = "+998".str_replace(' ', '', $request['phone']);
         $request['phone_two'] = "+998".str_replace(' ', '', $request['phone_two']);
         UserLead::create($request);
-        return redirect()->back()->with('success', __('empoles_lead_page.success'));
+        return redirect()->back()->with('success', __('emploes_lead_page.success'));
     }
 
     public function success(StoreEmployeeFromLeadRequest $request){
-        $validated = $request->validated();
-        DB::beginTransaction();
-        try {
+        DB::transaction(function () use ($request) {
             $user = User::create([
-                'name'      => $validated['name'],
+                'name'      => $request['name'],
                 'phone'     => $request->phone, 
                 'phone_two' => $request->phone_two,
-                'addres'   => $validated['address'],
+                'addres'   => $request['address'],
                 'salary'    => $request->salary, 
-                'tkun'      => $validated['tkun'],
+                'tkun'      => $request['tkun'],
                 'pasport'   => $request->pasport, 
-                'role'      => $validated['role'],
-                'about'     => $validated['about'],
+                'role'      => $request['role'],
+                'about'     => $request['about'],
                 'status'    => 'true',
                 'password'  => Hash::make('password'),
             ]);
-            $userLead = UserLead::findOrFail($validated['user_lead_id']);
+            $userLead = UserLead::findOrFail($request['user_lead_id']);
             $userLead->update(['status'  => 'success','user_id' => $user->id]);
             Note::create([
                 'type' => 'employeLead',
-                'user_id' => $validated['user_lead_id'],
+                'user_id' => $request['user_lead_id'],
                 'admin_id' => Auth::id(),
-                'content' => $validated['about'],
-            ]);
-            DB::commit();            
-            return redirect()->back()->with('success', __('empoles_lead_page.success'));
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'Xatolik yuz berdi: ' . $e->getMessage());
-        }
+                'content' => $request['about'],
+            ]);   
+        });        
+        return redirect()->back()->with('success', __('emploes_lead_page.success'));
     }
 
     public function note(Request $request){
@@ -83,7 +77,9 @@ class EmploesLeadController extends Controller{
             'content'  => $validated['content'],
         ]);
         $userLead = UserLead::findOrFail($validated['user_id']);
-        $userLead->update(['status'  => 'pending']);
+        if($userLead->status == 'new'){
+            $userLead->update(['status'  => 'pending']);
+        }
         return redirect()->back()->with('success', __('emploes_lead_page_show.note_success'));
     }
 

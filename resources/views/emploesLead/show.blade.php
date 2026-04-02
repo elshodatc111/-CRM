@@ -61,7 +61,7 @@
                     @elseif($userLead->status === 'pending')
                     <span class="badge bg-warning text-dark">{{ __('emploes_lead_page.pending') }}</span>
                     @elseif($userLead->status === 'success')
-                    <span class="badge bg-success">{{ __('emploes_lead_page.success') }}</span>
+                    <span class="badge bg-success">{{ __('emploes_lead_page.qabul') }}</span>
                     @else
                     <span class="badge bg-secondary">{{ __('emploes_lead_page.rejected') }}</span>
                   @endif</p>
