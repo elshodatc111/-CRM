@@ -40,6 +40,13 @@
   </a>
 </li>
 
+<li class="nav-item">
+  <a class="nav-link {{ request()->routeIs(['kassa_index']) ? '' : 'collapsed' }}" href="{{ route('kassa_index') }}">
+    <i class="bi bi-house-heart"></i>
+    <span>{{ __('menu.kassa') }}</span>
+  </a>
+</li>
+
 
 
 <li class="nav-item">

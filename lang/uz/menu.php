@@ -7,4 +7,6 @@ return [
     'child' => 'Bolalar',
     'childLead' => 'Lead Bolalar',
     'groups' => "Guruhlar",
+    'kassa' => "Kassa",
+    
 ];

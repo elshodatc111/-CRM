@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, HomeController, EmploesController, EmploesLeadController, GroupController};
+use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -47,6 +47,8 @@ Route::group([
             Route::post('/groups/update',[GroupController::class, 'updateUpdate'])->name('groups_update');
             Route::post('/groups/delete',[GroupController::class, 'deleteGroup'])->name('groups_delete');
             Route::post('/groups/delete/child',[GroupController::class, 'deleteChild'])->name('groups_delete_child');
+            # Kassa
+            Route::get('/kassa',[KassaController::class, 'index'])->name('kassa_index');
         });
         
     });
