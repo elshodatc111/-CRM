@@ -18,7 +18,7 @@ class GroupController extends Controller{
         $group = [];
         foreach ($groups as $key => $value) {
             $group[$key]['id'] = $value->id;
-            $group[$key]['group_name'] = $value->group_name;
+            $group[$key]['group_name'] = mb_strtoupper($value->group_name);
             $group[$key]['group_price'] = $value->group_price;
             $group[$key]['childs'] = count(GroupChild::where('group_id',$value->id)->get());
             $group[$key]['users'] = count(GroupUser::where('group_id',$value->id)->get());

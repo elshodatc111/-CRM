@@ -43,7 +43,7 @@ class ChildLeadController extends Controller{
     public function store(StoreChildLeadRequest $request){
         DB::transaction(function () use ($request) {
             ChildLead::create([
-                'name' => $request->name,
+                'name' => mb_strtoupper($request->name),
                 'phone' => $request->phone,
                 'phone_two' => $request->phone_two,
                 'ota_ona' => $request->ota_ona,
@@ -103,7 +103,7 @@ class ChildLeadController extends Controller{
                 'content'  => "Bola ro'yxatga olindi",
             ]);
             $child = Child::create([
-                'name' => $validated['name'],
+                'name' => mb_strtoupper($validated['name']),
                 'phone' => $validated['phone'],
                 'phone_two' => $validated['phone_two'],
                 'ota_ona' => $validated['ota_ona'],

@@ -1,5 +1,5 @@
 <li class="nav-item">
-  <a class="nav-link {{ request()->routeIs(['home']) ? '' : 'collapsed' }}" href="">
+  <a class="nav-link {{ request()->routeIs(['home']) ? '' : 'collapsed' }}" href="{{ route('home') }}">
     <i class="bi bi-house-heart"></i>
     <span>{{ __('menu.dashboard') }}</span>
   </a>
@@ -29,7 +29,7 @@
 <li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['childLead_index','childLead_show']) ? '' : 'collapsed' }}" href="{{ route('childLead_index') }}">
     <i class="bi bi-house-heart"></i>
-    <span>{{ __('menu.childLead') }}</span>
+    <span>{{ __('menu.childLead') }}</span> 
   </a>
 </li>
 

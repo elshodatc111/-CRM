@@ -20,7 +20,7 @@ class EmploesController extends Controller{
     }
 
     public function store(EmployeeStoreRequest $request){
-        $validated = $request->validated();
+        $validated = $request->validated(); 
         $validated['password'] = Hash::make(Str::slug($request->phone));
         $validated['status'] = 'true';
         $validated['addres'] = $request->address;

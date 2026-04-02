@@ -28,6 +28,7 @@ class EmploesLeadController extends Controller{
 
     public function store(StoreEmployeeLeadRequest $request){
         $request = $request->validated();
+        $request['name'] = mb_strtoupper($request['name']);
         $request['passport_seria'] = 'AA1234567';
         $request['status'] = 'new';
         $request['admin_id'] = Auth::id();
@@ -40,7 +41,7 @@ class EmploesLeadController extends Controller{
     public function success(StoreEmployeeFromLeadRequest $request){
         DB::transaction(function () use ($request) {
             $user = User::create([
-                'name'      => $request['name'],
+                'name'      => mb_strtoupper($request['name']),
                 'phone'     => $request->phone, 
                 'phone_two' => $request->phone_two,
                 'addres'   => $request['address'],
