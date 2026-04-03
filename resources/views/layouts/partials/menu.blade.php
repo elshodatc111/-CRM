@@ -54,6 +54,13 @@
   </a>
 </li>
 
+<li class="nav-item">
+  <a class="nav-link {{ request()->routeIs(['groups_davomad','groups_davomad_show']) ? '' : 'collapsed' }}" href="{{ route('groups_davomad') }}">
+    <i class="bi bi-house-heart"></i>
+    <span>{{ __('menu.group_davomad') }}</span>
+  </a>
+</li>
+
 
 
 <li class="nav-item">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupDavomadController;
 use App\Http\Controllers\web\{AuthController, BalansController, ChildController, ChildLeadController, ChildPaymentController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -52,6 +53,9 @@ Route::group([
             Route::post('/groups/update',[GroupController::class, 'updateUpdate'])->name('groups_update');
             Route::post('/groups/delete',[GroupController::class, 'deleteGroup'])->name('groups_delete');
             Route::post('/groups/delete/child',[GroupController::class, 'deleteChild'])->name('groups_delete_child');
+            # Group Davomad
+            Route::get('/davomad/groups',[GroupDavomadController::class, 'davomad'])->name('groups_davomad');
+            Route::get('/davomad/groups/show/{id}',[GroupDavomadController::class, 'davomadShow'])->name('groups_davomad_show');
             # Kassa
             Route::get('/kassa',[KassaController::class, 'index'])->name('kassa_index');
             Route::post('/kassa/out',[KassaController::class, 'kassaToBalans'])->name('kassa_out');

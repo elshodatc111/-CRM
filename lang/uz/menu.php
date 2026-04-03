@@ -9,4 +9,6 @@ return [
     'groups' => "Guruhlar",
     'kassa' => "Kassa",
     'moliya' => "Moliya",
+    'group_davomad' => 'Guruhlar davomadi',
+    
 ];
