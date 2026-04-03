@@ -30,6 +30,8 @@ Route::group([
             # Bolalar
             Route::get('/child', [ChildController::class, 'index'])->name('child_index');
             Route::get('/child/{id}', [ChildController::class, 'show'])->name('child_show');
+            Route::post('/child/update', [ChildController::class, 'update'])->name('child_update');
+            Route::post('/child/add_group', [ChildController::class, 'add_group'])->name('child_add_group');
             
             Route::post('/child/payment', [ChildPaymentController::class, 'payment'])->name('child_payment');
             Route::post('/child/descount', [ChildPaymentController::class, 'descount'])->name('child_descount');

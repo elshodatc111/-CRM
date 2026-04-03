@@ -26,13 +26,12 @@ class ChildPaymentController extends Controller{
                 'amount'=>$request->amount,
                 'amount_type'=>$request->amount_type,
                 'description'=>$request->description,
-                'status'=>'pending',
+                'status'=>$amount_type=='cash'?'success':'pending',
                 'admin_id'=>Auth::id(),
-            ]);
+            ]);            
             if($amount_type=='cash'){
                 $child->increment('balans', $request->amount);
                 $kassa->increment('cash', $request->amount);
-                $childPayment->success;
                 KassaHistory::create([
                     'type' => 'payment',
                     'amount' => $request->amount,
@@ -68,7 +67,6 @@ class ChildPaymentController extends Controller{
                     'child_payment_id' => $childPayment->id,
                 ]);
             }
-            $childPayment->save();
         });
         return redirect()->back()->with('success',"To'lov qabul qilindi");
     }

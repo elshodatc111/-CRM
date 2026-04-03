@@ -18,8 +18,8 @@
     </div>
     <div class="col-lg-6" style="text-align: right">
       <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#tulov"><i class="bi bi-wallet2 me-1"></i> To'lov qilish</button>
-      <button class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#return"><i class="bi bi-wallet2 me-1"></i> To'lov qaytarish</button>
       @if(auth()->user()->role=='superadmin' || auth()->user()->role=='direktor')
+      <button class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#return"><i class="bi bi-wallet2 me-1"></i> To'lov qaytarish</button>
       <button class="btn btn-warning mt-2 text-white" data-bs-toggle="modal" data-bs-target="#chegirma"><i class="bi bi-percent me-1"></i> Chegirma</button>
       @endif
       <button class="btn btn-info mt-2 text-white" data-bs-toggle="modal" data-bs-target="#taxrirlash"><i class="bi bi-pencil-square me-1"></i> Tahrirlash</button>
@@ -56,7 +56,7 @@
                 </tr>
                 <tr>
                   <th>Telefon raqam</th>
-                  <td style="text-align: right">{{ $child->phone." ".$child->phone_two }}</td>
+                  <td style="text-align: right">{{ $child->phone." | ".$child->phone_two }}</td>
                 </tr>
                 <tr>
                   <th>Guvohnoma</th>
@@ -110,6 +110,110 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Bola guruhlar tarixi</h5>
+            <div class="table-responsive notes-wrapper" style="max-height: 200px; overflow-y: auto; overflow-x: hidden;height:200px">
+              <table class="table table-hover table-bordered border-primary align-middle" style="font-size: 12px">
+                  <thead class="table-light text-center">
+                    <tr>
+                      <th>#</th>
+                      <th>Guruh</th>
+                      <th>Guruhga qo'shildi</th>
+                      <th>Guruhdan qo'shdi</th>
+                      <th>Guruhdagi holati</th>
+                      <th>Guruhdan o'chirildi</th>
+                      <th>Guruhdan o'chirdi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @forelse($childgouphistory as $item)
+                    <tr>
+                      <td class="text-center">{{ $loop->index+1 }}</td>
+                      <td><a href="{{ route('groups_show',$item->group_id ) }}">{{ $item->group->group_name }}</a></td>
+                      <td class="text-center">{{ $item->start_data->format("Y-m-d") }}</td>
+                      <td>{{ $item->starter->name }}</td>
+                      <td class="text-center">@if($item->is_active) <span class="badge bg-success">Aktiv</span>@else<span class="badge bg-danger">Noaktiv</span>@endif</td>
+                      <td>
+                        @if($item->end_id!=null) {{ $item->ender->name }} @endif
+                      </td>
+                      <td class="text-center">@if($item->end_data!=null) {{ $item->end_data->format("Y-m-d") }} @endif</td>
+                    </tr>
+                    @empty
+                    <tr>
+                      <td colspan="7" class="text-center">Guruhlar tarixi mavjud emas.</td>
+                    </tr>
+                    @endforelse
+                  </tbody>
+              </table>
+            </div>
+          </div>
+        </div>        
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">To'lovlar tarixi</h5>
+            <div class="table-responsive notes-wrapper" style="max-height: 500px; overflow-y: auto; overflow-x: hidden;height:500px">
+              <table class="table table-hover table-bordered border-primary align-middle" style="font-size: 12px">
+                <thead class="table-light text-center">
+                  <tr>
+                    <th>#</th>
+                    <th>Status</th>
+                    <th>To'lov summasi</th>
+                    <th>To'lov turi</th>
+                    <th>To'lov holati</th>
+                    <th>To'lov vaqt</th>
+                    <th>To'lov haqida</th>
+                    <th>Hodim</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @forelse($payments as $item)
+                  <tr>
+                    <td class="text-center">{{ $loop->index+1 }}</td>
+                    <td class="text-center">
+                      @if($item->type=='payment')
+                        <span class="badge bg-success">To'lov</span>
+                      @elseif($item->type=='return')
+                        <span class="badge bg-danger">Qaytarildi</span>
+                      @else
+                        <span class="badge bg-warning">Qaytarildi</span>
+                      @endif
+                    </td>
+                    <td class="text-center">{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
+                    <td class="text-center">
+                      @if($item->amount_type=='cash')
+                        Naqt
+                      @elseif($item->amount_type=='card')
+                        Karta
+                      @else
+                        Bank
+                      @endif
+                    </td>
+                    <td class="text-center">
+                      @if($item->status=='pending')
+                        <span class="badge bg-warning">Kutilmoqda</span>
+                      @elseif($item->status=='success')
+                        <span class="badge bg-success">Qabul qilindi</span>
+                      @else
+                        <span class="badge bg-danger">Bekor qilindi</span>
+                      @endif
+                    </td>
+                    <td class="text-center">{{ $item->created_at->format('Y-m-d h:i') }}</td>
+                    <td>{{ $item->description }}</td>
+                    <td>{{ $item->admin->name }}</td>
+                  </tr>
+                  @empty
+                    <tr>
+                      <td class="text-center" colspan="8">To'lovlar mavjud emas.</td>
+                    </tr>
+                  @endforelse
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
         <div class="card">
           <div class="card-body" >
             <h5 class="card-title">Guruh uchun to'lovlar</h5>
@@ -120,31 +224,6 @@
                     </thead>
                 </table>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-8">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Bola guruhlar tarixi</h5>
-            <div class="table-responsive notes-wrapper" style="max-height: 300px; overflow-y: auto; overflow-x: hidden;height:400px">
-              <table class="table table-hover table-bordered border-primary align-middle" style="font-size: 14px">
-                  <thead class="table-light text-center">
-                  </thead>
-              </table>
-            </div>
-          </div>
-        </div>
-        
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">To'lovlar tarixi</h5>
-            <div class="table-responsive notes-wrapper" style="max-height: 300px; overflow-y: auto; overflow-x: hidden;height:400px">
-              <table class="table table-hover table-bordered border-primary align-middle" style="font-size: 14px">
-                  <thead class="table-light text-center">
-                  </thead>
-              </table>
             </div>
           </div>
         </div>
@@ -208,6 +287,7 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
+          <p class="text-warning">To'lov qaytarish uchun balansda yetarli mablag' mavjud bo'lishi kerak.</p>
           <div class="row">
             <div class="col-6">
               <label for="amount" class="mb-2">Qaytarish summasi</label>
@@ -263,7 +343,7 @@
 </div>
 
 <div class="modal fade" id="taxrirlash" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('child_update') }}" method="post">
     @csrf 
     <input type="hidden" name="child_id" value="{{ $child->id }}">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -328,7 +408,7 @@
 </div>
 
 <div class="modal fade" id="groupAdd" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('child_add_group') }}" method="post">
     @csrf 
     <input type="hidden" name="child_id" value="{{ $child->id }}">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -343,6 +423,9 @@
           <label for="group_id" class="mb-2">Guruhni tanlang</label>
           <select name="group_id" class="form-select">
             <option value="">Tanlang...</option>
+            @foreach ($groups as $item)
+              <option value="{{ $item['id'] }}">{{ $item['group_name'] }}</option>
+            @endforeach
           </select>
         </div>
         <div class="modal-footer bg-light">
