@@ -47,6 +47,13 @@
   </a>
 </li>
 
+<li class="nav-item">
+  <a class="nav-link {{ request()->routeIs(['moliya_index']) ? '' : 'collapsed' }}" href="{{ route('moliya_index') }}">
+    <i class="bi bi-house-heart"></i>
+    <span>{{ __('menu.moliya') }}</span>
+  </a>
+</li>
+
 
 
 <li class="nav-item">

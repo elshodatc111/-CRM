@@ -8,5 +8,5 @@ return [
     'childLead' => 'Lead Bolalar',
     'groups' => "Guruhlar",
     'kassa' => "Kassa",
-    
+    'moliya' => "Moliya",
 ];

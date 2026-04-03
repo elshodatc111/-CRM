@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, ChildPaymentController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
+use App\Http\Controllers\web\{AuthController, BalansController, ChildController, ChildLeadController, ChildPaymentController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -54,6 +54,8 @@ Route::group([
             Route::post('/groups/delete/child',[GroupController::class, 'deleteChild'])->name('groups_delete_child');
             # Kassa
             Route::get('/kassa',[KassaController::class, 'index'])->name('kassa_index');
+            #Moliya
+            Route::get('/moliya',[BalansController::class, 'index'])->name('moliya_index');
         });
         
     });
