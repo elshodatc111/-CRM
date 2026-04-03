@@ -102,76 +102,67 @@
                       <th>Amaliyot haqida</th>
                       <th>Amaliyot vaqti</th>
                       <th>Amaliyotchi</th>
-                      <th></th>
+                      <th>Amallar</th>
                     </thead>
                     <tbody>
                       @forelse($history as $item)
-                      <tr>
-                        <td class="text-center">{{ $loop->index+1 }}</td>
-                        <td>
-                          @if($item->type=='payment')
-                            <span class="badge bg-success">To'lov</span>
-                          @elseif($item->type=='cost')
-                            <span class="badge bg-danger">Kassadan xarajat</span>
-                          @else
-                            <span class="badge bg-primary">Kassadan chiqim</span>
-                          @endif
-                        </td>
-                        <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
-                        <td>
-                          @if($item->amount_type=='cash')
-                          <b class="text-primary m-0 p-0"> Naqt </b>
-                          @elseif($item->amount_type=='card')
-                          <b class="text-info m-0 p-0"> Karta </b>
-                          @else
-                          <b class="text-dark m-0 p-0"> Bank </b>
-                          @endif
-                        </td>
-                        <td>{{ $item->start_comment }}</td>
-                        <td>{{ $item->created_at->format("Y-m-d H:i") }}</td>
-                        <td>{{ $item->startAdmin->name }}</td>
-                        <td class="text-center">
-                          <div class="d-flex justify-content-center gap-2">
-                            @if(auth()->user()->role == 'direktor' || auth()->user()->role == 'superadmin')
-                            <form action="{{ route('kassa_success') }}" method="post">
-                              @csrf
-                              <button type="button" onclick="confirmSuccess()" class="btn btn-success p-0 px-1" title="Tasdiqlash">
-                                  <i class="bi bi-check-lg"></i>
-                              </button>
-                            </form>
-                            <script>
-                              function confirmSuccess() {
-                                  const message = @json('Amaliyotni tasdiqlaysizmi?');
-                                  if (confirm(message)) {
-                                      document.getElementById('delete-group-form').submit();
-                                  }
-                              }
-                            </script>
+                        <tr>
+                          <td class="text-center">{{ $loop->iteration }}</td>
+                          <td>
+                            @if($item->type=='payment')
+                              <span class="badge bg-success">To'lov</span>
+                            @elseif($item->type=='cost')
+                              <span class="badge bg-danger">Kassadan xarajat</span>
+                            @else
+                              <span class="badge bg-primary">Kassadan chiqim</span>
                             @endif
-                            <form action="{{ route('kassa_cancel') }}" method="post">
-                              @csrf
-                              <button type="button" onclick="confirmCancel()" class="btn btn-danger p-0 px-1" title="Bekor qilish">
+                          </td>
+                          <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
+                          <td>
+                            @php
+                              $types = ['cash' => ['text-primary', 'Naqd'], 'card' => ['text-info', 'Karta'], 'bank' => ['text-dark', 'Bank']];
+                              $currentType = $types[$item->amount_type] ?? ['text-muted', 'Noma\'lum'];
+                            @endphp
+                            <b class="{{ $currentType[0] }} m-0 p-0"> {{ $currentType[1] }} </b>
+                          </td>
+                          <td>{{ $item->start_comment }}</td>
+                          <td>{{ $item->created_at->format("Y-m-d H:i") }}</td>
+                          <td>{{ $item->startAdmin->name ?? 'Noma\'lum' }}</td>
+                          <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2">
+                              @if(auth()->user()->role == 'direktor' || auth()->user()->role == 'superadmin')
+                                <form action="{{ route('kassa_success') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="kassaHistoryId" value="{{ $item->id }}">
+                                    <button type="button" onclick="confirmAction(this, 'Amaliyotni tasdiqlaysizmi?')" class="btn btn-success p-0 px-1" title="Tasdiqlash">
+                                      <i class="bi bi-check-lg"></i>
+                                    </button>
+                                </form>
+                              @endif
+                              <form action="{{ route('kassa_cancel') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="kassaHistoryId" value="{{ $item->id }}">
+                                <button type="button" onclick="confirmAction(this, 'Amaliyotni bekor qilmoqchimisiz?')" class="btn btn-danger p-0 px-1" title="Bekor qilish">
                                   <i class="bi bi-x-lg"></i>
-                              </button>
-                            </form>
-                            <script>
-                              function confirmCancel() {
-                                  const message = @json('Amaliyotni bekor qilmoqchimisiz?');
-                                  if (confirm(message)) {
-                                      document.getElementById('delete-group-form').submit();
-                                  }
-                              }
-                            </script>
-                          </div>
-                        </td>
-                      </tr>
+                                </button>
+                              </form>
+                            </div>
+                          </td>
+                        </tr>
                       @empty
-                      <tr>
-                        <td class="text-center" colspan="7">Tasdiqlanmagan amaliyotlar mavjud emas.</td>
-                      </tr>
+                        <tr>
+                          <td class="text-center" colspan="8">Tasdiqlanmagan amaliyotlar mavjud emas.</td>
+                        </tr>
                       @endforelse
                     </tbody>
                   </table>
+                  <script>
+                    function confirmAction(button, message) {
+                      if (confirm(message)) {
+                        button.closest('form').submit();
+                      }
+                    }
+                  </script>
                 </div>
               </div>
             </div>

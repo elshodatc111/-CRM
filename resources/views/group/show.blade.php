@@ -101,7 +101,7 @@
                   </td>
                   <td class="text-center">
                     @if($item->is_active==true)
-                      <form action="{{ route('groups_delete_user') }}" method="post">
+                      <form action="{{ route('groups_delete_user') }}" method="post" id="delete-group-form22">
                         @csrf 
                         <input type="hidden" name="id" value="{{ $item['id'] }}" class="p-0 m-0">
                         <button type="button" onclick="confirmUserDelete()" class="btn btn-danger p-0 px-1 m-0"><i class="bi bi-trash"></i></button>
@@ -110,7 +110,7 @@
                         function confirmUserDelete() {
                             const message = @json(__('group_show.del_user_abouts'));
                             if (confirm(message)) {
-                                document.getElementById('delete-group-form').submit();
+                                document.getElementById('delete-group-form22').submit();
                             }
                         }
                       </script>
@@ -171,7 +171,7 @@
                   </td>
                   <td class="text-center">
                     @if($item->is_active)
-                      <form action="{{ route('groups_delete_child') }}" method="post">
+                      <form action="{{ route('groups_delete_child') }}" method="post" id="delete-group-form">
                         @csrf 
                         <input type="hidden" name="id" value="{{ $item['id'] }}" class="p-0 m-0">
                         <button type="button" onclick="confirmChildDelete()" class="btn btn-danger p-0 px-1 m-0"><i class="bi bi-trash"></i></button>

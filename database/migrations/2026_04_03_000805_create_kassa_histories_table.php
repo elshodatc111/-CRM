@@ -12,7 +12,7 @@ return new class extends Migration{
             $table->enum('type',['out','cost','payment']);
             $table->decimal('amount', 10,2);
             $table->enum('amount_type',['cash','card','bank']);
-            $table->enum('status',['pending','success'])->default('pending');
+            $table->enum('status',['pending','success','cancel'])->default('pending');
             $table->date('start_data');
             $table->foreignId('start_admin')->constrained('users')->onDelete('cascade');
             $table->string('start_comment');
