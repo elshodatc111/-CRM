@@ -54,6 +54,8 @@ Route::group([
             Route::post('/groups/delete/child',[GroupController::class, 'deleteChild'])->name('groups_delete_child');
             # Kassa
             Route::get('/kassa',[KassaController::class, 'index'])->name('kassa_index');
+            Route::post('/kassa/out',[KassaController::class, 'kassaToBalans'])->name('kassa_out');
+            Route::post('/kassa/cost',[KassaController::class, 'kassaToCost'])->name('kassa_cost');
             #Moliya
             Route::get('/moliya',[BalansController::class, 'index'])->name('moliya_index');
         });

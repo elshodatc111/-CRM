@@ -22,7 +22,7 @@
   </div>
 
   <section class="section dashboard">
-    <div class="row">
+    <div class="row"> 
       <div class="col-lg-7">
         <div class="card info-card welcome-card">
           <div class="card-body">
@@ -220,7 +220,7 @@
 
 
 <div class="modal fade" id="kassadan_chiqim" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('kassa_out') }}" method="post">
     @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
@@ -246,7 +246,7 @@
 </div>
 
 <div class="modal fade" id="kassadan_xarajat" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('kassa_cost') }}" method="post">
     @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
@@ -258,13 +258,13 @@
         </div>
         <div class="modal-body p-4">
           <label for="amount" class="mb-2">Xarajat summasi</label>
-          <input type="text" name="amount" required class="form-control" id="amount1">
+          <input type="text" name="amount" required class="form-control" id="amount2">
           <label for="start_comment" class="my-2">Xarajat haqida</label>
           <textarea name="start_comment" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
           <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-primary px-5 shadow-sm">Xarajat qilish</button>
+          <button type="submit" class="btn btn-danger px-5 shadow-sm">Xarajat qilish</button>
         </div>
       </div>
     </div>
