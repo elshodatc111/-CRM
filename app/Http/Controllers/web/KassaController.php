@@ -15,7 +15,8 @@ class KassaController extends Controller{
     
     public function index(){
         $kassa = Kassa::getInstance();
-        return view('kassa.index',compact('kassa'));
+        $history = KassaHistory::where('status','pending')->get();
+        return view('kassa.index',compact('kassa','history'));
     }
 
     public function kassaToBalans(KassahOutRequest $request){
@@ -52,6 +53,14 @@ class KassaController extends Controller{
             ]);
         });
         return back()->with('success', "Kassadan xarajat muvaffaqiyatli bajarildi! Tasdiqlash kutilmoqda.");
+    }
+
+    public function successKassa(Request $request){
+
+    }
+
+    public function cancelKassa(Request $request){
+        
     }
 
 }

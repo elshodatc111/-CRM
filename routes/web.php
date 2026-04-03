@@ -56,6 +56,8 @@ Route::group([
             Route::get('/kassa',[KassaController::class, 'index'])->name('kassa_index');
             Route::post('/kassa/out',[KassaController::class, 'kassaToBalans'])->name('kassa_out');
             Route::post('/kassa/cost',[KassaController::class, 'kassaToCost'])->name('kassa_cost');
+            Route::post('/kassa/success',[KassaController::class, 'successKassa'])->name('kassa_success');
+            Route::post('/kassa/cancel',[KassaController::class, 'cancelKassa'])->name('kassa_cancel');
             #Moliya
             Route::get('/moliya',[BalansController::class, 'index'])->name('moliya_index');
         });
