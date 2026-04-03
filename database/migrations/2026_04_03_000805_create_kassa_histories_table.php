@@ -17,7 +17,7 @@ return new class extends Migration{
             $table->foreignId('start_admin')->constrained('users')->onDelete('cascade');
             $table->string('start_comment');
             $table->date('end_data')->nullable();
-            $table->foreignId('end_admin')->constrained('users')->onDelete('cascade');
+            $table->foreignId('end_admin')->nullable()->constrained('users')->onDelete('cascade');
             $table->foreignId('child_payment_id')->nullable()->constrained('child_payments')->onDelete('cascade');
             $table->timestamps();
         });

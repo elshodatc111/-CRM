@@ -10,6 +10,7 @@ class ChildPayment extends Model{
     use HasFactory;
     protected $fillable = [
         'child_id',
+        'type',
         'amount',
         'amount_type',
         'description',

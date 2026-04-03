@@ -10,8 +10,9 @@ return new class extends Migration{
         Schema::create('child_payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('child_id')->constrained('children')->onDelete('cascade');
+            $table->enum('type',['payment','return','discount']);
             $table->decimal('amount', 10,2);
-            $table->enum('amount_type',['cash','card','bank','return']);
+            $table->enum('amount_type',['cash','card','bank']);
             $table->string('description');
             $table->enum('status',['pending','success','cancel'])->default('pending');
             $table->foreignId('admin_id')->constrained('users')->onDelete('cascade');

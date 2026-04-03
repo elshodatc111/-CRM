@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
+use App\Http\Controllers\web\{AuthController, ChildController, ChildLeadController, ChildPaymentController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -30,6 +30,10 @@ Route::group([
             # Bolalar
             Route::get('/child', [ChildController::class, 'index'])->name('child_index');
             Route::get('/child/{id}', [ChildController::class, 'show'])->name('child_show');
+            
+            Route::post('/child/payment', [ChildPaymentController::class, 'payment'])->name('child_payment');
+            Route::post('/child/descount', [ChildPaymentController::class, 'descount'])->name('child_descount');
+            Route::post('/child/return', [ChildPaymentController::class, 'return'])->name('child_return');
             # Bolalardan kelgan leadlar
             Route::get('/childLead', [ChildLeadController::class, 'index'])->name('childLead_index');
             Route::get('/childLead/{id}', [ChildLeadController::class, 'show'])->name('childLead_show');

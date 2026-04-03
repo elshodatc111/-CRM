@@ -17,13 +17,14 @@
       </div>
     </div>
     <div class="col-lg-6" style="text-align: right">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tulov"><i class="bi bi-wallet2 me-1"></i> To'lov qilish</button>
+      <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#tulov"><i class="bi bi-wallet2 me-1"></i> To'lov qilish</button>
+      <button class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#return"><i class="bi bi-wallet2 me-1"></i> To'lov qaytarish</button>
       @if(auth()->user()->role=='superadmin' || auth()->user()->role=='direktor')
-      <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target="#chegirma"><i class="bi bi-percent me-1"></i> Chegirma</button>
+      <button class="btn btn-warning mt-2 text-white" data-bs-toggle="modal" data-bs-target="#chegirma"><i class="bi bi-percent me-1"></i> Chegirma</button>
       @endif
-      <button class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#taxrirlash"><i class="bi bi-pencil-square me-1"></i> Tahrirlash</button>
+      <button class="btn btn-info mt-2 text-white" data-bs-toggle="modal" data-bs-target="#taxrirlash"><i class="bi bi-pencil-square me-1"></i> Tahrirlash</button>
       @if(!$child->is_active)
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#groupAdd"><i class="bi bi-people-fill me-1"></i> Guruhga qo'shish</button>
+      <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#groupAdd"><i class="bi bi-people-fill me-1"></i> Guruhga qo'shish</button>
       @endif
     </div>
   </div>
@@ -155,7 +156,7 @@
 
 
 <div class="modal fade" id="tulov" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('child_payment') }}" method="post">
     @csrf 
     <input type="hidden" name="child_id" value="{{ $child->id }}">
     <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -173,18 +174,57 @@
               <input type="text" name="amount" required class="form-control" id="amount1">
             </div>
             <div class="col-6">
-              <label for="amount_type" class="mb-2">To'lov summasi</label>
-              <select name="" required class="form-select">
+              <label for="amount_type" class="mb-2">To'lov turi</label>
+              <select name="amount_type" required class="form-select">
                 <option value="">Tanlang...</option>
-                <option value="">Naqt to'lov</option>
-                <option value="">Karta to'lov</option>
-                <option value="">Bank orqali to'lov</option>
-                <option value="">To'lov qaytarish</option>
+                <option value="cash">Naqt to'lov</option>
+                <option value="card">Karta to'lov</option>
+                <option value="bank">Bank orqali to'lov</option>
               </select>
             </div>
           </div>
-          <label for="start_comment" class="my-2">To'lov haqida</label>
-          <textarea name="start_comment" required class="form-control"></textarea>
+          <label for="description" class="my-2">To'lov haqida</label>
+          <textarea name="description" required class="form-control"></textarea>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
+          <button type="submit" class="btn btn-success px-5 shadow-sm">To'lov qilish</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" id="return" tabindex="-1" aria-hidden="true">
+  <form action="{{ route('child_return') }}" method="post">
+    @csrf 
+    <input type="hidden" name="child_id" value="{{ $child->id }}">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">
+            <i class="bi bi-wallet2 me-2"></i> To'lov qaytarish
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row">
+            <div class="col-6">
+              <label for="amount" class="mb-2">Qaytarish summasi</label>
+              <input type="text" name="amount" required class="form-control" id="amount1">
+            </div>
+            <div class="col-6">
+              <label for="amount_type" class="mb-2">Qaytarish turi</label>
+              <select name="amount_type" required class="form-select">
+                <option value="">Tanlang...</option>
+                <option value="cash">Naqt to'lov</option>
+                <option value="card">Karta to'lov</option>
+                <option value="bank">Bank orqali to'lov</option>
+              </select>
+            </div>
+          </div>
+          <label for="description" class="my-2">Qaytarish haqida</label>
+          <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
           <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
@@ -196,7 +236,7 @@
 </div>
 
 <div class="modal fade" id="chegirma" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('child_descount') }}" method="post">
     @csrf 
     <input type="hidden" name="child_id" value="{{ $child->id }}">
     <div class="modal-dialog modal-lg modal-dialog-centered">
