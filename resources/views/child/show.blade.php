@@ -291,7 +291,7 @@
           <div class="row">
             <div class="col-6">
               <label for="amount" class="mb-2">Qaytarish summasi</label>
-              <input type="text" name="amount" required class="form-control" id="amount1">
+              <input type="text" name="amount" required class="form-control" id="amount4">
             </div>
             <div class="col-6">
               <label for="amount_type" class="mb-2">Qaytarish turi</label>
@@ -313,7 +313,7 @@
       </div>
     </div>
   </form>
-</div>
+</div> 
 
 <div class="modal fade" id="chegirma" tabindex="-1" aria-hidden="true">
   <form action="{{ route('child_descount') }}" method="post">

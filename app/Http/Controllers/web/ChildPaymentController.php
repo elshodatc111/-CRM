@@ -5,6 +5,9 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Child\ChildDiscountRequest;
 use App\Http\Requests\Child\ChildPaymentRequest;
+use App\Http\Requests\Child\ChildReturnRequest;
+use App\Models\Balans;
+use App\Models\BalansHistory;
 use App\Models\Child;
 use App\Models\ChildPayment;
 use App\Models\Kassa;
@@ -88,9 +91,35 @@ class ChildPaymentController extends Controller{
         return redirect()->back()->with('success',"Chegirma qabul qilindi");
     }
 
-    public function return(Request $request){
+    public function return(ChildReturnRequest $request){
         DB::transaction(function () use ($request) {
-
+            $child = Child::findOrFail($request->child_id);
+            $child->decrement('balans', $request['amount']);  
+            ChildPayment::create([
+                'child_id' => $request->child_id,
+                'type' => 'return',
+                'amount' => $request->amount,
+                'amount_type' => $request->amount_type,
+                'description' => $request->description,
+                'status' => 'success',
+                'admin_id' => Auth::id(),
+            ]);
+            $balans = Balans::first();
+            if($request->amount_type=='cash'){
+                $balans->decrement('cash', $request['amount']);  
+            }elseif($request->amount_type=='card'){
+                $balans->decrement('card', $request['amount']);  
+            }elseif($request->amount_type=='bank'){
+                $balans->decrement('bank', $request['amount']);  
+            }
+            BalansHistory::create([
+                'type' => 'return',
+                'status' => 'success',
+                'amount' => $request->amount,
+                'amount_type' => $request->amount_type,
+                'description' => $request->description,
+                'admin_id' => Auth::id(),
+            ]);
         });
         return redirect()->back()->with('success',"To'lov qaytarildi");
     }
