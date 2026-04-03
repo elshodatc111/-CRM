@@ -60,6 +60,10 @@ Route::group([
             Route::post('/kassa/cancel',[KassaController::class, 'cancelKassa'])->name('kassa_cancel');
             #Moliya
             Route::get('/moliya',[BalansController::class, 'index'])->name('moliya_index');
+            Route::post('/moliya/sunsedya',[BalansController::class, 'subsedyaToBalans'])->name('moliya_sunsedya');
+            Route::post('/moliya/balansToKassa',[BalansController::class, 'balansToKassa'])->name('moliya_balans_to_kassa');
+            Route::post('/moliya/balansDaromad',[BalansController::class, 'daromad'])->name('moliya_balans_daromad');
+            Route::post('/moliya/balansXarajat',[BalansController::class, 'xarajat'])->name('moliya_balans_xarajat');
         });
         
     });

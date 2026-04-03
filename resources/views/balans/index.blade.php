@@ -197,7 +197,7 @@
 
 
 <div class="modal fade" id="balansdan_xarajat" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('moliya_balans_xarajat') }}" method="post">
     @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
@@ -208,10 +208,24 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Chiqim summasi</label>
-          <input type="text" name="amount" required class="form-control" id="amount1">
-          <label for="start_comment" class="my-2">Chiqim haqida</label>
-          <textarea name="start_comment" required class="form-control"></textarea>
+          <div class="row">
+            <div class="col-lg-6">
+              <label for="amount" class="mb-2">Xarajat summasi</label>
+              <input type="text" name="amount" required class="form-control" id="amount2">
+            </div>
+            <div class="col-lg-6">
+              <label for="amount_type" class="mb-2">Xarajat turi</label>
+              <select name="amount_type" required class="form-select">
+                <option value="">Tanlang</option>
+                <option value="cash">Naqt</option>
+                <option value="card">Karta</option>
+                <option value="bank">Bank</option>
+                <option value="sub">Subsidiya</option>
+              </select>
+            </div>
+          </div>
+          <label for="description" class="my-2">Xarajat haqida</label>
+          <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
           <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
@@ -223,7 +237,7 @@
 </div>
 
 <div class="modal fade" id="daromad" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('moliya_balans_daromad') }}" method="post">
     @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
@@ -234,10 +248,24 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Xarajat summasi</label>
-          <input type="text" name="amount" required class="form-control" id="amount1">
-          <label for="start_comment" class="my-2">Xarajat haqida</label>
-          <textarea name="start_comment" required class="form-control"></textarea>
+          <div class="row">
+            <div class="col-lg-6">
+              <label for="amount" class="mb-2">Daromad summasi</label>
+              <input type="text" name="amount" required class="form-control" id="amount2">
+            </div>
+            <div class="col-lg-6">
+              <label for="amount_type" class="mb-2">Daromad turi</label>
+              <select name="amount_type" required class="form-select">
+                <option value="">Tanlang</option>
+                <option value="cash">Naqt</option>
+                <option value="card">Karta</option>
+                <option value="bank">Bank</option>
+                <option value="sub">Subsidiya</option>
+              </select>
+            </div>
+          </div>
+          <label for="description" class="my-2">Daromad haqida</label>
+          <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
           <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
@@ -249,7 +277,7 @@
 </div>
 
 <div class="modal fade" id="return_kassa" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('moliya_balans_to_kassa') }}" method="post">
     @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
@@ -260,10 +288,11 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Xarajat summasi</label>
-          <input type="text" name="amount" required class="form-control" id="amount1">
-          <label for="start_comment" class="my-2">Xarajat haqida</label>
-          <textarea name="start_comment" required class="form-control"></textarea>
+          <label for="amount" class="mb-2">Kassaga qaytarish summasi (Naqt)</label>
+          <input type="text" name="amount" required class="form-control" id="amount3">
+          <input type="hidden" name="amount_type" value="cash">
+          <label for="description" class="my-2">Qaytarish haqida</label>
+          <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
           <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
@@ -275,7 +304,7 @@
 </div>
 
 <div class="modal fade" id="add_subsidiya" tabindex="-1" aria-hidden="true">
-  <form action="#" method="post">
+  <form action="{{ route('moliya_sunsedya') }}" method="post">
     @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content border-0 shadow">
@@ -286,10 +315,10 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Xarajat summasi</label>
-          <input type="text" name="amount" required class="form-control" id="amount1">
-          <label for="start_comment" class="my-2">Xarajat haqida</label>
-          <textarea name="start_comment" required class="form-control"></textarea>
+          <label for="amount" class="mb-2">Subsidiya summasi</label>
+          <input type="text" name="amount" required class="form-control" id="amount4">
+          <label for="description" class="my-2">Subsidiya haqida</label>
+          <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
           <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
