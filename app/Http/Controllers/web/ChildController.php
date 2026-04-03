@@ -26,6 +26,7 @@ class ChildController extends Controller{
     }
     
     public function show($id){
-        return view('child.show', compact('id'));
+        $child = Child::findOrFail($id);
+        return view('child.show', compact('child'));
     }
 }
