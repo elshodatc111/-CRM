@@ -10,7 +10,7 @@ use App\Http\Requests\Moliya\SubsidyRequest;
 use App\Models\Balans;
 use App\Models\BalansHistory;
 use App\Models\Kassa;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +18,8 @@ class BalansController extends Controller{
 
     public function index(){
         $balans = Balans::getInstance();
-        return view('balans.index',compact('balans'));
+        $history = BalansHistory::where('created_at', '>=', now()->subDays(45))->orderBy('id', 'desc')->get();
+        return view('balans.index',compact('balans','history'));
     }
 
     public function subsedyaToBalans(SubsidyRequest $request){

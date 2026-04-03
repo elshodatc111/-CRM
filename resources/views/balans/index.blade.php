@@ -69,120 +69,59 @@
       <div class="card-body">
         <div class="row g-3">
           <div class="col-12 col-xl-12 border-xl-end">
-            <h5 class="card-title">Tasdiqlash kutilmoqda</h5>
+            <h5 class="card-title">Balans tarixi (45 kun)</h5>
             <div class="table-responsive">
-              <table class="table text-center table-bordered" style="font-size: 14px">
+              <table class="table text-center table-bordered" style="font-size: 12px">
                 <thead>
                   <th>#</th>
-                  <th>Bola</th>
-                  <th>Type</th>
+                  <th>Amaliyot turi</th>
                   <th>Summa</th>
-                  <th>To'lov turi</th>
+                  <th>Summa turi</th>
+                  <th>Amaliyot haqida</th>
+                  <th>Direktor</th>
                   <th>Amaliyot vaqti</th>
-                  <th>Amaliyotchi</th>
-                  <th></th>
                 </thead>
                 <tbody>
+                  @forelse($history as $item)
                   <tr>
-                    <td class="text-center">1</td>
-                    <td>-</td>
-                    <td>out=Kassadan chiqim</td>
-                    <td>{{ number_format(21250, 0, '.', ' ') }} UZS</td>
-                    <td>cash=Naqt</td>
-                    <td>2025-01-11 15:41</td>
-                    <td>Elshod Musurmonov</td>
-                    <td class="text-center">
-                      <div class="d-flex justify-content-center gap-2">
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-success p-0 px-1" title="Tasdiqlash">
-                              <i class="bi bi-check-lg"></i>
-                          </button>
-                        </form>
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-danger p-0 px-1" title="Bekor qilish">
-                              <i class="bi bi-x-lg"></i>
-                          </button>
-                        </form>
-                      </div>
+                    <td>{{ $loop->index+1 }}</td>
+                    <td>
+                      @if($item->type=='kassaToBalans')
+                        <b class="m-0 p-0 text-primary">Kassadan chiqim</b>
+                      @elseif($item->type=='kassaCost')
+                        <b class="m-0 p-0 text-danger">Kassadan xarajat</b>
+                      @elseif($item->type=='balansToKassa')
+                        <b class="m-0 p-0 text-info">Balansdan kassaga</b>
+                      @elseif($item->type=='balansOut')
+                        <b class="m-0 p-0 text-success">Daromad</b>
+                      @elseif($item->type=='balansCost')
+                        <b class="m-0 p-0 text-danger">Balansdan xarajat</b>
+                      @elseif($item->type=='return')
+                        <b class="m-0 p-0 text-danger">To'lov qaytarildi</b>
+                      @elseif($item->type=='salary')
+                        <b class="m-0 p-0 text-warning">Ish haqi to'lovi</b>
+                      @elseif($item->type=='subToBalans')
+                        <b class="m-0 p-0 text-primary">Sunsidiya</b>
+                      @endif
                     </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">2</td>
-                    <td>-</td>
-                    <td>cost=Kassadan xarajat</td>
-                    <td>{{ number_format(1250, 0, '.', ' ') }} UZS</td>
-                    <td>cash=Naqt</td>
-                    <td>2025-01-11 15:41</td>
-                    <td>Elshod Musurmonov</td>
-                    <td class="text-center">
-                      <div class="d-flex justify-content-center gap-2">
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-success p-0 px-1" title="Tasdiqlash">
-                              <i class="bi bi-check-lg"></i>
-                          </button>
-                        </form>
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-danger p-0 px-1" title="Bekor qilish">
-                              <i class="bi bi-x-lg"></i>
-                          </button>
-                        </form>
-                      </div>
+                    <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
+                    <td>
+                      @if($item->amount_type=='cash')
+                        Naqt
+                      @elseif($item->amount_type=='card')
+                        Karta
+                      @elseif($item->amount_type=='bank')
+                        Bank
+                      @elseif($item->amount_type=='sub')
+                        Subsidiya
+                      @endif
                     </td>
+                    <td style="text-align: left">{{ $item->description }}</td>
+                    <td>{{ $item->admin->name }}</td>
+                    <td>{{ $item->created_at->format('Y-m-d H:i') }}</td>
                   </tr>
-                  <tr>
-                    <td class="text-center">3</td>
-                    <td><a href="#">Elshod Musurmonov</a></td>
-                    <td>payment=To'lov</td>
-                    <td>{{ number_format(41250, 0, '.', ' ') }} UZS</td>
-                    <td>card=Karta</td>
-                    <td>2025-01-11 15:41</td>
-                    <td>Elshod Musurmonov</td>
-                    <td class="text-center">
-                      <div class="d-flex justify-content-center gap-2">
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-success p-0 px-1" title="Tasdiqlash">
-                              <i class="bi bi-check-lg"></i>
-                          </button>
-                        </form>
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-danger p-0 px-1" title="Bekor qilish">
-                              <i class="bi bi-x-lg"></i>
-                          </button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">4</td>
-                    <td><a href="#">Elshod Musurmonov</a></td>
-                    <td>payment=To'lov</td>
-                    <td>{{ number_format(891250, 0, '.', ' ') }} UZS</td>
-                    <td>bank=Bank</td>
-                    <td>2025-01-11 15:41</td>
-                    <td>Elshod Musurmonov</td>
-                    <td class="text-center">
-                      <div class="d-flex justify-content-center gap-2">
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-success p-0 px-1" title="Tasdiqlash">
-                              <i class="bi bi-check-lg"></i>
-                          </button>
-                        </form>
-                        <form action="#" method="post">
-                          @csrf
-                          <button type="submit" class="btn btn-danger p-0 px-1" title="Bekor qilish">
-                              <i class="bi bi-x-lg"></i>
-                          </button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @empty
+                  @endforelse
                 </tbody>
               </table>
             </div>
