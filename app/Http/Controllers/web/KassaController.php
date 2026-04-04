@@ -19,7 +19,6 @@ class KassaController extends Controller{
     public function index(){
         $kassa = Kassa::getInstance();
         $history = KassaHistory::where('status','pending')->get();
-        //dd($history);
         return view('kassa.index',compact('kassa','history'));
     }
 
@@ -38,7 +37,7 @@ class KassaController extends Controller{
                 'start_comment' => $request->start_comment
             ]);
         });
-        return back()->with('success', "Kassadan chiqim muvaffaqiyatli bajarildi! Tasdiqlash kutilmoqda.");
+        return back()->with('success', __('kassa.kassadan_chiqim_success'));
     }
 
     public function kassaToCost(KassaCostRequest $request){
@@ -56,7 +55,7 @@ class KassaController extends Controller{
                 'start_comment' => $request->start_comment
             ]);
         });
-        return back()->with('success', "Kassadan xarajat muvaffaqiyatli bajarildi! Tasdiqlash kutilmoqda.");
+        return back()->with('success', __('kassa.kassadan_xarajad_success'));
     }
 
     public function cancelKassa(Request $request){
@@ -88,7 +87,7 @@ class KassaController extends Controller{
                 }
             }
         });
-        return back()->with('success', "Amaliyot bekor qilindi.");
+        return back()->with('success', __('kassa.tranzaksion_cancel'));
     }
     
     public function successKassa(Request $request){
@@ -103,7 +102,6 @@ class KassaController extends Controller{
             $kassa = Kassa::first();
             if($type=='cost'){  
                 $kassa->decrement('cost_cash_pending', $history->amount); 
-                // 'kassaToBalans','kassaCost','balansToKassa','balansOut','balansCost','return','salary','balansToSub','subToBalans'
                 BalansHistory::create([
                     'type' => 'kassaCost',
                     'status' => 'success',
@@ -155,7 +153,7 @@ class KassaController extends Controller{
                 ]);
             }
         });
-        return back()->with('success', "Amaliyot tasdiqlandi.");
+        return back()->with('success', __('kassa.tranzaksion_success'));
     }
 
 

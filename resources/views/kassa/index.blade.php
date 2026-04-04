@@ -16,8 +16,8 @@
       </div>
     </div>
     <div class="col-lg-6" style="text-align:right">
-      <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#kassadan_chiqim"><i class="bi bi-cash"></i> Kassadan chiqim</button>
-      <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#kassadan_xarajat"><i class="bi bi-cash"></i> Kassadan xarajat</button>
+      <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#kassadan_chiqim"><i class="bi bi-cash"></i> {{ __('kassa.kassadan_chiqim') }}</button>
+      <button class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#kassadan_xarajat"><i class="bi bi-cash"></i> {{ __('kassa.kassadan_xarajat') }}</button>
     </div>
   </div>
 
@@ -28,27 +28,27 @@
           <div class="card-body">
             <div class="row g-3">
               <div class="col-12 col-xl-12 border-xl-end">
-                <h5 class="card-title mb-3 text-success">Kassada mavjud <span>| Jami balans</span></h5>
+                <h5 class="card-title mb-3 text-success">{{ __('kassa.kassada_mavjud') }}</h5>
                 <div class="row g-2">
                     <div class="col-lg-4">
                         <div class="op-card rounded p-2 text-center bg-light">
                             <div class="text-success mb-1"><i class="bi bi-cash-stack fs-4"></i></div>
                             <h5 class="mb-0">{{ number_format($kassa->cash, 0, '.', ' ') }}</h5>
-                            <div class="text-muted small">Naqd (Mavjud)</div>
+                            <div class="text-muted small">{{ __('kassa.naqt_mavjud') }}</div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="op-card rounded p-2 text-center bg-light">
                             <div class="text-primary mb-1"><i class="bi bi-credit-card fs-4"></i></div>
                             <h5 class="mb-0">{{ number_format($kassa->pending_card, 0, '.', ' ') }}</h5>
-                            <div class="text-muted small">Plastik (kutilmoqda)</div>
+                            <div class="text-muted small">{{ __('kassa.plastik_pending') }}</div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="op-card rounded p-2 text-center bg-light">
                             <div class="text-info mb-1"><i class="bi bi-bank fs-4"></i></div>
                             <h5 class="mb-0">{{ number_format($kassa->pending_bank, 0, '.', ' ') }}</h5>
-                            <div class="text-muted small">Bank (kutilmoqda)</div>
+                            <div class="text-muted small">{{ __('kassa.bank_pending') }}</div>
                         </div>
                     </div>
                 </div>
@@ -63,25 +63,25 @@
           <div class="card-body">
             <div class="row g-3">
               <div class="col-12 col-xl-12 border-xl-end">
-                  <h5 class="card-title mb-3 text-warning">Chiqim va Xarajat kutilmoqda</h5>
-                  <div class="row g-2">
-                      <div class="col-lg-6">
-                          <div class="op-card rounded p-2 text-center bg-light">
-                              <div class="text-primary mb-1"><i class="bi bi-cash fs-4"></i></div>
-                              <h5 class="mb-0">{{ number_format($kassa->out_cash_pending, 0, '.', ' ') }}</h5>
-                              <div class="text-muted small">Kassadan naqt chiqim</div>
-                          </div>
-                      </div>
-                      <div class="col-lg-6">
-                          <div class="op-card rounded p-2 text-center bg-light">
-                              <div class="text-info mb-1"><i class="bi bi-cash fs-4"></i></div>
-                              <h5 class="mb-0">{{ number_format($kassa->cost_cash_pending, 0, '.', ' ') }}</h5>
-                              <div class="text-muted small">Kassadan xarajat</div>
-                          </div>
-                      </div>
+                <h5 class="card-title mb-3 text-warning">{{ __('kassa.chiqim_xarajat_pending') }}</h5>
+                <div class="row g-2">
+                  <div class="col-lg-6">
+                    <div class="op-card rounded p-2 text-center bg-light">
+                      <div class="text-primary mb-1"><i class="bi bi-cash fs-4"></i></div>
+                      <h5 class="mb-0">{{ number_format($kassa->out_cash_pending, 0, '.', ' ') }}</h5>
+                      <div class="text-muted small">{{ __('kassa.kassadan_naqt_chiqim') }}</div>
+                    </div>
                   </div>
+                  <div class="col-lg-6">
+                    <div class="op-card rounded p-2 text-center bg-light">
+                      <div class="text-info mb-1"><i class="bi bi-cash fs-4"></i></div>
+                      <h5 class="mb-0">{{ number_format($kassa->cost_cash_pending, 0, '.', ' ') }}</h5>
+                      <div class="text-muted small">{{ __('kassa.kassadan_xarajat') }}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>
@@ -91,18 +91,18 @@
           <div class="card-body">
             <div class="row g-3">
               <div class="col-12 col-xl-12 border-xl-end">
-                <h5 class="card-title">Tasdiqlash kutilmoqda</h5>
+                <h5 class="card-title">{{ __('kassa.tasdiqlash_kutilmoqda') }}</h5>
                 <div class="table-responsive">
                   <table class="table text-center table-bordered" style="font-size: 12px">
                     <thead>
                       <th>#</th>
-                      <th>Type</th>
-                      <th>Summa</th>
-                      <th>To'lov turi</th>
-                      <th>Amaliyot haqida</th>
-                      <th>Amaliyot vaqti</th>
-                      <th>Amaliyotchi</th>
-                      <th>Amallar</th>
+                      <th>{{ __('kassa.type') }}</th>
+                      <th>{{ __('kassa.summa') }}</th>
+                      <th>{{ __('kassa.tulov_turi') }}</th>
+                      <th>{{ __('kassa.amaliyot_about') }}</th>
+                      <th>{{ __('kassa.amaliyot_time') }}</th>
+                      <th>{{ __('kassa.amaliyotchi') }}</th>
+                      <th>{{ __('kassa.amallar') }}</th>
                     </thead>
                     <tbody>
                       @forelse($history as $item)
@@ -110,11 +110,11 @@
                           <td class="text-center">{{ $loop->iteration }}</td>
                           <td>
                             @if($item->type=='payment')
-                              <span class="badge bg-success">To'lov</span>
+                              <span class="badge bg-success">{{ __('kassa.payment') }}</span>
                             @elseif($item->type=='cost')
-                              <span class="badge bg-danger">Kassadan xarajat</span>
+                              <span class="badge bg-danger">{{ __('kassa.kassadan_xarajat') }}</span>
                             @else
-                              <span class="badge bg-primary">Kassadan chiqim</span>
+                              <span class="badge bg-primary">{{ __('kassa.kassadan_chiqim') }}</span>
                             @endif
                           </td>
                           <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
@@ -151,7 +151,7 @@
                         </tr>
                       @empty
                         <tr>
-                          <td class="text-center" colspan="8">Tasdiqlanmagan amaliyotlar mavjud emas.</td>
+                          <td class="text-center" colspan="8">{{ __('kassa.not_found_amaliyot') }}</td>
                         </tr>
                       @endforelse
                     </tbody>
@@ -182,19 +182,19 @@
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title">
-            <i class="bi bi-cash me-2"></i>Kassadan chiqim
+            <i class="bi bi-cash me-2"></i> {{ __('kassa.kassadan_chiqim') }}
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Chiqim summasi</label>
+          <label for="amount" class="mb-2">{{ __('kassa.chiqim_summasi') }}</label>
           <input type="text" name="amount" required class="form-control" id="amount1">
-          <label for="start_comment" class="my-2">Chiqim haqida</label>
+          <label for="start_comment" class="my-2">{{ __('kassa.chiqim_about') }}</label>
           <textarea name="start_comment" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-primary px-5 shadow-sm">Chiqim qilish</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('kassa.cancel') }}</button>
+          <button type="submit" class="btn btn-primary px-5 shadow-sm">{{ __('kassa.chiqim_qilish') }}</button>
         </div>
       </div>
     </div>
@@ -208,19 +208,19 @@
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-danger text-white">
           <h5 class="modal-title">
-            <i class="bi bi-cash me-2"></i>Kassadan xarajat
+            <i class="bi bi-cash me-2"></i> {{ __('kassa.kassadan_xarajat') }}
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Xarajat summasi</label>
+          <label for="amount" class="mb-2">{{ __('kassa.xarajat_summa') }}</label>
           <input type="text" name="amount" required class="form-control" id="amount2">
-          <label for="start_comment" class="my-2">Xarajat haqida</label>
+          <label for="start_comment" class="my-2">{{ __('kassa.xarajat_about') }}</label>
           <textarea name="start_comment" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-danger px-5 shadow-sm">Xarajat qilish</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('kassa.cancel') }}</button>
+          <button type="submit" class="btn btn-danger px-5 shadow-sm">{{ __('kassa.xarajat_qilish') }}</button>
         </div>
       </div>
     </div>

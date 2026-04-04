@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Kassa;
 
 use App\Models\Kassa;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class KassaCostRequest extends FormRequest
@@ -27,7 +26,7 @@ class KassaCostRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     $kassa = Kassa::getInstance(); 
                     if (!$kassa || $kassa->cash < $value) {
-                        $fail("Kassada yetarli mablag' mavjud emas. Joriy balans: " . number_format($kassa->cash ?? 0, 0, '.', ' ') . " UZS");
+                        $fail(__('kassa.mablag_yetarli_emas'));
                     }
                 },
             ],
@@ -37,10 +36,10 @@ class KassaCostRequest extends FormRequest
 
     public function messages(): array{
         return [
-            'amount.required' => 'Xarajat summasini kiritish majburiy.',
-            'amount.numeric'  => 'Summa faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.gt'       => 'Xarajat summasi 0 dan katta bo\'lishi kerak.',
-            'start_comment.required' => 'Xarajat haqida izoh qoldiring.',
+            'amount.required' => __('kassa.amount_required'),
+            'amount.numeric'  => __('kassa.amount_numeric'),
+            'amount.gt'       => __('kassa.amount_gt'),
+            'start_comment.required' => __('kassa.start_comment_required'),
         ];
     }
 }
