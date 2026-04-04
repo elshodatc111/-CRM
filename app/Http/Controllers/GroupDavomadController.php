@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Models\GroupChild;
 use App\Models\GroupDavomad;
-use App\Models\GroupUser;
 use Illuminate\Http\Request;
 
 class GroupDavomadController extends Controller{
@@ -42,7 +41,7 @@ class GroupDavomadController extends Controller{
             $res['groups'][] = [
                 'group_id'     => $group->id,
                 'group_name'   => $group->group_name,
-                'is_done'      => $attendanceCount > 0, // Davomad qilinganmi?
+                'is_done'      => $attendanceCount > 0,
                 'users_count'  => $usersCount,
                 'keldi'        => $percent($keldi, $usersCount),
                 'kelmadi'      => $percent($kelmadi, $usersCount),
@@ -94,7 +93,7 @@ class GroupDavomadController extends Controller{
                     ]
                 );
             }
-            return redirect()->back()->with('success', 'Davomad muvaffaqiyatli saqlandi!');
+            return redirect()->back()->with('success', __('group_davomad.success_davomad'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Xatolik yuz berdi: ' . $e->getMessage());
         }

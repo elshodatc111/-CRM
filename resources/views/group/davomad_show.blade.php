@@ -1,13 +1,13 @@
 @extends('layouts.admin')
-@section('title', __('menu.group_davomad'))
+@section('title', __('group_davomad.davomad_check') )
 @section('content')
   <div class="pagetitle">
-    <h1>Davomad olish</h1>
+    <h1>{{ __('group_davomad.davomad_check') }}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
         <li class="breadcrumb-item"><a href="{{ route('groups_davomad') }}">{{ __('menu.group_davomad') }}</a></li>
-        <li class="breadcrumb-item active">Davomad olish</li>
+        <li class="breadcrumb-item active">{{ __('group_davomad.davomad_check') }}</li>
       </ol>
     </nav>
   </div>
@@ -31,8 +31,8 @@
               <thead>
                 <tr class="text-center">
                   <th style="width: 50px;">#</th>
-                  <th>Bola</th>
-                  <th style="width: 400px;">Davomad Holati</th>
+                  <th>{{ __('group_davomad.child') }}</th>
+                  <th style="width: 400px;">{{ __('group_davomad.status') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -50,7 +50,7 @@
                             value="kelmadi" 
                             @checked(isset($student['status']) && ($student['status'] == '0' || $student['status'] == 'kelmadi'))>
                           <label class="form-check-label text-white" for="absent{{ $student['child_id'] }}">
-                            Kelmadi
+                            {{ __('group_davomad.kelmadi') }}
                           </label>
                         </div>
                       </span>
@@ -62,7 +62,7 @@
                             value="kechikdi" 
                             @checked(isset($student['status']) && ($student['status'] == '2' || $student['status'] == 'sababli' || $student['status'] == 'kechikdi'))>
                           <label class="form-check-label text-white" for="reason{{ $student['child_id'] }}">
-                            Kechikdi
+                            {{ __('group_davomad.kechikdi') }}
                           </label>
                         </div>
                       </span>                   
@@ -74,7 +74,7 @@
                             value="keldi" 
                             @checked(!isset($student['status']) || $student['status'] == '1' || $student['status'] == 'keldi')>
                           <label class="form-check-label text-white" for="present{{ $student['child_id'] }}">
-                            Keldi
+                            {{ __('group_davomad.keldi') }}
                           </label>
                         </div>
                       </span>
@@ -87,7 +87,7 @@
           </div>
           <div class="text-end mt-3">
             <button type="submit" class="btn btn-outline-primary px-5">
-                <i class="bi bi-check"></i> Davomadni saqlash
+                <i class="bi bi-check"></i> {{ __('group_davomad.davomad_save') }}
             </button>
           </div>
         </form>

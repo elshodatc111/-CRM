@@ -17,7 +17,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-6">
-            <h5 class="card-title text-primary">Guruhlar</h5>
+            <h5 class="card-title text-primary">{{ __('group_davomad.groups') }}</h5>
           </div>
           <div class="col-6" style="text-align: right">
             <h5 class="card-title text-primary">{{ date('d.m.Y') }}</h5>
@@ -28,12 +28,12 @@
             <thead>
               <tr class="text-center">
                 <th>#</th>
-                <th>Guruh</th>
-                <th>Davomad</th>
-                <th>Bolalar soni</th>
-                <th>Keldi</th>
-                <th>Kechikdi</th>
-                <th>Kelmadi</th>
+                <th>{{ __('group_davomad.group') }}</th>
+                <th>{{ __('group_davomad.davomad') }}</th>
+                <th>{{ __('group_davomad.child_count') }}</th>
+                <th>{{ __('group_davomad.keldi') }}</th>
+                <th>{{ __('group_davomad.kechikdi') }}</th>
+                <th>{{ __('group_davomad.kelmadi') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -60,7 +60,7 @@
                 </tr>
               @empty
                 <tr>
-                  <td colspan="7" class="text-center">Guruhlar mavjud emas</td>
+                  <td colspan="7" class="text-center">{{ __('group_davomad.not_fount_groups')}}</td>
                 </tr>
               @endforelse
             </tbody>
