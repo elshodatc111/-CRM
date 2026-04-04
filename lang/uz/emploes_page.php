@@ -1,54 +1,48 @@
 <?php
-
 return [
-    // Sahifa matnlari
-    'add_new' => 'Yangi xodim qo\'shish',
-    'employees_list' => 'Xodimlar ro\'yxati',
-    'fio' => 'FIO',
-    'fio_placeholder' => 'To\'liq ism sharifni kiriting',
+    'add_new' => 'Yangi xodim qo‘shish',
+    'employees_list' => 'Xodimlar ro‘yxati',
+    'fio' => 'F.I.Sh.',
+    'fio_placeholder' => 'To‘liq ism-sharifni kiriting',
     'phone' => 'Telefon raqami',
-    'phone_secondary' => 'Telefon raqami 2',
+    'phone_secondary' => 'Qo‘shimcha telefon raqami',
     'address' => 'Manzil',
     'salary' => 'Maosh miqdori',
-    'birth_date' => 'Tug\'ilgan sana',
-    'passport' => 'Pasport seriyasi',
-    'position' => 'Lavozimi',
+    'birth_date' => 'Tug‘ilgan sana',
+    'passport' => 'Pasport ma’lumotlari',
+    'position' => 'Lavozim',
     'select_position' => 'Lavozimni tanlang',
     'status' => 'Holati',
-    'hired_date' => 'Ishga olindi',
-    'about' => 'Lavozim haqida ma\'lumot',
-    'about_placeholder' => 'Qisqacha qo\'shimcha ma\'lumot...',
+    'hired_date' => 'Ishga qabul qilingan sana',
+    'about' => 'Qo‘shimcha ma’lumot',
+    'about_placeholder' => 'Qisqacha qo‘shimcha ma’lumot...',
     'no_data' => 'Xodimlar mavjud emas',
     'cancel' => 'Bekor qilish',
     'save' => 'Saqlash',
     'success_message' => 'Yangi xodim muvaffaqiyatli qo‘shildi.',
-    // Statuslar
     'status_true' => 'Faol',
     'status_false' => 'Nofaol',
-    
-    // Lavozimlar
+
     'roles' => [
-        'superadmin' => 'Super Admin',
+        'superadmin' => 'Superadmin',
         'admin' => 'Administrator',
         'direktor' => 'Direktor',
         'tarbiyachi' => 'Tarbiyachi',
-        'yordamchi' => 'Yordamchi tarbiyachi',
-        'teacher' => 'O\'qituvchi',
+        'yordamchi' => 'Yordamchi',
+        'teacher' => "O‘qituvchi",
         'oshpaz' => 'Oshpaz',
         'farrosh' => 'Farrosh',
         'xodim' => 'Xodim',
     ],
 
-    // Validatsiya xabarlari (Siz so'ragan qism)
     'validation' => [
-        'name_required' => 'FIO kiritilishi shart.',
+        'name_required' => 'F.I.Sh. kiritilishi shart.',
         'phone_required' => 'Asosiy telefon raqami kiritilishi shart.',
         'phone_unique' => 'Ushbu telefon raqami allaqachon ro‘yxatdan o‘tgan.',
         'salary_numeric' => 'Maosh miqdori faqat sonlardan iborat bo‘lishi kerak.',
-        'tkun_before' => 'Tug‘ilgan sana bugungi kundan oldin bo‘lishi shart.',
+        'tkun_before' => 'Tug‘ilgan sana bugungi kundan oldin bo‘lishi kerak.',
         'role_required' => 'Lavozimni tanlash majburiy.',
         'address_required' => 'Manzil kiritilishi shart.',
         'passport_required' => 'Pasport ma’lumotlari kiritilishi shart.',
     ],
-
 ];

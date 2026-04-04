@@ -44,7 +44,7 @@
                   @forelse ($emploes as $emploe)
                     <tr class="text-center align-middle">
                       <td>{{ $loop->iteration }}</td>
-                      <td>
+                      <td style="text-align: left">
                         <a href="{{ route('emploes_show', $emploe['id']) }}" class="fw-bold text-primary">
                           {{ $emploe->name }}
                         </a>
