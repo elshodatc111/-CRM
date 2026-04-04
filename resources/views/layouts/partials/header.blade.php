@@ -1,17 +1,19 @@
 <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center list-unstyled mb-0">
-        
+        <!--
         <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                 <i class="bi bi-bell"></i>
                 <span class="badge bg-primary badge-number">1</span>
             </a>
-            </li>
-
-        <li class="nav-item dropdown">
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        </li>
+        -->
+        <li class="nav-item">
+            <a class="nav-link nav-icon" href="#">
                 <i class="bi bi-cake2"></i>
-                <span class="badge bg-success badge-number">2</span>
+                @if($birthdayCount > 0)
+                    <span class="badge bg-success badge-number">{{ $birthdayCount }}</span>
+                @endif
             </a>
         </li>
           
