@@ -28,10 +28,10 @@ class SubsidyRequest extends FormRequest{
     
     public function messages(): array{
         return [
-            'amount.required'      => 'Subsidiya summasini kiritish majburiy.',
-            'amount.numeric'       => 'Summa faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.gt'            => 'Subsidiya summasi 0 dan katta bo\'lishi shart.',
-            'description.required' => 'Subsidiya haqida qisqacha ma\'lumot yozing.',
+            'amount.required'      => __('moliya.amount_c_required'),
+            'amount.numeric'       => __('moliya.amount_c_numeric'),
+            'amount.gt'            => __('moliya.amount_c_gt'),
+            'description.required' => __('moliya.description_c_required'),
         ];
     }
     

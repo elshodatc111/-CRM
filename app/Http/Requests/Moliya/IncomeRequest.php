@@ -29,12 +29,12 @@ class IncomeRequest extends FormRequest{
 
     public function messages(): array{
         return [
-            'amount.required'      => 'Daromad summasini kiritish majburiy.',
-            'amount.numeric'       => 'Summa faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.gt'            => 'Daromad summasi 0 dan katta bo\'lishi kerak.',
-            'amount_type.required' => 'Daromad turini tanlang.',
-            'amount_type.in'       => 'Tanlangan daromad turi noto\'g\'ri.',
-            'description.required' => 'Daromad haqida izoh qoldiring.',
+            'amount.required'      => __('moliya.amount_a_required'),
+            'amount.numeric'       => __('moliya.amount_a_numeric'),
+            'amount.gt'            => __('moliya.amount_a_gt'),
+            'amount_type.required' => __('moliya.amount_type_a_required'),
+            'amount_type.in'       => __('moliya.amount_type_a_in'),
+            'description.required' => __('moliya.description_a_required'),
         ];
     }
     

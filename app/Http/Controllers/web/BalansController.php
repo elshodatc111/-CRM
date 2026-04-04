@@ -35,7 +35,7 @@ class BalansController extends Controller{
                 'admin_id' => Auth::id(),
             ]);
         });
-        return back()->with('success', "Subsidiya hisobi to'ldirildi.");
+        return back()->with('success', __('moliya.sub_add_plus'));
     }
 
     public function balansToKassa(ReturnToKassaRequest $request){
@@ -62,7 +62,7 @@ class BalansController extends Controller{
                 'admin_id' => Auth::id(),
             ]);
         });
-        return back()->with('success', "Balansdan kassaga mablag' qaytarildi.");
+        return back()->with('success', __('moliya.balansToKassaSuccess'));
     }
 
     public function daromad(IncomeRequest $request){
@@ -87,7 +87,7 @@ class BalansController extends Controller{
                 'admin_id' => Auth::id(),
             ]);
         });
-        return back()->with('success', "Balansdan daromad chiqim qilindi.");
+        return back()->with('success', __('moliya.balans_out_success'));
     }
     
     public function xarajat(BalanceExpenseRequest $request){
@@ -112,7 +112,7 @@ class BalansController extends Controller{
                 'admin_id' => Auth::id(),
             ]);
         });
-        return back()->with('success', "Balansdan xarajat chiqim qilindi.");
+        return back()->with('success', __('moliya.balans_cost_out_succerss'));
     }
 
 }

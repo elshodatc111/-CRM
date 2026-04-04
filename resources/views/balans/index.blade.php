@@ -16,10 +16,10 @@
       </div>
     </div>
     <div class="col-lg-6" style="text-align:right">
-      <button class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#balansdan_xarajat"> <i class="bi bi-dash-circle me-1"></i> Xarajat </button>
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#daromad"> <i class="bi bi-plus-circle me-1"></i> Daromad </button>
-      <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#return_kassa"> <i class="bi bi-arrow-return-left me-1"></i> Kassaga qaytarish </button>
-      <button class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#add_subsidiya"> <i class="bi bi-bank me-1"></i> Subsidiya kiritish </button>
+      <button class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#balansdan_xarajat"> <i class="bi bi-dash-circle me-1"></i> {{ __('moliya.xarajat') }} </button>
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#daromad"> <i class="bi bi-plus-circle me-1"></i> {{ __('moliya.daromad') }} </button>
+      <button class="btn btn-warning text-white" data-bs-toggle="modal" data-bs-target="#return_kassa"> <i class="bi bi-arrow-return-left me-1"></i> {{ __('moliya.kassaga_qaytarish') }} </button>
+      <button class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#add_subsidiya"> <i class="bi bi-bank me-1"></i> {{ __('moliya.subsidya_plus') }} </button>
     </div>
   </div>
 
@@ -29,36 +29,36 @@
       <div class="card-body">
         <div class="row g-3">
           <div class="col-12 col-xl-12 border-xl-end">
-            <h5 class="card-title mb-3 text-success">Balansda mavjud mablag'lar</h5>
+            <h5 class="card-title mb-3 text-success">{{ __('moliya.balansda_mavjud_mablag') }}</h5>
             <div class="row g-2">
-                <div class="col-lg-3">
-                    <div class="op-card rounded p-2 text-center bg-light">
-                        <div class="text-success mb-1"><i class="bi bi-cash-stack fs-4"></i></div>
-                        <h5 class="mb-0">{{ number_format($balans->cash, 0, '.', ' ') }}</h5>
-                        <div class="text-muted small">Naqd</div>
-                    </div>
+              <div class="col-lg-3">
+                <div class="op-card rounded p-2 text-center bg-light">
+                  <div class="text-success mb-1"><i class="bi bi-cash-stack fs-4"></i></div>
+                  <h5 class="mb-0">{{ number_format($balans->cash, 0, '.', ' ') }}</h5>
+                  <div class="text-muted small">{{ __('moliya.cash') }}</div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="op-card rounded p-2 text-center bg-light">
-                        <div class="text-primary mb-1"><i class="bi bi-credit-card-2-front fs-4"></i></div>
-                        <h5 class="mb-0">{{ number_format($balans->card, 0, '.', ' ') }}</h5>
-                        <div class="text-muted small">Plastik</div>
-                    </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="op-card rounded p-2 text-center bg-light">
+                  <div class="text-primary mb-1"><i class="bi bi-credit-card-2-front fs-4"></i></div>
+                  <h5 class="mb-0">{{ number_format($balans->card, 0, '.', ' ') }}</h5>
+                  <div class="text-muted small">{{ __('moliya.card') }}</div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="op-card rounded p-2 text-center bg-light">
-                        <div class="text-info mb-1"><i class="bi bi-bank fs-4"></i></div>
-                        <h5 class="mb-0">{{ number_format($balans->bank, 0, '.', ' ') }}</h5>
-                        <div class="text-muted small">Bank</div>
-                    </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="op-card rounded p-2 text-center bg-light">
+                  <div class="text-info mb-1"><i class="bi bi-bank fs-4"></i></div>
+                  <h5 class="mb-0">{{ number_format($balans->bank, 0, '.', ' ') }}</h5>
+                  <div class="text-muted small">{{ __('moliya.bank') }}</div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="op-card rounded p-2 text-center bg-light">
-                        <div class="text-warning mb-1"><i class="bi bi-piggy-bank fs-4"></i></div>
-                        <h5 class="mb-0">{{ number_format($balans->sub, 0, '.', ' ') }}</h5>
-                        <div class="text-muted small">Subsidiya</div>
-                    </div>
+              </div>
+              <div class="col-lg-3">
+                <div class="op-card rounded p-2 text-center bg-light">
+                  <div class="text-warning mb-1"><i class="bi bi-piggy-bank fs-4"></i></div>
+                  <h5 class="mb-0">{{ number_format($balans->sub, 0, '.', ' ') }}</h5>
+                  <div class="text-muted small">{{ __('moliya.subsidya') }}</div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
@@ -69,17 +69,17 @@
       <div class="card-body">
         <div class="row g-3">
           <div class="col-12 col-xl-12 border-xl-end">
-            <h5 class="card-title">Balans tarixi (45 kun)</h5>
+            <h5 class="card-title">{{ __('moliya.balans_history') }}</h5>
             <div class="table-responsive">
               <table class="table text-center table-bordered" style="font-size: 12px">
                 <thead>
                   <th>#</th>
-                  <th>Amaliyot turi</th>
-                  <th>Summa</th>
-                  <th>Summa turi</th>
-                  <th>Amaliyot haqida</th>
-                  <th>Direktor</th>
-                  <th>Amaliyot vaqti</th>
+                  <th>{{ __('moliya.amaliyot_type') }}</th>
+                  <th>{{ __('moliya.summa') }}</th>
+                  <th>{{ __('moliya.summa_type') }}</th>
+                  <th>{{ __('moliya.amaliyot_about') }}</th>
+                  <th>{{ __('moliya.direktor') }}</th>
+                  <th>{{ __('moliya.amaliyot_time') }}</th>
                 </thead>
                 <tbody>
                   @forelse($history as $item)
@@ -87,33 +87,33 @@
                     <td>{{ $loop->index+1 }}</td>
                     <td>
                       @if($item->type=='kassaToBalans')
-                        <b class="m-0 p-0 text-primary">Kassadan chiqim</b>
+                        <b class="m-0 p-0 text-primary">{{ __('moliya.kassadan_chiqim') }}</b>
                       @elseif($item->type=='kassaCost')
-                        <b class="m-0 p-0 text-danger">Kassadan xarajat</b>
+                        <b class="m-0 p-0 text-danger">{{ __('moliya.kassadan_xarajat') }}</b>
                       @elseif($item->type=='balansToKassa')
-                        <b class="m-0 p-0 text-info">Balansdan kassaga</b>
+                        <b class="m-0 p-0 text-info">{{ __('moliya.balansToKassa') }}</b>
                       @elseif($item->type=='balansOut')
-                        <b class="m-0 p-0 text-success">Daromad</b>
+                        <b class="m-0 p-0 text-success">{{ __('moliya.daromad') }}</b>
                       @elseif($item->type=='balansCost')
-                        <b class="m-0 p-0 text-danger">Balansdan xarajat</b>
+                        <b class="m-0 p-0 text-danger">{{ __('moliya.balansdan_xarajat') }}</b>
                       @elseif($item->type=='return')
-                        <b class="m-0 p-0 text-danger">To'lov qaytarildi</b>
+                        <b class="m-0 p-0 text-danger">{{ __('moliya.payment_return') }}</b>
                       @elseif($item->type=='salary')
-                        <b class="m-0 p-0 text-warning">Ish haqi to'lovi</b>
+                        <b class="m-0 p-0 text-warning">{{ __('moliya.ish_haqi_tolov') }}</b>
                       @elseif($item->type=='subToBalans')
-                        <b class="m-0 p-0 text-primary">Sunsidiya</b>
+                        <b class="m-0 p-0 text-primary">{{ __('moliya.subsidya') }}</b>
                       @endif
                     </td>
                     <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
                     <td>
                       @if($item->amount_type=='cash')
-                        Naqt
+                        {{ __('moliya.cash') }}
                       @elseif($item->amount_type=='card')
-                        Karta
+                        {{ __('moliya.card') }}
                       @elseif($item->amount_type=='bank')
-                        Bank
+                        {{ __('moliya.bank') }}
                       @elseif($item->amount_type=='sub')
-                        Subsidiya
+                        {{ __('moliya.subsidya') }}
                       @endif
                     </td>
                     <td style="text-align: left">{{ $item->description }}</td>
@@ -121,6 +121,9 @@
                     <td>{{ $item->created_at->format('Y-m-d H:i') }}</td>
                   </tr>
                   @empty
+                  <tr>
+                    <td class="text-center" colspan="7">{{ __('moliya.not_found_amaliyot') }}</td>
+                  </tr>
                   @endforelse
                 </tbody>
               </table>
@@ -142,33 +145,33 @@
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-danger text-white">
           <h5 class="modal-title">
-            <i class="bi bi-dash-circle me-2"></i>Balansdan xarajat
+            <i class="bi bi-dash-circle me-2"></i>{{ __('moliya.balansdan_xarajat') }}
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
           <div class="row">
             <div class="col-lg-6">
-              <label for="amount" class="mb-2">Xarajat summasi</label>
+              <label for="amount" class="mb-2">{{ __('moliya.xarajat_summa') }}</label>
               <input type="text" name="amount" required class="form-control" id="amount2">
             </div>
             <div class="col-lg-6">
-              <label for="amount_type" class="mb-2">Xarajat turi</label>
+              <label for="amount_type" class="mb-2">{{ __('moliya.xarajat_type') }}</label>
               <select name="amount_type" required class="form-select">
-                <option value="">Tanlang</option>
-                <option value="cash">Naqt</option>
-                <option value="card">Karta</option>
-                <option value="bank">Bank</option>
-                <option value="sub">Subsidiya</option>
+                <option value="">{{ __('moliya.tanlang') }}</option>
+                <option value="cash">{{ __('moliya.card') }}</option>
+                <option value="card">{{ __('moliya.card') }}</option>
+                <option value="bank">{{ __('moliya.bank') }}</option>
+                <option value="sub">{{ __('moliya.subsidya') }}</option>
               </select>
             </div>
           </div>
-          <label for="description" class="my-2">Xarajat haqida</label>
+          <label for="description" class="my-2">{{ __('moliya.xarajat_haqida') }}</label>
           <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-danger px-5 shadow-sm">Xarajatni saqlash</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('moliya.cancel') }}</button>
+          <button type="submit" class="btn btn-danger px-5 shadow-sm">{{ __('moliya.xarajat_save') }}</button>
         </div>
       </div>
     </div>
@@ -182,33 +185,34 @@
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-success text-white">
           <h5 class="modal-title">
-            <i class="bi bi-plus-circle me-2"></i> Daromad
+            <i class="bi bi-plus-circle me-2"></i> {{ __('moliya.daromad') }}
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
           <div class="row">
             <div class="col-lg-6">
-              <label for="amount" class="mb-2">Daromad summasi</label>
+              <label for="amount" class="mb-2">{{ __('moliya.daromad_summa') }}</label>
               <input type="text" name="amount" required class="form-control" id="amount2">
             </div>
             <div class="col-lg-6">
-              <label for="amount_type" class="mb-2">Daromad turi</label>
+              <label for="amount_type" class="mb-2">{{ __('moliya.daromad_type') }}</label>
               <select name="amount_type" required class="form-select">
-                <option value="">Tanlang</option>
-                <option value="cash">Naqt</option>
-                <option value="card">Karta</option>
-                <option value="bank">Bank</option>
-                <option value="sub">Subsidiya</option>
+                <option value="">{{ __('moliya.tanlang') }}</option>
+                <option value="">{{ __('moliya.tanlang') }}</option>
+                <option value="cash">{{ __('moliya.card') }}</option>
+                <option value="card">{{ __('moliya.card') }}</option>
+                <option value="bank">{{ __('moliya.bank') }}</option>
+                <option value="sub">{{ __('moliya.subsidya') }}</option>
               </select>
             </div>
           </div>
-          <label for="description" class="my-2">Daromad haqida</label>
+          <label for="description" class="my-2">{{ __('moliya.daromad_about') }}</label>
           <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-success px-5 shadow-sm">Daromadni saqlash</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('moliya.cancel') }}</button>
+          <button type="submit" class="btn btn-success px-5 shadow-sm">{{ __('moliya.daromad_save') }}</button>
         </div>
       </div>
     </div>
@@ -222,20 +226,20 @@
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-warning text-white">
           <h5 class="modal-title">
-            <i class="bi bi-arrow-return-left me-2"></i> Kassaga qaytarish
+            <i class="bi bi-arrow-return-left me-2"></i> {{ __('kassaga_qaytarish') }}
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Kassaga qaytarish summasi (Naqt)</label>
+          <label for="amount" class="mb-2">{{ __('kassa.kassa_return_amount') }}</label>
           <input type="text" name="amount" required class="form-control" id="amount3">
           <input type="hidden" name="amount_type" value="cash">
-          <label for="description" class="my-2">Qaytarish haqida</label>
+          <label for="description" class="my-2">{{ __('moliya.return_about') }}</label>
           <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-warning px-5 shadow-sm">Kassaga qaytarish</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('moliya.cancel') }}</button>
+          <button type="submit" class="btn btn-warning px-5 shadow-sm">{{ __('moliya.kassaga_qaytarish') }}</button>
         </div>
       </div>
     </div>
@@ -249,19 +253,19 @@
       <div class="modal-content border-0 shadow">
         <div class="modal-header bg-primary text-white">
           <h5 class="modal-title">
-            <i class="bi bi-bank me-2"></i> Subsidiya kiritish
+            <i class="bi bi-bank me-2"></i> {{ __('moliya.subsidya_plus') }}
           </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">Subsidiya summasi</label>
+          <label for="amount" class="mb-2">{{ __('moliya.sub_amount') }}</label>
           <input type="text" name="amount" required class="form-control" id="amount4">
-          <label for="description" class="my-2">Subsidiya haqida</label>
+          <label for="description" class="my-2">{{ __('sub_about') }}</label>
           <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">Bekor qilish</button>
-          <button type="submit" class="btn btn-primary px-5 shadow-sm">Subsediyani saqlash</button>
+          <button type="button" class="btn btn-secondary border-0 px-4" data-bs-dismiss="modal">{{ __('moliya.cancel') }}</button>
+          <button type="submit" class="btn btn-primary px-5 shadow-sm">{{ __('moliya.subsedya_save') }}</button>
         </div>
       </div>
     </div>

@@ -48,11 +48,11 @@ class BalanceExpenseRequest extends FormRequest{
 
     public function messages(): array{
         return [
-            'amount.required'      => 'Xarajat summasini kiritish majburiy.',
-            'amount.numeric'       => 'Summa faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.gt'            => 'Xarajat summasi 0 dan katta bo\'lishi shart.',
-            'amount_type.required' => 'Xarajat turini (balansni) tanlang.',
-            'description.required' => 'Xarajat nima uchun qilinayotgani haqida izoh yozing.',
+            'amount.required'      => __('moliya.amount_required'),
+            'amount.numeric'       => __('moliya.amount_numeric'),
+            'amount.gt'            => __('moliya.amount_gt'),
+            'amount_type.required' => __('moliya.amount_type_required'),
+            'description.required' => __('moliya.description_required'),
         ];
     }
     

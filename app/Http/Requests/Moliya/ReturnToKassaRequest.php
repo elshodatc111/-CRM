@@ -47,11 +47,11 @@ class ReturnToKassaRequest extends FormRequest{
 
     public function messages(): array{
         return [
-            'amount.required'      => 'Qaytarish summasini kiritish majburiy.',
-            'amount.numeric'       => 'Summa faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.gt'            => 'Qaytarish summasi 0 dan katta bo\'lishi shart.',
-            'amount_type.required' => 'To\'lov turini tanlang.',
-            'description.required' => 'Qaytarish haqida izoh qoldiring.',
+            'amount.required'      => __('moliya.amount_b_required'),
+            'amount.numeric'       => __('moliya.amount_b_numeric'),
+            'amount.gt'            => __('moliya.amount_b_gt'),
+            'amount_type.required' => __('moliya.amount_type_b_required'),
+            'description.required' => __('moliya.description_b_required'),
         ];
     }
 }
