@@ -9,7 +9,7 @@
         </li>
         -->
         <li class="nav-item">
-            <a class="nav-link nav-icon" href="#">
+            <a class="nav-link nav-icon" href="{{ route('tkun') }}">
                 <i class="bi bi-cake2"></i>
                 @if($birthdayCount > 0)
                     <span class="badge bg-success badge-number">{{ $birthdayCount }}</span>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupDavomadController;
+use App\Http\Controllers\TKunController;
 use App\Http\Controllers\web\{AuthController, BalansController, ChildController, ChildLeadController, ChildPaymentController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -16,7 +17,10 @@ Route::group([
     Route::middleware(['auth'])->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::middleware(['role:superadmin,direktor,admin'])->prefix('admin')->group(function () {
+            # Home
             Route::get('/', [HomeController::class, 'index'])->name('home');
+            # TKUN
+            Route::get('/tkun', [TKunController::class, 'index'])->name('tkun');
             # Hodimlar
             Route::get('/empoes', [EmploesController::class, 'index'])->name('emploes_index');
             Route::get('/emploes/{id}', [EmploesController::class, 'show'])->name('emploes_show');
