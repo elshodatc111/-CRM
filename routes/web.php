@@ -56,6 +56,7 @@ Route::group([
             # Group Davomad
             Route::get('/davomad/groups',[GroupDavomadController::class, 'davomad'])->name('groups_davomad');
             Route::get('/davomad/groups/show/{id}',[GroupDavomadController::class, 'davomadShow'])->name('groups_davomad_show');
+            Route::post('/davomad/groups/store',[GroupDavomadController::class, 'davomadStore'])->name('groups_davomad_store');
             # Kassa
             Route::get('/kassa',[KassaController::class, 'index'])->name('kassa_index');
             Route::post('/kassa/out',[KassaController::class, 'kassaToBalans'])->name('kassa_out');

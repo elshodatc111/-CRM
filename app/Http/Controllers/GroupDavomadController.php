@@ -62,7 +62,42 @@ class GroupDavomadController extends Controller{
     }
 
     public function davomadShow($id){
-        return view('group.davomad_show');
+        $childs = GroupChild::where('group_id',$id)->where('is_active','true')->get();
+        $child = [];
+        foreach ($childs as $key => $value) {
+            $child[$key]['child_id'] = $value->child_id;
+            $child[$key]['name'] = $value->child->name;
+            $dav = GroupDavomad::where('group_id',$id)->where('child_id',$value->child_id)->where('date',date('Y-m-d'))->first();
+            $child[$key]['status'] = $dav?$dav->status:'kelmadi';
+        }
+        $group = Group::find($id);
+        return view('group.davomad_show',compact('child','group'));
+    }
+
+    public function davomadStore(Request $request){
+        $request->validate([
+            'group_id' => 'required|exists:groups,id',
+            'attendance' => 'required|array',
+        ]);
+        $groupId = $request->group_id;
+        $today = now()->format('Y-m-d');
+        try {
+            foreach ($request->attendance as $childId => $status) {
+                GroupDavomad::updateOrCreate(
+                    [
+                        'group_id' => $groupId,
+                        'child_id' => $childId,
+                        'date'     => $today,
+                    ],
+                    [
+                        'status'   => $status,
+                    ]
+                );
+            }
+            return redirect()->back()->with('success', 'Davomad muvaffaqiyatli saqlandi!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Xatolik yuz berdi: ' . $e->getMessage());
+        }
     }
 
 }
