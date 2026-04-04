@@ -71,8 +71,8 @@
                 <th>{{ $res['chart']['group_davomad'] }}</th>
                 <th>{{ $res['chart']['total_users'] }}</th>
                 <th>{{ $res['chart']['total_keldi'] }}</th>
-                <th>{{ $res['chart']['total_kechikdi'] }}</th>
                 <th>{{ $res['chart']['total_kelmadi'] }}</th>
+                <th>{{ $res['chart']['total_kechikdi'] }}</th>
               </tr>
             </tfoot>
           </table>

@@ -13,4 +13,5 @@
         'child' => "Bola",
         'status' => "Davomat holati",
         'davomad_check' => "Davomatni belgilash",
+        'work_time' => "Bugun ish kuni emas.",
     ];

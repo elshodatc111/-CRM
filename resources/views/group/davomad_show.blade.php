@@ -54,7 +54,7 @@
                           </label>
                         </div>
                       </span>
-                      <span class="btn btn-warning py-0 my-0 pt-1">
+                      <span class="btn btn-warning py-0 my-0 pt-1 mx-2">
                         <div class="form-check">
                           <input class="form-check-input" type="radio" 
                             name="attendance[{{ $student['child_id'] }}]" 
@@ -86,9 +86,13 @@
             </table>
           </div>
           <div class="text-end mt-3">
+            @if($dav_satus)
             <button type="submit" class="btn btn-outline-primary px-5">
                 <i class="bi bi-check"></i> {{ __('group_davomad.davomad_save') }}
             </button>
+            @else
+              <b class="text-danger">{{ __('group_davomad.work_time') }}</b>
+            @endif
           </div>
         </form>
       </div>

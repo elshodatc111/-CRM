@@ -6,62 +6,84 @@ use App\Models\Group;
 use App\Models\GroupChild;
 use App\Models\GroupDavomad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class GroupDavomadController extends Controller{
 
     public function davomad(){
         $today = date("Y-m-d");
-        $groups = Group::where('status', 'aktiv')->with(['children' => function($q) { $q->where('is_active', 'true'); }, 'davomads' => function($q) use ($today) { $q->where('date', $today); } ])->get();
-        $res = [];
-        $totals = [
-            'groups_count' => $groups->count(),
-            'groups_with_attendance' => 0,
-            'all_users' => 0,
-            'all_keldi' => 0,
-            'all_kelmadi' => 0,
-            'all_kechikdi' => 0,
-        ];
-        foreach ($groups as $group) {
-            $usersCount = $group->children->count();
-            $davomads = $group->davomads;
-            $attendanceCount = $davomads->count();
-            if ($attendanceCount > 0) { $totals['groups_with_attendance']++; }
-            $keldi = $davomads->where('status', 'keldi')->count();
-            $kelmadi = $davomads->where('status', 'kelmadi')->count();
-            $kechikdi = $davomads->where('status', 'kechikdi')->count();
-            $totals['all_users'] += $usersCount;
-            $totals['all_keldi'] += $keldi;
-            $totals['all_kelmadi'] += $kelmadi;
-            $totals['all_kechikdi'] += $kechikdi;
-            $percent = function($count, $total) {
-                if ($total == 0) return "0 (0%)";
-                $p = round(($count / $total) * 100);
-                return "{$count} ({$p}%)";
-            };
-            $res['groups'][] = [
-                'group_id'     => $group->id,
-                'group_name'   => $group->group_name,
-                'is_done'      => $attendanceCount > 0,
-                'users_count'  => $usersCount,
-                'keldi'        => $percent($keldi, $usersCount),
-                'kelmadi'      => $percent($kelmadi, $usersCount),
-                'kechikdi'     => $percent($kechikdi, $usersCount),
-            ];
+        $groups = Group::where('status', 'aktiv')->get();
+        $group = [];
+        $all_users = 0;
+        $davomad_group = 0;
+        $all_keldi = 0;
+        $all_kechikdi = 0;
+        $all_kelmadi = 0;
+        foreach ($groups as $key => $gr) {
+            $group[$key]['group_id'] = $gr->id;
+            $group[$key]['group_name'] = $gr->group_name;
+            $group[$key]['is_done'] = false;
+            $davomads = GroupDavomad::where('group_id',$gr->id)->where('date',$today)->get();
+            if(count($davomads)>0){
+                $group[$key]['is_done'] = true;
+                $davomad_group = $davomad_group + 1;
+            }
+            $groupUser = GroupChild::where('group_id',$gr->id)->where('is_active',true)->get();
+            $group[$key]['users_count'] = count($groupUser);
+            $all_users = $all_users + count($groupUser);
+            $keldi = 0;
+            $kelmadi = 0;
+            $kechikdi = 0;
+            foreach ($davomads as $dav) {
+                if($dav->status=='keldi'){
+                    $keldi = $keldi + 1;
+                    $all_keldi = $all_keldi + 1;
+                }elseif($dav->status == 'kelmadi'){
+                    $kelmadi = $kelmadi + 1;
+                    $all_kechikdi = $all_kechikdi + 1;
+                }elseif($dav->status == 'kechikdi'){
+                    $kechikdi = $kechikdi + 1;
+                    $all_kelmadi = $all_kelmadi + 1;
+                }
+            }
+
+            $count = count($groupUser);
+
+            $group[$key]['users_count'] = count($groupUser);
+            $foiz_keldi = $count==0?0:round(($keldi/$count)*100,1);
+            $group[$key]['keldi'] = $keldi." (".$foiz_keldi."%)";
+            $foiz_kelmadi = $count==0?0:round(($kelmadi/$count)*100,1);
+            $group[$key]['kelmadi'] = $kelmadi." (".$foiz_kelmadi."%)";
+            $foiz_kechikdi = $count==0?0:round(($kechikdi/$count)*100,1);
+            $group[$key]['kechikdi'] = $kechikdi." (".$foiz_kechikdi."%)";
         }
-        $allUsers = $totals['all_users'];
+        if($all_users==0){
+            $res_keldi = "-";
+            $res_kelmadi = "-";
+            $res_kechikdi = "-";
+        }else{
+            $mmkeldi = round(($all_keldi/$all_users)*100,1);
+            $res_keldi = $all_keldi." (" .$mmkeldi." %)";
+            $mmkelmadi = round(($all_kelmadi/$all_users)*100,1);
+            $res_kelmadi = $all_kelmadi." (" .$mmkelmadi." %)";
+            $mmkechikdi = round(($all_kechikdi/$all_users)*100,1);
+            $res_kechikdi = $all_kechikdi." (" .$mmkechikdi." %)";
+        }
+        $res = [];
+        $res['groups'] = $group;
         $res['chart'] = [
-            'group_count'    => $totals['groups_count'],
-            'group_davomad'  => $totals['groups_with_attendance'] . " / " . $totals['groups_count'],
-            'total_users'    => $allUsers,
-            'total_keldi'    => $allUsers > 0 ? $totals['all_keldi'] . " / " . round(($totals['all_keldi'] / $allUsers) * 100) . "%" : 0,
-            'total_kelmadi'  => $allUsers > 0 ? $totals['all_kelmadi'] . " / " . round(($totals['all_kelmadi'] / $allUsers) * 100) . "%" : 0,
-            'total_kechikdi' => $allUsers > 0 ? $totals['all_kechikdi'] . " / " . round(($totals['all_kechikdi'] / $allUsers) * 100) . "%" : 0,
+            "group_count" => count($groups),
+            "group_davomad" => $davomad_group." / ".count($groups),
+            "total_users" => $all_users,
+            "total_keldi" => $res_keldi,
+            "total_kelmadi" => $res_kelmadi,
+            "total_kechikdi" => $res_kechikdi
         ];
         return view('group.davomad', compact('res'));
     }
 
     public function davomadShow($id){
-        $childs = GroupChild::where('group_id',$id)->where('is_active','true')->get();
+        $childs = GroupChild::where('group_id',$id)->where('is_active',true)->get();
         $child = [];
         foreach ($childs as $key => $value) {
             $child[$key]['child_id'] = $value->child_id;
@@ -70,7 +92,8 @@ class GroupDavomadController extends Controller{
             $child[$key]['status'] = $dav?$dav->status:'kelmadi';
         }
         $group = Group::find($id);
-        return view('group.davomad_show',compact('child','group'));
+        $dav_satus = now()->isWeekday();
+        return view('group.davomad_show',compact('child','group','dav_satus'));
     }
 
     public function davomadStore(Request $request){

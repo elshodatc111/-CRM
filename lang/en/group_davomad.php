@@ -13,4 +13,5 @@
         'child' => "Child",
         'status' => "Attendance status",
         'davomad_check' => "Mark attendance",
+        'work_time' => "Today is not a working day.",
     ];
