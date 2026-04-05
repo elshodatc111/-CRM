@@ -13,7 +13,7 @@ class UserDavomad extends Model{
     protected $table = 'user_davomads';
 
     protected $fillable = [
-        'group_id',
+        'user_id',
         'status',
         'data',
         'description',
@@ -27,8 +27,8 @@ class UserDavomad extends Model{
         'status'    => 'string',
     ];
 
-    public function group(): BelongsTo{
-        return $this->belongsTo(Group::class, 'group_id');
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function admin(): BelongsTo{

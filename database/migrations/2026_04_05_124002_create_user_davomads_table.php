@@ -9,7 +9,7 @@ return new class extends Migration{
     public function up(): void{
         Schema::create('user_davomads', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->enum('status',['keldi','keldi_formasiz','kechikdi_formasiz','kechikdi_sababli','kechikdi_sababsiz','kelmadi','kelmadi_sababli'])->default('kelmadi');
             $table->date('data');
             $table->string('description')->nullable();

@@ -20,6 +20,10 @@ Route::group([
         Route::middleware(['role:superadmin,direktor,admin'])->prefix('admin')->group(function () {
             # Home
             Route::get('/', [HomeController::class, 'index'])->name('home');
+            Route::post('/davomad', [HomeController::class, 'hodimDavomad'])->name('hodim_davomad');
+            Route::post('/hisobot', [HomeController::class, 'groupHisobot'])->name('hodim_hisobot');
+            Route::post('/tadbirlar', [HomeController::class, 'groupTadbirlar'])->name('hodim_tadbirlar');
+            Route::post('/shikoyat', [HomeController::class, 'groupShikoyat'])->name('hodim_shikoyat');
             # TKUN
             Route::get('/tkun', [TKunController::class, 'index'])->name('tkun');
             # Hodimlar
