@@ -13,4 +13,6 @@ return [
     'emploes_davomad' => "Xodimlar davomati",
     'reports' => "Hisobotlar",
     'charts' => "Statistika",
+    'setting' => "Sozlamalar",
+    'salary' => "Ish haqi",
 ];

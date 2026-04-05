@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupDavomadController;
+use App\Http\Controllers\SettingSalaryController;
 use App\Http\Controllers\TKunController;
 use App\Http\Controllers\web\{AuthController, BalansController, ChildController, ChildLeadController, ChildPaymentController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,9 @@ Route::group([
             Route::post('/moliya/balansToKassa',[BalansController::class, 'balansToKassa'])->name('moliya_balans_to_kassa');
             Route::post('/moliya/balansDaromad',[BalansController::class, 'daromad'])->name('moliya_balans_daromad');
             Route::post('/moliya/balansXarajat',[BalansController::class, 'xarajat'])->name('moliya_balans_xarajat');
+            # SETTING
+            Route::get('/setting/salary',[SettingSalaryController::class, 'salary'])->name('setting_salary');
+
         });
         
     });
