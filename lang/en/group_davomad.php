@@ -1,7 +1,7 @@
 <?php
     return [
         'success_davomad' => "Attendance saved successfully!",
-        'groups' => "Groups",
+        'groups' => "Today's groups continue",
         'group' => "Group",
         'davomad' => "Attendance",
         'child_count' => "Number of children",

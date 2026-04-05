@@ -6,7 +6,6 @@
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('groups_davomad') }}">{{ __('menu.group_davomad') }}</a></li>
         <li class="breadcrumb-item active">{{ __('group_davomad.davomad_check') }}</li>
       </ol>
     </nav>

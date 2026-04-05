@@ -108,7 +108,7 @@
 
 <li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['setting_salary']) ? '' : 'collapsed' }}" data-bs-target="#setting-nav" data-bs-toggle="collapse" href="#">
-    <i class="bi bi-pie-chart"></i><span>{{ __('menu.setting') }}</span><i class="bi bi-chevron-down ms-auto"></i>
+    <i class="bi bi-gear"></i><span>{{ __('menu.setting') }}</span><i class="bi bi-chevron-down ms-auto"></i>
   </a>
   <ul id="setting-nav" class="nav-content collapse {{ request()->routeIs(['setting_salary']) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
     <li>

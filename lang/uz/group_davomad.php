@@ -1,7 +1,7 @@
 <?php
     return [
         'success_davomad' => "Davomat muvaffaqiyatli saqlandi!",
-        'groups' => "Guruhlar",
+        'groups' => "Bugungi guruhlar davomadi",
         'group' => "Guruh",
         'davomad' => "Davomat",
         'child_count' => "Bolalar soni",
