@@ -76,6 +76,12 @@ Route::group([
             Route::post('/moliya/balansXarajat',[BalansController::class, 'xarajat'])->name('moliya_balans_xarajat');
             # SETTING
             Route::get('/setting/salary',[SettingSalaryController::class, 'salary'])->name('setting_salary');
+            Route::post('/setting/salary/tarbiyachi',[SettingSalaryController::class, 'tarbiyachi'])->name('setting_salary_terbiyachi');
+            Route::post('/setting/salary/kichiktarbiyachi',[SettingSalaryController::class, 'kichik_tarbiyachi'])->name('setting_salary_terbiyachikichik');
+            Route::post('/setting/salary/yordamchi',[SettingSalaryController::class, 'yordamchi'])->name('setting_salary_yordamchi');
+            Route::post('/setting/salary/yordamchi/kichik',[SettingSalaryController::class, 'kichik_yordamchi'])->name('setting_salary_yordamchi_kichik');
+            Route::post('/setting/salary/oshpaz',[SettingSalaryController::class, 'oshpaz'])->name('setting_salary_oshpaz');
+            Route::post('/setting/salary/admin',[SettingSalaryController::class, 'admin'])->name('setting_salary_admin');
 
         });
         

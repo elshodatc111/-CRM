@@ -59,54 +59,79 @@
         $(".guvoxnoma_serya").inputmask("AAAA");
         $(".guvoxnoma_raqam").inputmask("999999999");
         $(".passport").inputmask("AA 9999999");
-        $("#amount0").inputmask({
-            alias: "numeric",
-            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
-            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
-            autoGroup: true,         // Avtomatik guruhlash
-            rightAlign: false,       // Matnni chapdan boshlab yozish
-            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
-        });
-        $("#amount1").inputmask({
-            alias: "numeric",
-            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
-            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
-            autoGroup: true,         // Avtomatik guruhlash
-            rightAlign: false,       // Matnni chapdan boshlab yozish
-            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
-        });
-        $("#amount2").inputmask({
-            alias: "numeric",
-            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
-            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
-            autoGroup: true,         // Avtomatik guruhlash
-            rightAlign: false,       // Matnni chapdan boshlab yozish
-            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
-        });
-        $("#amount3").inputmask({
-            alias: "numeric",
-            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
-            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
-            autoGroup: true,         // Avtomatik guruhlash
-            rightAlign: false,       // Matnni chapdan boshlab yozish
-            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
-        });
-        $("#amount4").inputmask({
-            alias: "numeric",
-            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
-            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
-            autoGroup: true,         // Avtomatik guruhlash
-            rightAlign: false,       // Matnni chapdan boshlab yozish
-            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
-        });
-        $("#amount5").inputmask({
-            alias: "numeric",
-            groupSeparator: " ",     // Xona birliklarini probel bilan ajratadi
-            digits: 0,               // Verguldan keyingi raqamlar (kerak bo'lsa 2 qiling)
-            autoGroup: true,         // Avtomatik guruhlash
-            rightAlign: false,       // Matnni chapdan boshlab yozish
-            removeMaskOnSubmit: true // Formani yuborganda probellarni olib tashlaydi
-        });
+        
+        $("#amount0").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#amount1").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#amount2").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#amount3").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#amount4").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#amount5").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+
+        $("#price_0_1").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_2").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_3").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_4").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_5").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_6").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_7").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_8").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_9").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_0_10").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+
+        $("#price_1_1").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_2").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_3").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_4").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_5").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_6").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_7").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_8").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_9").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_1_10").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+
+        $("#price_2_1").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_2").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_3").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_4").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_5").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_6").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_7").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_8").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_9").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_2_10").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+
+        $("#price_3_1").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_2").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_3").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_4").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_5").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_6").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_7").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_8").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_9").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#price_3_10").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+
+        $("#item_oshpaz_1").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_2").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_3").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_4").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_5").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_6").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_7").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_8").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_9").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_10").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_11").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_12").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_13").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_14").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_15").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_16").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_17").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_18").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_19").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_20").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
+        $("#item_oshpaz_21").inputmask({alias: "numeric",groupSeparator: " ",digits: 0,autoGroup: true,rightAlign: false,removeMaskOnSubmit: true});
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
