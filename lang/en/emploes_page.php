@@ -45,4 +45,11 @@ return [
         'address_required' => 'Address is required.',
         'passport_required' => 'Passport details are required.',
     ],
+
+    'salary_numeric' => "The salary amount must contain only numbers.",
+    'tkun_before'    => "The birth date must be earlier than today.",
+    'role_in'        => "The selected role does not exist in the system.",
+    'user_id_exists' => "Employee not found.",
+    'emploes_update' => "Employee information has been successfully updated!",
+
 ];

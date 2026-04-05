@@ -33,7 +33,7 @@
 
 
 
-  <div class="modal fade" id="create_emploes" tabindex="-1" aria-hidden="true">
+ <div class="modal fade" id="create_emploes" tabindex="-1" aria-hidden="true">
   <form action="#" method="post" class="needs-validation" novalidate>
     @csrf 
     <div class="modal-dialog modal-lg modal-dialog-centered">

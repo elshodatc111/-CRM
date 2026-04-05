@@ -30,6 +30,7 @@ Route::group([
             Route::get('/empoes', [EmploesController::class, 'index'])->name('emploes_index');
             Route::get('/emploes/{id}', [EmploesController::class, 'show'])->name('emploes_show');
             Route::post('/emploes', [EmploesController::class, 'store'])->name('emploes_store');
+            Route::post('/emploes/update', [EmploesController::class, 'update'])->name('emploes_update');
             # Hodimlarga kelgan leadlar
             Route::get('/empoesLead', [EmploesLeadController::class, 'index'])->name('emploesLead_index');
             Route::get('/emploesLead/{id}', [EmploesLeadController::class, 'show'])->name('emploesLead_show');

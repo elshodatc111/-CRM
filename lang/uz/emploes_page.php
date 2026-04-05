@@ -45,4 +45,10 @@ return [
         'address_required' => 'Manzil kiritilishi shart.',
         'passport_required' => 'Pasport ma’lumotlari kiritilishi shart.',
     ],
+
+    'salary_numeric' => "Maosh miqdori faqat raqamlardan iborat bo'lishi kerak.",
+    'tkun_before'    => "Tug\'ilgan sana bugundan oldin bo'lishi shart.",
+    'role_in'        => "Tanlangan lavozim tizimda mavjud emas.",
+    'user_id_exists' => "Bunday xodim topilmadi.",
+    'emploes_update' => "Xodim ma'lumotlari muvaffaqiyatli yangilandi!",
 ];
