@@ -9,16 +9,16 @@
       </div>
     </div>
     <div class="table-responsive">
-      <table class="table table-bordered" style="font-size: 14px">
-        <thead>
+      <table class="table table-bordered table-striped" style="font-size: 14px">
+        <thead class="">
           <tr class="text-center">
-            <th>#</th>
-            <th>{{ __('group_davomad.group') }}</th>
-            <th>{{ __('group_davomad.davomad') }}</th>
-            <th>{{ __('group_davomad.child_count') }}</th>
-            <th>{{ __('group_davomad.keldi') }}</th>
-            <th>{{ __('group_davomad.kechikdi') }}</th>
-            <th>{{ __('group_davomad.kelmadi') }}</th>
+            <th class="bg-primary text-white">#</th>
+            <th class="bg-primary text-white">{{ __('group_davomad.group') }}</th>
+            <th class="bg-primary text-white">{{ __('group_davomad.davomad') }}</th>
+            <th class="bg-primary text-white">{{ __('group_davomad.child_count') }}</th>
+            <th class="bg-primary text-white">{{ __('group_davomad.keldi') }}</th>
+            <th class="bg-primary text-white">{{ __('group_davomad.kechikdi') }}</th>
+            <th class="bg-primary text-white">{{ __('group_davomad.kelmadi') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -51,8 +51,8 @@
         </tbody>
         <tfoot>
           <tr class="text-center">
-            <th>#</th>
-            <th>{{ $res['chart']['group_count'] }}</th>
+            <th></th>
+            <th> </th>
             <th>{{ $res['chart']['group_davomad'] }}</th>
             <th>{{ $res['chart']['total_users'] }}</th>
             <th>{{ $res['chart']['total_keldi'] }}</th>

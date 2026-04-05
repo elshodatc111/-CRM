@@ -27,23 +27,9 @@
 </li>
 
 <li class="nav-item">
-  <a class="nav-link {{ request()->routeIs(['groups_davomad','groups_davomad_show']) ? '' : 'collapsed' }}" href="{{ route('groups_davomad') }}">
-    <i class="bi bi-calendar-check"></i>
-    <span>{{ __('menu.group_davomad') }}</span>
-  </a>
-</li>
-
-<li class="nav-item">
   <a class="nav-link {{ request()->routeIs(['emploes_index','emploes_show']) ? '' : 'collapsed' }}" href="{{ route('emploes_index') }}">
     <i class="bi bi-person-workspace"></i>
     <span>{{ __('menu.emploes') }}</span>
-  </a>
-</li>
-
-<li class="nav-item">
-  <a class="nav-link {{ request()->routeIs(['emploes_indexww','emploes_showww']) ? '' : 'collapsed' }}" href="#">
-    <i class="bi bi-clipboard-check"></i>
-    <span>{{ __('menu.emploes_davomad') }}</span>
   </a>
 </li>
 
