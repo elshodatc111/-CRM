@@ -13,4 +13,6 @@ return [
     'emploes_davomad' => "Employee Attendance",
     'reports' => "Reports",
     'charts' => "Analytics",
+    'setting' => "Settings",
+    'salary' => "Salary",
 ];

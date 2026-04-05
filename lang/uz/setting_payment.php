@@ -1,0 +1,20 @@
+<?php
+return [
+    'tarbiyachi' => 'Tarbiyachi (katta guruh)',
+    'tarbiyachi_kichik' => 'Tarbiyachi (kichik guruh)',
+    'payment' => "To‘lov",
+    'hsiobot' => 'Hisobot',
+    'shikoyat' => 'Shikoyat',
+    'bayramlar' => 'Bayramlar',
+    'yordamchi' => "Yordamchi tarbiyachi (katta guruh)",
+    'yordamchi_kichik' => "Yordamchi tarbiyachi (kichik guruh)",
+    'oshpazlar' => "Oshpazlar",
+    'administrator' => "Administrator",
+    'new_child' => "Yangi bola uchun to‘lov",
+    'new_lead' => "Yangi lead uchun to‘lov",
+    'save' => "O‘zgarishlarni saqlash",
+    'update_tarbiyachi' => "Tarbiyachi ish haqi yangilandi",
+    'update_yordamchi' => "Yordamchi tarbiyachi ish haqi yangilandi",
+    'update_oshpaz' => "Oshpaz ish haqi yangilandi",
+    'update_administrator' => "Administrator ish haqi yangilandi",
+];

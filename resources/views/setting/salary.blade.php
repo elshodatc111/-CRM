@@ -19,26 +19,26 @@
       <div class="col-lg-6">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">Tarbiyachi (Katta guruh)</h5>
+            <h5 class="card-title">{{ __('setting_payment.tarbiyachi') }}</h5>
             <form action="{{ route('setting_salary_terbiyachi') }}" method="post">
               @csrf 
               <input type="hidden" name="id" value="{{ $setting[0]['id'] }}">
               <input type="hidden" name="role" value="{{ $setting[0]['role'] }}">
               <div class="row">
                 <div class="col-lg-6">
-                  <label for="child_pay" class="mb-1">To'lov</label>
+                  <label for="child_pay" class="mb-1">{{ __('setting_payment.payment') }}</label>
                   <input type="text" name="child_pay" value="{{ $setting[0]['child_pay'] }}" class="form-control" id="price_0_1" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="hisobot" class="mb-1">Hisobot</label>
+                  <label for="hisobot" class="mb-1">{{ __('setting_payment.hsiobot') }}</label>
                   <input type="text" name="hisobot" value="{{ $setting[0]['hisobot'] }}" class="form-control" id="price_0_2" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="shikoyat" class="my-1">Shikoyat</label>
+                  <label for="shikoyat" class="my-1">{{ __('setting_payment.shikoyat') }}</label>
                   <input type="text" name="shikoyat" value="{{ $setting[0]['shikoyat'] }}" class="form-control"  id="price_0_3" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="bayramlar" class="my-1">Bayramlar</label>
+                  <label for="bayramlar" class="my-1">{{ __('setting_payment.bayramlar') }}</label>
                   <input type="text" name="bayramlar" value="{{ $setting[0]['bayramlar'] }}" class="form-control" id="price_0_4" required>
                 </div>
                 <div class="col-lg-4">
@@ -75,26 +75,26 @@
       <div class="col-lg-6">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">Tarbiyachi (Kichik guruh)</h5>
+            <h5 class="card-title">{{ __('setting_payment.tarbiyachi_kichik') }}</h5>
             <form action="{{ route('setting_salary_terbiyachikichik') }}" method="post">
               @csrf 
               <input type="hidden" name="id" value="{{ $setting[1]['id'] }}">
               <input type="hidden" name="role" value="{{ $setting[1]['role'] }}">
               <div class="row">
                 <div class="col-lg-6">
-                  <label for="child_pay" class="mb-1">To'lov</label>
+                  <label for="child_pay" class="mb-1">{{ __('setting_payment.payment') }}</label>
                   <input type="text" name="child_pay" value="{{ $setting[1]['child_pay'] }}" class="form-control" id="price_1_1" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="hisobot" class="mb-1">Hisobot</label>
+                  <label for="hisobot" class="mb-1">{{ __('setting_payment.hsiobot') }}</label>
                   <input type="text" name="hisobot" value="{{ $setting[1]['hisobot'] }}" class="form-control" id="price_1_2" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="shikoyat" class="my-1">Shikoyat</label>
+                  <label for="shikoyat" class="my-1">{{ __('setting_payment.shikoyat') }}</label>
                   <input type="text" name="shikoyat" value="{{ $setting[1]['shikoyat'] }}" class="form-control"  id="price_1_3" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="bayramlar" class="my-1">Bayramlar</label>
+                  <label for="bayramlar" class="my-1">{{ __('setting_payment.bayramlar') }}</label>
                   <input type="text" name="bayramlar" value="{{ $setting[1]['bayramlar'] }}" class="form-control" id="price_1_4" required>
                 </div>
                 <div class="col-lg-4">
@@ -122,7 +122,7 @@
                   <input type="text" name="item30" value="{{ $setting[1]['item30'] }}" class="form-control" id="price_1_10" required>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary w-100 mt-3">O'zgarishlarni saqlash</button>
+              <button type="submit" class="btn btn-primary w-100 mt-3">{{ __('setting_payment.save') }}</button>
             </form>
           </div>
         </div>
@@ -131,26 +131,26 @@
       <div class="col-lg-6">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">Yordamchi tarbiyachi (Katta guruh)</h5>
+            <h5 class="card-title">{{ __('setting_payment.yordamchi') }}</h5>
             <form action="{{ route('setting_salary_yordamchi') }}" method="post">
               @csrf 
               <input type="hidden" name="id" value="{{ $setting[2]['id'] }}">
               <input type="hidden" name="role" value="{{ $setting[2]['role'] }}">              
               <div class="row">
                 <div class="col-lg-6">
-                  <label for="child_pay" class="mb-1">To'lov</label>
+                  <label for="child_pay" class="mb-1">{{ __('setting_payment.payment') }}</label>
                   <input type="text" name="child_pay" value="{{ $setting[2]['child_pay'] }}" class="form-control" id="price_2_1" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="hisobot" class="mb-1">Hisobot</label>
+                  <label for="hisobot" class="mb-1">{{ __('setting_payment.hsiobot') }}</label>
                   <input type="text" name="hisobot" value="{{ $setting[2]['hisobot'] }}" class="form-control" id="price_2_2" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="shikoyat" class="my-1">Shikoyat</label>
+                  <label for="shikoyat" class="my-1">{{ __('setting_payment.shikoyat') }}</label>
                   <input type="text" name="shikoyat" value="{{ $setting[2]['shikoyat'] }}" class="form-control"  id="price_2_3" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="bayramlar" class="my-1">Bayramlar</label>
+                  <label for="bayramlar" class="my-1">{{ __('setting_payment.bayramlar') }}</label>
                   <input type="text" name="bayramlar" value="{{ $setting[2]['bayramlar'] }}" class="form-control" id="price_2_4" required>
                 </div>
                 <div class="col-lg-4">
@@ -178,7 +178,7 @@
                   <input type="text" name="item30" value="{{ $setting[2]['item30'] }}" class="form-control" id="price_2_10" required>
                 </div>
               </div>
-              <button class="btn btn-primary w-100 mt-3">O'zgarishlarni saqlash</button>
+              <button type="submit" class="btn btn-primary w-100 mt-3">{{ __('setting_payment.save') }}</button>
             </form>
           </div>
         </div>
@@ -187,26 +187,26 @@
       <div class="col-lg-6">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">Yordamchi tarbiyachi (Kichik guruh)</h5>
+            <h5 class="card-title">{{ __('setting_payment.yordamchi_kichik') }}</h5>
             <form action="{{ route('setting_salary_yordamchi_kichik') }}" method="post">
               @csrf 
               <input type="hidden" name="id" value="{{ $setting[3]['id'] }}">
               <input type="hidden" name="role" value="{{ $setting[3]['role'] }}">
               <div class="row">
                 <div class="col-lg-6">
-                  <label for="child_pay" class="mb-1">To'lov</label>
+                  <label for="child_pay" class="mb-1">{{ __('setting_payment.payment') }}</label>
                   <input type="text" name="child_pay" value="{{ $setting[3]['child_pay'] }}" class="form-control" id="price_3_1" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="hisobot" class="mb-1">Hisobot</label>
+                  <label for="hisobot" class="mb-1">{{ __('setting_payment.hsiobot') }}</label>
                   <input type="text" name="hisobot" value="{{ $setting[3]['hisobot'] }}" class="form-control" id="price_3_2" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="shikoyat" class="my-1">Shikoyat</label>
+                  <label for="shikoyat" class="my-1">{{ __('setting_payment.shikoyat') }}</label>
                   <input type="text" name="shikoyat" value="{{ $setting[3]['shikoyat'] }}" class="form-control"  id="price_3_3" required>
                 </div>
                 <div class="col-lg-6">
-                  <label for="bayramlar" class="my-1">Bayramlar</label>
+                  <label for="bayramlar" class="my-1">{{ __('setting_payment.bayramlar') }}</label>
                   <input type="text" name="bayramlar" value="{{ $setting[3]['bayramlar'] }}" class="form-control" id="price_3_4" required>
                 </div>
                 <div class="col-lg-4">
@@ -234,7 +234,7 @@
                   <input type="text" name="item30" value="{{ $setting[3]['item30'] }}" class="form-control" id="price_3_10" required>
                 </div>
               </div>
-              <button class="btn btn-primary w-100 mt-3">O'zgarishlarni saqlash</button>
+              <button type="submit" class="btn btn-primary w-100 mt-3">{{ __('setting_payment.save') }}</button>
             </form>
           </div>
         </div>
@@ -243,22 +243,22 @@
       <div class="col-lg-6">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">Administrator</h5>            
-            <form action="{{ route('setting_salary_oshpaz') }}" method="post">
+            <h5 class="card-title">{{ __('setting_payment.administrator') }}</h5>            
+            <form action="{{ route('setting_salary_admin') }}" method="post">
               @csrf 
               <input type="hidden" name="id" value="{{ $setting[5]['id'] }}">
               <input type="hidden" name="role" value="{{ $setting[5]['role'] }}">
               <div class="row">
                 <div class="col-lg-12">
-                  <label for="new_child" class="mb-1">Yangi bola uchun to'lov</label>
+                  <label for="new_child" class="mb-1">{{ __('setting_payment.new_child') }}</label>
                   <input type="text" name="new_child" value="{{ $setting[5]['new_child'] }}" id='amount0' class="form-control" required>
                 </div>
                 <div class="col-lg-12">
-                  <label for="new_lead" class="my-1">Yangi Lead uchun to'lov</label>
+                  <label for="new_lead" class="my-1">{{ __('setting_payment.new_lead') }}</label>
                   <input type="text" name="new_lead" value="{{ $setting[5]['new_lead'] }}" id='amount1' class="form-control" required>
                 </div>
               </div>
-              <button class="btn btn-primary w-100 mt-3">O'zgarishlarni saqlash</button>
+              <button type="submit" class="btn btn-primary w-100 mt-3">{{ __('setting_payment.save') }}</button>
             </form>
           </div>
         </div>
@@ -267,14 +267,14 @@
       <div class="col-lg-6">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">Oshpazlar</h5>
+            <h5 class="card-title">{{ __('setting_payment.oshpazlar') }}</h5>
             <form action="{{ route('setting_salary_oshpaz') }}" method="post">
               @csrf 
               <input type="hidden" name="id" value="{{ $setting[4]['id'] }}">
               <input type="hidden" name="role" value="{{ $setting[4]['role'] }}">
               <div class="row">
                 <div class="col-lg-12">
-                  <label for="child_pay" class="mb-1">To'lov</label>
+                  <label for="child_pay" class="mb-1">{{ __('setting_payment.payment') }}</label>
                   <input type="text" name="child_pay" class="form-control" required  value="{{ $setting[4]['child_pay'] }}" id="amount2">
                 </div>
                 <div class="col-lg-4">
@@ -374,7 +374,7 @@
                   <input type="text" name="item120" class="form-control" required  value="{{ $setting[4]['item110'] }}" id="item_oshpaz_21">
                 </div>
               </div>
-              <button class="btn btn-primary w-100 mt-3">O'zgarishlarni saqlash</button>
+              <button type="submit" class="btn btn-primary w-100 mt-3">{{ __('setting_payment.save') }}</button>
             </form>
           </div>
         </div>

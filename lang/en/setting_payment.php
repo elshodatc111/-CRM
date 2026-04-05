@@ -1,0 +1,20 @@
+<?php
+return [
+    'tarbiyachi' => 'Educator (senior group)',
+    'tarbiyachi_kichik' => 'Educator (junior group)',
+    'payment' => "Payment",
+    'hsiobot' => 'Report',
+    'shikoyat' => 'Complaint',
+    'bayramlar' => 'Holidays',
+    'yordamchi' => "Assistant educator (senior group)",
+    'yordamchi_kichik' => "Assistant educator (junior group)",
+    'oshpazlar' => "Cooks",
+    'administrator' => "Administrator",
+    'new_child' => "Payment for new child",
+    'new_lead' => "Payment for new lead",
+    'save' => "Save changes",
+    'update_tarbiyachi' => "Educator salary updated",
+    'update_yordamchi' => "Assistant salary updated",
+    'update_oshpaz' => "Cook salary updated",
+    'update_administrator' => "Administrator salary updated",
+];
