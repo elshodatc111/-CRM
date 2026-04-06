@@ -35,6 +35,7 @@ Route::group([
             Route::post('/payments', [EmploesController::class, 'storePayments'])->name('user_store_payment');
             // Ish haqini hisoblash
             Route::post('/calculation/admin', [EmploesController::class, 'calculateAdministratorAndExport'])->name('user_admin_calculation');
+            Route::post('/calculation/oshpaz', [EmploesController::class, 'calculateOshpazistratorAndExport'])->name('user_oshpaz_calculation');
             # Hodimlarga kelgan leadlar
             Route::get('/empoesLead', [EmploesLeadController::class, 'index'])->name('emploesLead_index');
             Route::get('/emploesLead/{id}', [EmploesLeadController::class, 'show'])->name('emploesLead_show');

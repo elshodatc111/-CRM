@@ -52,4 +52,13 @@ return [
     'balansda_mavjud_mablag' => "Balansda mabjud mablag'lar",
     'ish_haqi_tulovlar_mavjud_emas' => "Ish haqi to'lovlari mavjud emas.",
     'ish_haqi_tulovlari' => "Ish haqi to'lovlari",
+    'ish_haqi_hisoblash' => "Ish haqini hisoblash",
+    'ish_haqi_hisob_monch' => "Ish haqi hisoblash oyni tanlang",
+    'admin_hisob_ish_haqi' => "Administrator ish haqini hisoblash",
+    'new_child' => "Yangi bola uchun",
+    'new_lead' => "Yangi lead uchun",
+    'ish_kunlar_soni' => "Ish kunlari sonini kiriting",
+    'oshpaz_sh_haqi_hisoblash' => "Oshpaz ish haqini hisoblash",
+
+
 ];

@@ -163,12 +163,12 @@
         <div class="card info-card welcome-card">
           <div class="card-body">
             <div class="notes-wrapper" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;min-height:400px;">
-              <h2 class="card-title">Administrator ish haqini hisoblash</h2>
+              <h2 class="card-title">{{ __('emploes_show.admin_hisob_ish_haqi') }}</h2>
               <table class="table table-bordered text-center" style="font-size:12px">
                 <tr>
                   <th>{{ __('emploes_show.maosh_miqdori') }}</th>
-                  <th>Yangi bola uchun</th>
-                  <th>Yangi lead uchun</th>
+                  <th>{{ __('emploes_show.new_child') }}</th>
+                  <th>{{ __('emploes_show.new_lead') }}</th>
                 </tr>
                 <tr>
                   <td>{{ number_format($userT['salary'], 0, '.', ' ') }} UZS</td>
@@ -182,13 +182,13 @@
                 <input type="hidden" name="salary" value="{{ $userT['salary'] }}">
                 <input type="hidden" name="new_child" value="{{ $salary[5]['new_child'] }}">
                 <input type="hidden" name="new_lead" value="{{ $salary[5]['new_lead'] }}">
-                <label for="monch" class="mb-2">Ish haqi hisoblash oyni tanlang</label>
+                <label for="monch" class="mb-2">{{ __('emploes_show.ish_haqi_hisob_monch') }}</label>
                 <select name="monch" id="" class="form-control">
                   @foreach ($oxirgiOltiOy as $item)
                     <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
                   @endforeach
                 </select>
-                <button class="btn btn-primary w-100 mt-2">Ish haqini hisoblash</button>
+                <button class="btn btn-primary w-100 mt-2">{{ __('emploes_show.ish_haqi_hisoblash') }}</button>
               </form>
             </div>
           </div>
@@ -199,8 +199,20 @@
         <div class="card info-card welcome-card">
           <div class="card-body">
             <div class="notes-wrapper" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;min-height:400px;">
-            <h2 class="card-title">Oshpaz ish haqini hisoblash</h2>
-                  
+              <h2 class="card-title">{{ __('emploes_show.oshpaz_sh_haqi_hisoblash') }}</h2>
+              <form action="{{ route('user_oshpaz_calculation') }}" method="post">
+                @csrf 
+                <input type="hidden" name="user_id" value="{{ $userT['id'] }}">
+                <label for="monch" class="mb-2">{{ __('emploes_show.ish_haqi_hisob_monch') }}</label>
+                <select name="monch" id="" class="form-control">
+                  @foreach ($oxirgiOltiOy as $item)
+                    <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
+                  @endforeach
+                </select>
+                <label for="countData" class="my-2">{{ __('emploes_show.ish_kunlar_soni') }}</label>
+                <input type="number" name="countData" class="form-control" value="21" required>
+                <button class="btn btn-primary w-100 mt-2">{{ __('emploes_show.ish_haqi_hisoblash') }}</button>
+              </form>
             </div>
           </div>
         </div>
@@ -210,8 +222,20 @@
         <div class="card info-card welcome-card">
           <div class="card-body">
             <div class="notes-wrapper" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;min-height:400px;">
-            <h2 class="card-title">Tarbiyachi ish haqini hisoblash</h2>
-                  
+              <h2 class="card-title">Tarbiyachi ish haqini hisoblash</h2>
+              <form action="#" method="post">
+                @csrf 
+                <input type="hidden" name="user_id" value="{{ $userT['id'] }}">
+                <label for="monch" class="mb-2">{{ __('emploes_show.ish_haqi_hisob_monch') }}</label>
+                <select name="monch" id="" class="form-control">
+                  @foreach ($oxirgiOltiOy as $item)
+                    <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
+                  @endforeach
+                </select>
+                <label for="countData" class="my-2">{{ __('emploes_show.ish_kunlar_soni') }}</label>
+                <input type="number" name="countData" class="form-control" value="21" required>
+                <button class="btn btn-primary w-100 mt-2">{{ __('emploes_show.ish_haqi_hisoblash') }}</button>
+              </form>
             </div>
           </div>
         </div>

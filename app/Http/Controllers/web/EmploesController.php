@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Exports\SalaryAdminReportExport;
+use App\Exports\SalaryOshpazReportExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Emploes\EmployeeStoreRequest;
 use App\Http\Requests\Emploes\StoreUserPaymentRequest;
@@ -11,6 +12,7 @@ use App\Models\Balans;
 use App\Models\BalansHistory;
 use App\Models\ChildLead;
 use App\Models\ChildPayment;
+use App\Models\GroupDavomad;
 use App\Models\GroupUser;
 use App\Models\SettingSalary;
 use App\Models\User;
@@ -79,8 +81,147 @@ class EmploesController extends Controller{
             'new_lead_count'  => (int) $new_lead_count,
             'monch'     => $request->monch,
         ];
-        $fileName = 'administrator_ish_haqi_' . $data['monch'] . '_' . $data['user_id'] . '.xlsx';
+        $username = User::find($request->user_id)->name;
+        $fileName = $username.'_ish_haqi_'.$data['monch'].'_'.time().'.xlsx';
         return Excel::download(new SalaryAdminReportExport($data), $fileName);
+    }
+
+    public function ortachaHisobot(int $childCount, int $ishKunlari, int $settingID){
+        $ortachaBolalar = $childCount/$ishKunlari;
+        $setting = SettingSalary::find($settingID);
+        if($ortachaBolalar>119){
+            $ItemChild = 120; 
+            $ItemChildBonusCount = $childCount - 120;
+            $child_pay_bonus = $setting['item120'];
+        }elseif($ortachaBolalar>114){
+            $ItemChild = 115; 
+            $ItemChildBonusCount = $childCount - 115;
+            $child_pay_bonus = $setting['item115'];
+        }elseif($ortachaBolalar>109){
+            $ItemChild = 110; 
+            $ItemChildBonusCount = $childCount - 110;
+            $child_pay_bonus = $setting['item110'];
+        }elseif($ortachaBolalar>104){
+            $ItemChild = 105; 
+            $ItemChildBonusCount = $childCount - 105;
+            $child_pay_bonus = $setting['item105'];
+        }elseif($ortachaBolalar>99){
+            $ItemChild = 100; 
+            $ItemChildBonusCount = $childCount - 100;
+            $child_pay_bonus = $setting['item100'];
+        }elseif($ortachaBolalar>94){
+            $ItemChild = 95; 
+            $ItemChildBonusCount = $childCount - 95;
+            $child_pay_bonus = $setting['item95'];
+        }elseif($ortachaBolalar>89){
+            $ItemChild = 90; 
+            $ItemChildBonusCount = $childCount - 90;
+            $child_pay_bonus = $setting['item90'];
+        }elseif($ortachaBolalar>84){
+            $ItemChild = 85; 
+            $ItemChildBonusCount = $childCount - 85;
+            $child_pay_bonus = $setting['item85'];
+        }elseif($ortachaBolalar>79){
+            $ItemChild = 80; 
+            $ItemChildBonusCount = $childCount - 80;
+            $child_pay_bonus = $setting['item80'];
+        }elseif($ortachaBolalar>74){
+            $ItemChild = 75; 
+            $ItemChildBonusCount = $childCount - 75;
+            $child_pay_bonus = $setting['item75'];
+        }elseif($ortachaBolalar>69){
+            $ItemChild = 70; 
+            $ItemChildBonusCount = $childCount - 70;
+            $child_pay_bonus = $setting['item70'];
+        }elseif($ortachaBolalar>64){
+            $ItemChild = 65; 
+            $ItemChildBonusCount = $childCount - 65;
+            $child_pay_bonus = $setting['item65'];
+        }elseif($ortachaBolalar>59){
+            $ItemChild = 60; 
+            $ItemChildBonusCount = $childCount - 60;
+            $child_pay_bonus = $setting['item60'];
+        }elseif($ortachaBolalar>54){
+            $ItemChild = 55; 
+            $ItemChildBonusCount = $childCount - 55;
+            $child_pay_bonus = $setting['item55'];
+        }elseif($ortachaBolalar>49){
+            $ItemChild = 50; 
+            $ItemChildBonusCount = $childCount - 50;
+            $child_pay_bonus = $setting['item50'];
+        }elseif($ortachaBolalar>44){
+            $ItemChild = 45; 
+            $ItemChildBonusCount = $childCount - 45;
+            $child_pay_bonus = $setting['item45'];
+        }elseif($ortachaBolalar>39){
+            $ItemChild = 40; 
+            $ItemChildBonusCount = $childCount - 40;
+            $child_pay_bonus = $setting['item40'];
+        }elseif($ortachaBolalar>34){
+            $ItemChild = 35; 
+            $ItemChildBonusCount = $childCount - 35;
+            $child_pay_bonus = $setting['item35'];
+        }elseif($ortachaBolalar>29){
+            $ItemChild = 30; 
+            $ItemChildBonusCount = $childCount - 30;
+            $child_pay_bonus = $setting['item30'];
+        }elseif($ortachaBolalar>24){
+            $ItemChild = 25; 
+            $ItemChildBonusCount = $childCount - 25;
+            $child_pay_bonus = $setting['item25'];
+        }elseif($ortachaBolalar>19){
+            $ItemChild = 20; 
+            $ItemChildBonusCount = $childCount - 20;
+            $child_pay_bonus = $setting['item20'];
+        }elseif($ortachaBolalar>14){
+            $ItemChild = 15; 
+            $ItemChildBonusCount = $childCount - 15;
+            $child_pay_bonus = $setting['item15'];
+        }elseif($ortachaBolalar>9){
+            $ItemChild = 10; 
+            $ItemChildBonusCount = $childCount - 10;
+            $child_pay_bonus = $setting['item10'];
+        }elseif($ortachaBolalar>4){
+            $ItemChild = 5; 
+            $ItemChildBonusCount = $childCount - 5;
+            $child_pay_bonus = $setting['item5'];
+        }else{
+            $ItemChild = $childCount; 
+            $ItemChildBonusCount = 0;
+            $child_pay_bonus = 0;
+        }
+        return [
+            'hisobot' => $setting->hisobot,
+            'bayramlar' => $setting->bayramlar,
+            'shikoyat' => $setting->shikoyat,
+            'child_pay' => $setting->child_pay,
+            'ish_kunlari' => $ishKunlari,
+            'jami_bolalar' => $childCount,
+            'kunlik_ortacha_bolalar' => round($childCount/$ishKunlari),
+            'child_pay_count' => $ItemChild,
+            'child_pay_bonus' => $child_pay_bonus,
+            'child_pay_bonus_count' => $ItemChildBonusCount
+        ];
+    }
+
+    public function calculateOshpazistratorAndExport(Request $request){
+        $Monch = $request->monch;
+        $childCount = GroupDavomad::whereIn('status', ['keldi', 'kechikdi'])->whereYear('created_at', date('Y', strtotime($Monch)))->whereMonth('created_at', date('m', strtotime($Monch)))->count();
+        $array = $this->ortachaHisobot($childCount, $request->countData, 5);
+        $req = [
+            "user_id" => $request->user_id,
+            "name" => User::find($request->user_id)->name,
+            "monch" => $request->monch,
+            "countData" => $request->countData,
+            'child_pay' => $array['child_pay'],
+            'jami_bolalar' => $array['jami_bolalar'],
+            'kunlik_ortacha_bolalar' => $array['kunlik_ortacha_bolalar'],
+            'child_pay_count' => $array['child_pay_count'],
+            'child_pay_bonus' => $array['child_pay_bonus'],
+            'child_pay_bonus_count' => $array['child_pay_bonus_count'],
+        ];
+        $fileName = $req['name'].'_ish_haqi_'.$req['monch'].'_'.time(). '.xlsx';
+        return Excel::download(new SalaryOshpazReportExport($req), $fileName);
     }
 
     public function store(EmployeeStoreRequest $request){
