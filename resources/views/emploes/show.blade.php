@@ -176,7 +176,8 @@
                   <td>{{ number_format($salary[5]['new_lead'], 0, '.', ' ') }} UZS</td>
                 </tr>
               </table>
-              <form action="#" method="post">
+              <form action="{{ route('user_admin_calculation') }}" method="post">
+                @csrf 
                 <input type="hidden" name="user_id" value="{{ $userT['id'] }}">
                 <input type="hidden" name="salary" value="{{ $userT['salary'] }}">
                 <input type="hidden" name="new_child" value="{{ $salary[5]['new_child'] }}">
