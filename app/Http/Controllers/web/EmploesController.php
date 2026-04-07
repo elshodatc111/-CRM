@@ -176,6 +176,63 @@ class EmploesController extends Controller{
         ];
     }
 
+    public function oshpazSalary($monch,$id,$group_id=null){
+        $startDate = Carbon::parse($monch)->startOfMonth();
+        $endDate = Carbon::parse($monch)->endOfMonth();
+        if($group_id==null){
+            $allDavomad = GroupDavomad::whereIn('status',['keldi','kelmadi'])->whereBetween('date', [$startDate, $endDate])->get();
+        }else{
+            $allDavomad = GroupDavomad::whereIn('status',['keldi','kelmadi'])->whereBetween('date', [$startDate, $endDate])->where('group_id',$group_id)->get();
+        }
+        $allCount = count($allDavomad);
+        $ortacha_davomad = round($allCount/21);
+        $SettingPayment = SettingSalary::find($id);
+        $tarif = $SettingPayment->child_pay;
+        if($ortacha_davomad<=5){$tarif_bonus = 0;$tarif_bonus_count = 0;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = $allCount*$tarif;}
+        elseif($ortacha_davomad<10){$tarif_bonus = $SettingPayment['item5'];$tarif_bonus_count = $ortacha_davomad-5;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*5;}
+        elseif($ortacha_davomad<15){$tarif_bonus = $SettingPayment['item10'];$tarif_bonus_count = $ortacha_davomad-10;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*10;}
+        elseif($ortacha_davomad<20){$tarif_bonus = $SettingPayment['item15'];$tarif_bonus_count = $ortacha_davomad-15;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*15;}
+        elseif($ortacha_davomad<25){$tarif_bonus = $SettingPayment['item20'];$tarif_bonus_count = $ortacha_davomad-20;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*20;}
+        elseif($ortacha_davomad<30){$tarif_bonus = $SettingPayment['item25'];$tarif_bonus_count = $ortacha_davomad-25;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*25;}
+        elseif($ortacha_davomad<35){$tarif_bonus = $SettingPayment['item30'];$tarif_bonus_count = $ortacha_davomad-30;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*30;}
+        elseif($ortacha_davomad<40){$tarif_bonus = $SettingPayment['item35'];$tarif_bonus_count = $ortacha_davomad-35;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*35;}
+        elseif($ortacha_davomad<45){$tarif_bonus = $SettingPayment['item40'];$tarif_bonus_count = $ortacha_davomad-40;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*40;}
+        elseif($ortacha_davomad<50){$tarif_bonus = $SettingPayment['item45'];$tarif_bonus_count = $ortacha_davomad-45;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*45;}
+        elseif($ortacha_davomad<55){$tarif_bonus = $SettingPayment['item50'];$tarif_bonus_count = $ortacha_davomad-50;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*50;}
+        elseif($ortacha_davomad<60){$tarif_bonus = $SettingPayment['item55'];$tarif_bonus_count = $ortacha_davomad-55;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*55;}
+        elseif($ortacha_davomad<65){$tarif_bonus = $SettingPayment['item60'];$tarif_bonus_count = $ortacha_davomad-60;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*60;}
+        elseif($ortacha_davomad<70){$tarif_bonus = $SettingPayment['item65'];$tarif_bonus_count = $ortacha_davomad-65;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*65;}
+        elseif($ortacha_davomad<75){$tarif_bonus = $SettingPayment['item70'];$tarif_bonus_count = $ortacha_davomad-70;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*70;}
+        elseif($ortacha_davomad<80){$tarif_bonus = $SettingPayment['item75'];$tarif_bonus_count = $ortacha_davomad-75;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*75;}
+        elseif($ortacha_davomad<85){$tarif_bonus = $SettingPayment['item80'];$tarif_bonus_count = $ortacha_davomad-80;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*80;}
+        elseif($ortacha_davomad<90){$tarif_bonus = $SettingPayment['item85'];$tarif_bonus_count = $ortacha_davomad-85;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*85;}
+        elseif($ortacha_davomad<95){$tarif_bonus = $SettingPayment['item90'];$tarif_bonus_count = $ortacha_davomad-90;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*90;}
+        elseif($ortacha_davomad<100){$tarif_bonus = $SettingPayment['item95'];$tarif_bonus_count = $ortacha_davomad-95;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*95;}
+        elseif($ortacha_davomad<105){$tarif_bonus = $SettingPayment['item100'];$tarif_bonus_count = $ortacha_davomad-100;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*100;}
+        elseif($ortacha_davomad<110){$tarif_bonus = $SettingPayment['item105'];$tarif_bonus_count = $ortacha_davomad-105;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*105;}
+        elseif($ortacha_davomad<115){$tarif_bonus = $SettingPayment['item110'];$tarif_bonus_count = $ortacha_davomad-110;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*110;}
+        elseif($ortacha_davomad<120){$tarif_bonus = $SettingPayment['item115'];$tarif_bonus_count = $ortacha_davomad-115;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*115;}
+        else{$tarif_bonus = $SettingPayment['item120'];$tarif_bonus_count = $ortacha_davomad-120;$bonus = $tarif_bonus_count * $tarif_bonus;$tarif_buyicha_hisoblash = 21*$tarif*120;}
+        $ish_haqi = $bonus + $tarif_buyicha_hisoblash;
+        $hisobot = $SettingPayment['hisobot'];
+        $shikoyat = $SettingPayment['shikoyat'];
+        $bayramlar = $SettingPayment['bayramlar'];
+        return [
+            'hisobot' => $hisobot,  // Barcha davomad
+            'shikoyat' => $shikoyat,  // Barcha davomad
+            'bayramlar' => $bayramlar,  // Barcha davomad
+            'allDavomad' => $allCount,  // Barcha davomad
+            'ortacha_davomad' => $ortacha_davomad, // O'rtacha davomad
+            'tarif' => $tarif, // Tarif narxi
+            'tarif_buyicha_bolalar' => $allCount,
+            'tarif_buyicha_hisoblash' => $tarif_buyicha_hisoblash,
+            'tarif_bonus_count' => $tarif_bonus_count,
+            'tarif_bonus' => $tarif_bonus,
+            'bonus' => $bonus,
+            'ish_haqi' => $ish_haqi,
+        ];
+    }
+
     public function calcEmploesAndExport(Request $request){
         $user = User::find($request['user_id']);
         $monch = $request['monch'];
@@ -185,13 +242,18 @@ class EmploesController extends Controller{
         $hisobot = $this->hisobot($monch,$request->group_id);
         if($request->role=='admin'){
             $salary = $this->adminSalary($monch,$request->user_id);
-            //dd($salary);
             return view('emploes.ish_haqi.administrator',compact('user','monch','davomad','shikoyatlar','salary'));
         }elseif($request->role=='oshpaz'){
-            return view('emploes.ish_haqi.oshpaz',compact('user','monch','davomad','shikoyatlar','tadbirlar','hisobot'));
+            $salary = $this->oshpazSalary($monch,5);
+            return view('emploes.ish_haqi.oshpaz',compact('user','monch','davomad','shikoyatlar','salary'));
         }elseif($request->role=='tarbiyachi'){
+            $salary_katta = $this->oshpazSalary($monch,1,$request->group_id);
+            $salary_kichik = $this->oshpazSalary($monch,2,$request->group_id);
+            dd($salary_katta);
             return view('emploes.ish_haqi.tarbiyachi',compact('user','monch','davomad','shikoyatlar','tadbirlar','hisobot'));
         }elseif($request->role=='yordamchi'){
+            $salary_katta = $this->oshpazSalary($monch,3,$request->group_id);
+            $salary_kichik = $this->oshpazSalary($monch,4,$request->group_id);
             return view('emploes.ish_haqi.yordamchi',compact('user','monch','davomad','shikoyatlar','tadbirlar','hisobot'));
         }else{
             return redirect()->back()->with('success', '');

@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="col-lg-6" style="text-align: right">
-        <b class="btn btn-outline-primary mt-2">{{ $monch }}</b>
+        <b class="btn btn-primary mt-2">{{ __('emploes_show.hisoblandi') }} {{ $monch }}</b>
     </div>
 </div>
 

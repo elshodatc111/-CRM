@@ -64,6 +64,10 @@ return [
     'hisoblandi' => "Hisoblandi:",
     'yangi_lead' => "Yangi lead",
     'yangi_bola' => "Yangi bola",
-    'hisoblandi' => "Hisoblandi :",
+    'bonus_summasi' => "Bonus summasi",
+    'bonusli_davomad_soni' => "Bonusli davomad soni",
+    'tarif_narxi' => "Tarif narxi",
+    'ortacha_davomad' => "O'rtacha davomad",
+    'dabomad_soni' => "Davomad soni",
 
 ];

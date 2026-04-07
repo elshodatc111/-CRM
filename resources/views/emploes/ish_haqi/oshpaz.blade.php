@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="col-lg-6" style="text-align: right">
-        <b class="btn btn-outline-primary mt-2">{{ $monch }}</b>
+        <b class="btn btn-primary mt-2">{{ __('emploes_show.hisoblandi') }} {{ $monch }}</b>
     </div>
 </div>
 
@@ -25,7 +25,44 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h2 class="card-title">Hisoblandi</h2>
+                    <div class="notes-wrapper" style="max-height: 320px; overflow-y: auto; overflow-x: hidden;min-height:320px;">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h2 class="card-title">{{ $user['name'] }}</h2>
+                            </div>
+                            <div class="col-lg-4" style="text-align: right">
+                                <h2 class="card-title">{{ $monch }}</h2>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="font-size:12px;">
+                                <tr>
+                                    <th>{{ __('emploes_show.dabomad_soni') }}</th>
+                                    <td style="text-align: right">{{ $salary['allDavomad'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('emploes_show.ortacha_davomad') }}</th>
+                                    <td style="text-align: right">{{ $salary['ortacha_davomad'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('emploes_show.tarif_narxi') }}</th>
+                                    <td style="text-align: right">{{ number_format($salary['tarif'], 0, '.', ' ') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Bonusli davomad soni</th>
+                                    <td style="text-align: right">{{ $salary['tarif_bonus_count'] }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('emploes_show.bonus_summasi') }}</th>
+                                    <td style="text-align: right">{{ number_format($salary['tarif_bonus'], 0, '.', ' ') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ __('emploes_show.hisoblandi') }}</th>
+                                    <td style="text-align: right">{{ number_format($salary['ish_haqi'], 0, '.', ' ') }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
