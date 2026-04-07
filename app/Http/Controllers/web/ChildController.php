@@ -9,6 +9,8 @@ use App\Models\Child;
 use App\Models\ChildPayment;
 use App\Models\Group;
 use App\Models\GroupChild;
+use App\Models\GroupDavomad;
+use App\Models\GroupPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -37,14 +39,16 @@ class ChildController extends Controller{
         $groups = Group::where('status','aktiv')->get();
         $childgouphistory = GroupChild::where('child_id',$id)->orderby('is_active', 'desc')->get();
         $payments = ChildPayment::where('child_id',$id)->orderby('created_at','desc')->get();
-        return view('child.show', compact('child','groups','childgouphistory','payments'));
+        $davomad = GroupDavomad::where('child_id',$id)->orderby('date','desc')->get();
+        $groupPay = GroupPayment::where('child_id',$id)->orderby('created_at','desc')->get();
+        return view('child.show', compact('child','groups','childgouphistory','payments','davomad','groupPay'));
     }
 
     public function update(UpdateChildRequest $request){
         $validated = $request->validated();
         $child = Child::findOrFail($validated['child_id']);
         $child->update($validated);
-        return back()->with('success', "Ma'lumotlar muvaffaqiyatli yangilandi!");
+        return back()->with('success', __('emploes_show.bola_malumotlari_yangilandi'));
     }
 
     public function add_group(AddChildToGroupRequest $request){
@@ -60,6 +64,6 @@ class ChildController extends Controller{
             $child->is_active = true;
             $child->save();
          });
-        return back()->with('success', "Bola guruhga muvaffaqiyatli qo'shildi!");
+        return back()->with('success', __('emploes_show.bola_guruhga_movaqiyatli_qoshildi'));
     }
 }

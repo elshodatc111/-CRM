@@ -20,10 +20,11 @@ class AddChildToGroupRequest extends FormRequest{
     
     public function messages(): array{
         return [
-            'child_id.required' => 'Bola IDsi ko\'rsatilmadi.',
-            'child_id.exists'   => 'Bunday bola tizimda mavjud emas.',
-            'group_id.required' => 'Iltimos, guruhni tanlang.',
-            'group_id.exists'   => 'Tanlangan guruh tizimda topilmadi.',
+            'child_id.required' => __('emploes_show.child_id_4_required'),
+            'child_id.exists'   => __('emploes_show.child_id_4_exists'),
+            'group_id.required' => __('emploes_show.group_id_4_required'),
+            'group_id.exists'   => __('emploes_show.group_id_4_exists'),
         ];
     }
 }
+ 

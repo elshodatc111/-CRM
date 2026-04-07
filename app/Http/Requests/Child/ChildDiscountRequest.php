@@ -28,9 +28,9 @@ class ChildDiscountRequest extends FormRequest{
     }
     public function messages(): array{
         return [
-            'amount.numeric' => 'Chegirma summasi faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.required' => 'Chegirma summasini kiritish majburiy.',
-            'start_comment.required' => 'Izoh qoldirish majburiy.',
+            'amount.numeric' => __('child_show.amount_3_numeric'),
+            'amount.required' => __('child_show.amount_3_required'),
+            'start_comment.required' => __('child_show.start_comment_3_required'),
         ];
     }
-}
+} 

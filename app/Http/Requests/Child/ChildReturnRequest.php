@@ -33,13 +33,13 @@ class ChildReturnRequest extends FormRequest{
                 function ($attribute, $value, $fail) {
                     $child = Child::find($this->child_id);
                     if (!$child || $child->balans < $value) {
-                        return $fail("Bolaning balansida yetarli mablag' mavjud emas. (Hozirgi balans: " . number_format($child->balans ?? 0, 0, '.', ' ') . " so'm)");
+                        return $fail(__('emploes_show.bolaning_balansida_yetarli_mablag_mavjud_emas'));
                     }
                     $kassa = Balans::first();
                     $type = $this->amount_type;
                     if (!$kassa || $kassa->$type < $value) {
                         $labels = ['cash' => 'Naqd', 'card' => 'Karta', 'bank' => 'Bank'];
-                        return $fail("Kassaning " . $labels[$type] . " hisobida yetarli mablag' mavjud emas.");
+                        return $fail(__('child_sow.kassa_hisobida_yetarli_mablag_mavjud_emas'));
                     }
                 },
             ],
@@ -48,11 +48,12 @@ class ChildReturnRequest extends FormRequest{
 
     public function messages(): array{
         return [
-            'amount.required'      => 'Qaytarish summasini kiritish majburiy.',
-            'amount.numeric'       => 'Summa faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.gt'            => 'Summa 0 dan katta bo\'lishi kerak.',
-            'amount_type.required' => 'Qaytarish turini tanlang.',
-            'description.required' => 'Qaytarish sababini ko\'rsating.',
+            'amount.required'      => __('child_show.amount_1_required'),
+            'amount.numeric'       => __('child_show.amount_1_numeric'),
+            'amount.gt'            => __('child_show.amount_1_gt'),
+            'amount_type.required' => __('child_show.amount_type_1_required'),
+            'description.required' => __('child_show.description_1_required'),
         ];
     }
 }
+ 

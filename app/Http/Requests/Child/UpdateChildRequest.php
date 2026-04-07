@@ -36,12 +36,13 @@ class UpdateChildRequest extends FormRequest{
 
     public function messages(): array{
         return [
-            'name.required'      => 'Bola FIO kiritilishi shart.',
-            'phone.required'     => 'Asosiy telefon raqami shart.',
-            'phone.min'          => 'Telefon raqami juda qisqa.',
-            'tkun.before'        => 'Tug\'ilgan kun kelajakda bo\'lishi mumkin emas.',
-            'jinsi.in'           => 'Jinsni tanlashda xatolik.',
-            'child_id.exists'    => 'Bunday bola tizimda topilmadi.',
+            'name.required'      => __('child_show.name_required'),
+            'phone.required'     => __('child_show.phone_required'),
+            'phone.min'          => __('child_show.phone_min'),
+            'tkun.before'        => __('child_show.tkun_before'),
+            'jinsi.in'           => __('child_show.jinsi_in'),
+            'child_id.exists'    => __('child_show.child_id_exists'),
         ];
     }
 }
+ 

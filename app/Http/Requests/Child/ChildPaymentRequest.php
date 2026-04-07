@@ -29,12 +29,12 @@ class ChildPaymentRequest extends FormRequest{
 
     public function messages(): array{
         return [
-            'amount.required'    => 'To\'lov summasini kiritish majburiy.',
-            'amount.numeric'     => 'To\'lov summasi faqat raqamlardan iborat bo\'lishi kerak.',
-            'amount.gt'          => 'To\'lov summasi 0 dan katta bo\'lishi shart.',
-            'amount_type.required' => 'To\'lov turini tanlang.',
-            'description.required' => 'To\'lov haqida izoh qoldiring.',
+            'amount.required'    => __('child_show.amount_2_required'),
+            'amount.numeric'     => __('child_show.amount_2_numeric'),
+            'amount.gt'          => __('child_show.amount_2_gt'),
+            'amount_type.required' => __('child_show.amount_type_2_required'),
+            'description.required' => __('child_show.description_2_required'),
         ];
-    }
+    } 
 
 }
