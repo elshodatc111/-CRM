@@ -169,7 +169,7 @@
                 <input type="hidden" name="name" value="{{ $userT['name'] }}">
                 <input type="hidden" name="role" value="{{ $userT['role'] }}">
                 <input type="hidden" name="group_id" value="{{ $group_id }}">
-                <label for="monch" class="mb-2">Hisoblash davrini tanlang.</label>
+                <label for="monch" class="mb-2">{{ __('emploes_show.hisoblash_davrini_tanlang') }}</label>
                 <select name="monch" id="" class="form-control">
                   <?php $i=0; ?>
                   @foreach ($oxirgiOltiOy as $item)
