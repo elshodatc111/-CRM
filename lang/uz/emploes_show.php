@@ -58,7 +58,8 @@ return [
     'new_child' => "Yangi bola uchun",
     'new_lead' => "Yangi lead uchun",
     'ish_kunlar_soni' => "Ish kunlari sonini kiriting",
-    'oshpaz_sh_haqi_hisoblash' => "Oshpaz ish haqini hisoblash",
+    'xodim_ish_haqi_hisoblash'=> 'Xodim ish haqi hisoblash', 
+    'ish_haqi_hisob_davri' => "Hisoblash davrini tanlang.",
 
 
 ];

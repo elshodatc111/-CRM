@@ -17,7 +17,7 @@
     </div>
   </div>
   <div class="col-lg-6 d-flex justify-content-end align-items-center flex-wrap gap-2">
-    @if(auth()->user()->role == 'superadmin' || auth()->use()->role=='direktor')
+    @if(auth()->user()->role == 'superadmin' || auth()->user()->role=='direktor')
     <button class="btn btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#create_payment"><i class="bi bi-cash-stack me-1"></i> {{ __('emploes_show.create_paymart') }}</button>   
     <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#users_update"><i class="bi bi-pencil-square me-1"></i> {{ __('emploes_show.taxrirlash') }}</button>
     @endif   
@@ -158,34 +158,25 @@
     </div>
     
     @if(in_array($userT->role, ['admin', 'oshpaz', 'tarbiyachi', 'yordamchi']))
-      @if($userT->role=='admin')
       <div class="col-lg-4">
         <div class="card info-card welcome-card">
           <div class="card-body">
             <div class="notes-wrapper" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;min-height:400px;">
-              <h2 class="card-title">{{ __('emploes_show.admin_hisob_ish_haqi') }}</h2>
-              <table class="table table-bordered text-center" style="font-size:12px">
-                <tr>
-                  <th>{{ __('emploes_show.maosh_miqdori') }}</th>
-                  <th>{{ __('emploes_show.new_child') }}</th>
-                  <th>{{ __('emploes_show.new_lead') }}</th>
-                </tr>
-                <tr>
-                  <td>{{ number_format($userT['salary'], 0, '.', ' ') }} UZS</td>
-                  <td>{{ number_format($salary[5]['new_child'], 0, '.', ' ') }} UZS</td>
-                  <td>{{ number_format($salary[5]['new_lead'], 0, '.', ' ') }} UZS</td>
-                </tr>
-              </table>
-              <form action="{{ route('user_admin_calculation') }}" method="post">
+              <h2 class="card-title">{{ __('emploes_show.xodim_ish_haqi_hisoblash') }}</h2>
+              <form action="{{ route('user_emploes_calc') }}" method="post">
                 @csrf 
                 <input type="hidden" name="user_id" value="{{ $userT['id'] }}">
-                <input type="hidden" name="salary" value="{{ $userT['salary'] }}">
-                <input type="hidden" name="new_child" value="{{ $salary[5]['new_child'] }}">
-                <input type="hidden" name="new_lead" value="{{ $salary[5]['new_lead'] }}">
-                <label for="monch" class="mb-2">{{ __('emploes_show.ish_haqi_hisob_monch') }}</label>
+                <input type="hidden" name="name" value="{{ $userT['name'] }}">
+                <input type="hidden" name="role" value="{{ $userT['role'] }}">
+                <input type="hidden" name="group_id" value="{{ $group_id }}">
+                <label for="monch" class="mb-2">Hisoblash davrini tanlang.</label>
                 <select name="monch" id="" class="form-control">
+                  <?php $i=0; ?>
                   @foreach ($oxirgiOltiOy as $item)
+                    <?php $i++;?>
+                    @if($i<=2)
                     <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
+                    @endif
                   @endforeach
                 </select>
                 <button class="btn btn-primary w-100 mt-2">{{ __('emploes_show.ish_haqi_hisoblash') }}</button>
@@ -194,64 +185,6 @@
           </div>
         </div>
       </div>
-      @elseif($userT->role=='oshpaz')
-      <div class="col-lg-4">
-        <div class="card info-card welcome-card">
-          <div class="card-body">
-            <div class="notes-wrapper" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;min-height:400px;">
-              <h2 class="card-title">{{ __('emploes_show.oshpaz_sh_haqi_hisoblash') }}</h2>
-              <form action="{{ route('user_oshpaz_calculation') }}" method="post">
-                @csrf 
-                <input type="hidden" name="user_id" value="{{ $userT['id'] }}">
-                <label for="monch" class="mb-2">{{ __('emploes_show.ish_haqi_hisob_monch') }}</label>
-                <select name="monch" id="" class="form-control">
-                  @foreach ($oxirgiOltiOy as $item)
-                    <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
-                  @endforeach
-                </select>
-                <label for="countData" class="my-2">{{ __('emploes_show.ish_kunlar_soni') }}</label>
-                <input type="number" name="countData" class="form-control" value="21" required>
-                <button class="btn btn-primary w-100 mt-2">{{ __('emploes_show.ish_haqi_hisoblash') }}</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      @elseif($userT->role=='tarbiyachi')
-      <div class="col-lg-4">
-        <div class="card info-card welcome-card">
-          <div class="card-body">
-            <div class="notes-wrapper" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;min-height:400px;">
-              <h2 class="card-title">Tarbiyachi ish haqini hisoblash</h2>
-              <form action="#" method="post">
-                @csrf 
-                <input type="hidden" name="user_id" value="{{ $userT['id'] }}">
-                <label for="monch" class="mb-2">{{ __('emploes_show.ish_haqi_hisob_monch') }}</label>
-                <select name="monch" id="" class="form-control">
-                  @foreach ($oxirgiOltiOy as $item)
-                    <option value="{{ $item['value'] }}">{{ $item['label'] }}</option>
-                  @endforeach
-                </select>
-                <label for="countData" class="my-2">{{ __('emploes_show.ish_kunlar_soni') }}</label>
-                <input type="number" name="countData" class="form-control" value="21" required>
-                <button class="btn btn-primary w-100 mt-2">{{ __('emploes_show.ish_haqi_hisoblash') }}</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      @elseif($userT->role=='yordamchi')
-      <div class="col-lg-4">
-        <div class="card info-card welcome-card">
-          <div class="card-body">
-            <div class="notes-wrapper" style="max-height: 400px; overflow-y: auto; overflow-x: hidden;min-height:400px;">
-            <h2 class="card-title">Yordamchi tarbiyachi ish haqini hisoblash</h2>
-                  
-            </div>
-          </div>
-        </div>
-      </div>
-      @endif
     @endif
     <!-- ISH haqi to'lovlar tarixi -->
     <div class="{{ in_array($userT->role, ['admin', 'oshpaz', 'tarbiyachi', 'yordamchi']) ? 'col-lg-8' : 'col-lg-12' }}">

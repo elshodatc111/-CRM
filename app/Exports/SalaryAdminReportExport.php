@@ -1,93 +1,102 @@
 <?php
-
 namespace App\Exports;
 
-use App\Models\SettingSalary;
-use App\Models\User;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
-use Maatwebsite\Excel\Concerns\WithCustomStartCell;
-use Maatwebsite\Excel\Concerns\RegistersEventListeners;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class SalaryAdminReportExport implements WithEvents{
-    
-    protected $data;
 
-    public function __construct($data){
-        $this->data = $data;
-    }
+    protected $data;
+    protected $davomad;
+    protected $shikoyat;
+
+    public function __construct($data, $davomad, $shikoyat){$this->data = $data;$this->davomad = $davomad;$this->shikoyat = $shikoyat;}
 
     public function registerEvents(): array{
         return [
             AfterSheet::class => function(AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
+                // --- 1. ISH HAQI JADVALI (A-D ustunlar) ---
+                $sheet->mergeCells('A1:B1');
+                $sheet->setCellValue('A1', 'Administrator: ' . ($this->data['admin_name'] ?? 'Noma’lum'));
+                $sheet->setCellValue('D1', 'Yuklandi: ' . date('Y-m-d H:i:s'));
 
-                $userName = User::find($this->data['user_id'])->name;
-                $month = $this->data['monch'];
-                $baseSalary = (float)User::find($this->data['user_id'])->salary;
-                $newChildCount = (int)$this->data['new_child_count'];
-                $newLeadCount = (int)$this->data['new_lead_count'];
-                $childPrice = SettingSalary::find(6)->new_child; 
-                $leadPrice = SettingSalary::find(6)->new_lead;                
-                $totalChild = $newChildCount * $childPrice;
-                $totalLead = $newLeadCount * $leadPrice;
-                $grandTotal = $baseSalary + $totalChild + $totalLead;
+                $headers1 = ['#', 'Summa', 'Soni', 'Hisoblash'];
+                $sheet->fromArray([$headers1], NULL, 'A2');
 
-                $sheet->mergeCells('A1:C1');
-                $sheet->setCellValue('A1', $userName);
-                $sheet->setCellValue('D1', $month);
-                $sheet->getStyle('A1')->getFont()->setSize(14)->setBold(true);
-                $sheet->getStyle('D1')->getAlignment()->setHorizontal('right');
-                $styleArray = [
-                    'borders' => [
-                        'allBorders' => [
-                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                        ],
-                    ],
-                ];
-                // 3-qator: Maosh miqdori
-                $sheet->setCellValue('A3', 'Maosh miqdori');
-                $sheet->setCellValue('B3', number_format($baseSalary, 2, ',', ' '));
-                $sheet->getStyle('B3')->getAlignment()->setHorizontal('right');
-                $sheet->setCellValue('C3', 1);
-                $sheet->setCellValue('D3', number_format($baseSalary, 2, ',', ' '));
-                $sheet->getStyle('D3')->getAlignment()->setHorizontal('right');
+                $currentRow = 3;
+                foreach ($this->data['items'] as $item) {
+                    $sheet->setCellValue('A' . $currentRow, $item['title']);
+                    $sheet->setCellValue('B' . $currentRow, $item['summa']);
+                    $sheet->setCellValue('C' . $currentRow, $item['soni']);
+                    $sheet->setCellValue('D' . $currentRow, $item['total']);
+                    $currentRow++;
+                }
+                $sheet->setCellValue('D' . $currentRow, $this->data['total_all'] ?? 0);
+                $sheet->getStyle("A2:D$currentRow")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
-                // 4-qator: Yangi bolalar
-                $sheet->setCellValue('A4', 'Yangi bolalar');
-                $sheet->setCellValue('B4', number_format($childPrice, 2, ',', ' '));
-                $sheet->getStyle('B4')->getAlignment()->setHorizontal('right');
-                $sheet->setCellValue('C4', $newChildCount);
-                $sheet->setCellValue('D4', number_format($totalChild, 2, ',', ' '));
-                $sheet->getStyle('D4')->getAlignment()->setHorizontal('right');
+                // --- 2. DAVOMAD JADVALI (F-I ustunlar) ---
+                $sheet->setCellValue('F1', 'Hodim Davomad');
+                $sheet->setCellValue('I1', date('2026-04')); // Oyni dinamik qilish mumkin
 
-                // 5-qator: Yangi lead
-                $sheet->setCellValue('A5', 'Yangi leat');
-                $sheet->setCellValue('B5', number_format($leadPrice, 2, ',', ' '));
-                $sheet->getStyle('B5')->getAlignment()->setHorizontal('right');
-                $sheet->setCellValue('C5', $newLeadCount);
-                $sheet->setCellValue('D5', number_format($totalLead, 2, ',', ' '));
-                $sheet->getStyle('D5')->getAlignment()->setHorizontal('right');
+                $headers2 = ['#', 'Davomad Kuni', 'Davomad holati', 'Davomad haqida'];
+                $sheet->fromArray([$headers2], NULL, 'F2');
 
-                // 6-qator: Jami
-                $sheet->setCellValue('D6', number_format($grandTotal, 2, ',', ' '));
-                $sheet->getStyle('D6')->getAlignment()->setHorizontal('right');
-                $sheet->getStyle('D6')->getFont()->setBold(true);
+                $attRow = 3;
+                foreach ($this->davomad as $index => $att) {
+                    $sheet->setCellValue('F' . $attRow, $index + 1);
+                    $sheet->setCellValue('G' . $attRow, $att['sana']);
+                    $sheet->setCellValue('H' . $attRow, $att['holat']);
+                    $sheet->setCellValue('I' . $attRow, $att['izoh']);
 
-                // Borderlarni qo'llash (A3 dan D6 gacha)
-                $sheet->getStyle('A3:D6')->applyFromArray($styleArray);
+                    // Rang berish (Rasmdagidek)
+                    $color = $this->getStatusColor($att['holat']);
+                    if ($color) {
+                        $sheet->getStyle('H' . $attRow)->getFill()
+                            ->setFillType(Fill::FILL_SOLID)
+                            ->getStartColor()->setARGB($color);
+                    }
+                    $attRow++;
+                }
+                $sheet->getStyle("F2:I" . ($attRow - 1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
-                // 8-qator: Yuklangan vaqti
-                $sheet->mergeCells('C8:D8');
-                $sheet->setCellValue('C8', 'Yuklandi: ' . now()->format('d-m-Y H:i'));
-                $sheet->getStyle('C8')->getAlignment()->setHorizontal('right');
+                // --- 3. SHIKOYATLAR JADVALI (Pastki qism) ---
+                $shikoyatStart = $currentRow + 2; // Ish haqi jadvalidan 2 qator pastda
+                $sheet->setCellValue('A' . $shikoyatStart, 'Shikoyatlar');
+                $sheet->setCellValue('D' . $shikoyatStart, date('2026-04'));
 
-                // Ustun kengliklarini sozlash
-                $sheet->getColumnDimension('A')->setWidth(30);
-                $sheet->getColumnDimension('B')->setWidth(20);
-                $sheet->getColumnDimension('C')->setWidth(10);
-                $sheet->getColumnDimension('D')->setWidth(20);
+                $headers3 = ['#', 'Shikoyatlar matni', 'Administrator', 'Shikoyat vaqti'];
+                $sheet->fromArray([$headers3], NULL, 'A' . ($shikoyatStart + 1));
+
+                $compRow = $shikoyatStart + 2;
+                foreach ($this->shikoyat as $index => $sh) {
+                    $sheet->setCellValue('A' . $compRow, $index + 1);
+                    $sheet->setCellValue('B' . $compRow, $sh['matn']);
+                    $sheet->setCellValue('C' . $compRow, $sh['admin']);
+                    $sheet->setCellValue('D' . $compRow, $sh['vaqt']);
+                    $compRow++;
+                }
+                $sheet->getStyle("A" . ($shikoyatStart + 1) . ":D" . ($compRow - 1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+
+                // Ustunlar kengligini avtomatik sozlash
+                foreach (range('A', 'I') as $col) {
+                    $sheet->getColumnDimension($col)->setAutoSize(true);
+                }
             },
         ];
+    }
+
+    // Holatga qarab rang qaytaruvchi yordamchi funksiya
+    private function getStatusColor($status)
+    {
+        return match ($status) {
+            'keldi', 'kelmadi_sababli' => 'C6EFCE', // Yashil
+            'keldi_formasiz', 'kechikdi_sababli' => 'FFEB9C', // Sariq
+            'kechikdi_formasiz', 'kechikdi_sababsiz', 'kelmadi' => 'FFC7CE', // Qizil
+            default => null,
+        };
     }
 }
