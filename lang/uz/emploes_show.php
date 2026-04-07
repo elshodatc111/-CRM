@@ -69,5 +69,23 @@ return [
     'tarif_narxi' => "Tarif narxi",
     'ortacha_davomad' => "O'rtacha davomad",
     'dabomad_soni' => "Davomad soni",
+    'bayram_tadbirlar' => "Bayram & Tadbirlar",
+    'otqazish_vaqti' => "O'tqazilgan vaqti",
+    'bayram_tadbirlari_mavjud_emas' => "Bayram tadbiri mavjud emas",
+    'hisobotlar' => "Hisobotlar",
+    'hisobot_status' => "Hisobot status",
+    'hisobotlar_mavjud_emas' => "Hisobotlar mavjud emas",
+    'topshirgan' => "Topshirgan",
+    'topshirmagan' => "Topshirmagan",
+    'navjud' => "Mavjud",
+    'no_mavjud' => "Mavjud emas",
+    'tulov' => "To'lov",
+    'holati' => "Holati",
+    "kunlik_hisobot" => "Kunlik hisobotlar",
+    "bay_tadbir" => "Bayram tadbirlari",
+    "shikoy" => "Shikoyatlar",
+    'kichik_guruh' => "Kichik Guruh",
+    'katta_guruh' => "Katta Guruh",
+
 
 ];

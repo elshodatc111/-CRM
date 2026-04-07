@@ -232,7 +232,39 @@ class EmploesController extends Controller{
             'ish_haqi' => $ish_haqi,
         ];
     }
-
+    public function tarbiyachiKPI($monch, $group_id,$user_id,$type){
+        $startDate = Carbon::parse($monch)->startOfMonth();
+        $endDate = Carbon::parse($monch)->endOfMonth();
+        $hisobot_status = true;
+        $hisobotlar = GroupHisobot::where('group_id',$group_id)->where('type','hisobot')->whereBetween('created_at', [$startDate, $endDate])->get();
+        foreach ($hisobotlar as $key => $value) {
+            if(!$value->is_active){
+                $hisobot_status = 'false';
+            }
+        }
+        $hisobot_count = count($hisobotlar);
+        if($hisobot_count==0){
+            $hisobot_status = 'false';
+        }
+        $tadbirlar = count(GroupHisobot::where('group_id',$group_id)->where('type','tadbir')->whereBetween('created_at', [$startDate, $endDate])->get());
+        $shikoyat = count(UserShikoyat::where('user_id',$user_id)->whereBetween('created_at', [$startDate, $endDate])->get());
+        if($type=='tarbiyachi'){
+            $a1 = 1;
+            $a2 = 2;
+        }else{
+            $a1 = 3;
+            $a2 = 4;
+        }
+        $salary_katta = $this->oshpazSalary($monch,$a1,$group_id);
+        $salary_kichik = $this->oshpazSalary($monch,$a2,$group_id);
+        return [
+            'hisobot_status' => $hisobot_status,
+            'tadbir_status' => $tadbirlar>0?true:false,
+            'shikoyat_status' => $shikoyat>0?true:false,
+            'kichik_guruh' => $salary_kichik,
+            'katta_guruh' => $salary_katta,
+        ];
+    }
     public function calcEmploesAndExport(Request $request){
         $user = User::find($request['user_id']);
         $monch = $request['monch'];
@@ -247,14 +279,12 @@ class EmploesController extends Controller{
             $salary = $this->oshpazSalary($monch,5);
             return view('emploes.ish_haqi.oshpaz',compact('user','monch','davomad','shikoyatlar','salary'));
         }elseif($request->role=='tarbiyachi'){
-            $salary_katta = $this->oshpazSalary($monch,1,$request->group_id);
-            $salary_kichik = $this->oshpazSalary($monch,2,$request->group_id);
-            dd($salary_katta);
-            return view('emploes.ish_haqi.tarbiyachi',compact('user','monch','davomad','shikoyatlar','tadbirlar','hisobot'));
+            $salary = $this->tarbiyachiKPI($monch,$request->group_id,$request->user_id,'tarbiyachi');
+            //dd($salary);
+            return view('emploes.ish_haqi.tarbiyachi',compact('user','monch','davomad','shikoyatlar','tadbirlar','hisobot','salary'));
         }elseif($request->role=='yordamchi'){
-            $salary_katta = $this->oshpazSalary($monch,3,$request->group_id);
-            $salary_kichik = $this->oshpazSalary($monch,4,$request->group_id);
-            return view('emploes.ish_haqi.yordamchi',compact('user','monch','davomad','shikoyatlar','tadbirlar','hisobot'));
+            $salary = $this->tarbiyachiKPI($monch,$request->group_id,$request->user_id,'yordamchi');
+            return view('emploes.ish_haqi.tarbiyachi',compact('user','monch','davomad','shikoyatlar','tadbirlar','hisobot','salary'));
         }else{
             return redirect()->back()->with('success', '');
         }
