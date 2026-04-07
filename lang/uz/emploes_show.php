@@ -60,6 +60,10 @@ return [
     'ish_kunlar_soni' => "Ish kunlari sonini kiriting",
     'xodim_ish_haqi_hisoblash'=> 'Xodim ish haqi hisoblash', 
     'ish_haqi_hisob_davri' => "Hisoblash davrini tanlang.",
-
+    'ish_haqi' => "Ish haqi",
+    'hisoblandi' => "Hisoblandi:",
+    'yangi_lead' => "Yangi lead",
+    'yangi_bola' => "Yangi bola",
+    'hisoblandi' => "Hisoblandi :",
 
 ];
