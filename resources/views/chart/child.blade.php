@@ -1,33 +1,37 @@
 @extends('layouts.admin')
 
-@section('title', __('menu.dashboard'))
+@section('title', __('menu.chart_child'))
 
 @section('content')
   <div class="pagetitle">
-    <h1>{{ __('menu.dashboard') }}</h1>
+    <h1>{{ __('menu.chart_child') }}</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('menu.home') }}</a></li>
-        <li class="breadcrumb-item active">{{ __('menu.dashboard') }}</li>
+        <li class="breadcrumb-item active">{{ __('menu.chart_child') }}</li>
       </ol>
     </nav>
   </div>
 
-  <section class="section dashboard">
-    <div class="row">
+  <section class="section chart_child">
 
-      <div class="col-lg-12">
-        <div class="card info-card welcome-card">
-          <div class="card-body">
-            <h5 class="card-title">Sarlovha</h5>
-            
-            sdasda
-          </div>
-        </div>
+    <div class="card info-card welcome-card">
+      <div class="card-body">
+        <h5 class="card-title">Sarlovha</h5>
+        
+        Kunlik davomad oxirgi 10 kun
       </div>
-      
-      
     </div>
+
+    
+    <div class="card info-card welcome-card">
+      <div class="card-body">
+        <h5 class="card-title">Sarlovha</h5>
+        
+        Kunlik davomad oxirgi 10 oy
+      </div>
+    </div>
+
   </section>
 
 

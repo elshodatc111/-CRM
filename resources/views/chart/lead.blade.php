@@ -18,7 +18,7 @@
       <div class="col-lg-4">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title text-center">Leadlar (oxirgi 7 kunlik)</h5>
+            <h5 class="card-title text-center">{{ __('charts.lead_joriy_hafta') }}</h5>
             <div id="joriy_hafta"></div>
             <div class="funnel-stats-container">
               <div class="stat-block">
@@ -48,7 +48,7 @@
       <div class="col-lg-4">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title text-center">Leadlar (Joriy oy)</h5>
+            <h5 class="card-title text-center">{{ __('charts.lead_joriy_oy') }}</h5>
             <div id="joriy_oy"></div>
             <div class="funnel-stats-container">
               <div class="stat-block">
@@ -78,7 +78,7 @@
       <div class="col-lg-4">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title text-center">Leadlar (Joriy yil)</h5>
+            <h5 class="card-title text-center">{{ __('charts.lead_joriy_yil') }}</h5>
             <div id="joriy_yil"></div>
             <div class="funnel-stats-container">
               <div class="stat-block">
@@ -108,7 +108,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h2 class="card-title">Oxirgi 6 oylik</h2>
+              <h2 class="card-title">{{ __('charts.oxirgiOltiOy') }}</h2>
               <canvas id="statistika" style="max-height: 450px;"></canvas>
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
@@ -180,8 +180,6 @@
         </div>
     </div>
   </section>
-
-
 <style>
   .funnel-stats-container {display: flex;justify-content: space-between;gap: 10px;margin-top: 20px;padding: 10px 5px;background: #fdfdfd;border-radius: 8px;}
   .stat-block {flex: 1;display: flex;flex-direction: column;align-items: center;padding: 10px 5px;border-right: 1px solid #eee;transition: all 0.3s ease;}
