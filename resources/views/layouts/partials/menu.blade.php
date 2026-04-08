@@ -54,28 +54,11 @@
   </a>
 </li>
 
-
 <li class="nav-item">
-  <a class="nav-link {{ request()->routeIs(['reports','report01','report02']) ? '' : 'collapsed' }}" data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#">
-    <i class="bi bi-file-earmark-bar-graph"></i><span>{{ __('menu.reports') }}</span><i class="bi bi-chevron-down ms-auto"></i>
+  <a class="nav-link {{ request()->routeIs(['report']) ? '' : 'collapsed' }}" href="{{ route('report') }}">
+    <i class="bi bi-file-earmark-bar-graph"></i>
+    <span>{{ __('menu.reports') }}</span>
   </a>
-  <ul id="reports-nav" class="nav-content collapse {{ request()->routeIs(['reports']) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-    <li>
-      <a href="#" class="nav-link {{ request()->routeIs(['report01']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>Bolalar</span>
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link {{ request()->routeIs(['report2']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>Hodimlar</span>
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link {{ request()->routeIs(['report2']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>Kassa</span>
-      </a>
-    </li>
-  </ul>
 </li>
 
 

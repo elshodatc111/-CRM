@@ -36,4 +36,5 @@
         'not_fount_child' => "No children in this group.",
         'cancel' => "Cancel",
         'tanlang' => "Select...",
+        'yuklash' => "Download",
     ];

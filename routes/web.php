@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GroupDavomadController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingSalaryController;
 use App\Http\Controllers\TKunController;
 use App\Http\Controllers\web\{AuthController, BalansController, ChildController, ChildLeadController, ChildPaymentController, HomeController, EmploesController, EmploesLeadController, GroupController, KassaController};
@@ -94,6 +95,9 @@ Route::group([
             Route::post('/setting/salary/yordamchi/kichik',[SettingSalaryController::class, 'kichik_yordamchi'])->name('setting_salary_yordamchi_kichik');
             Route::post('/setting/salary/oshpaz',[SettingSalaryController::class, 'oshpaz'])->name('setting_salary_oshpaz');
             Route::post('/setting/salary/admin',[SettingSalaryController::class, 'admin'])->name('setting_salary_admin');
+            # Report
+            Route::get('/report', [ReportController::class, 'index'])->name('report');
+            Route::post('/report', [ReportController::class, 'report'])->name('report_post');
 
         });
         

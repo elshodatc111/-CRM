@@ -36,4 +36,5 @@
         'not_fount_child' => "Guruhdagi bolalar mavjud emas.",
         'cancel' => "Bekor qilish",
         'tanlang' => "Tanlang...",
+        'yuklash' => "Yuklash",
     ];
