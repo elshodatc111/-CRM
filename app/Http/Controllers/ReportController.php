@@ -8,9 +8,12 @@ use App\Exports\ChildExport;
 use App\Exports\ChildLeadExport;
 use App\Exports\ChildPaymentExport;
 use App\Exports\GroupChildExport;
+use App\Exports\GroupDavomadExport;
+use App\Exports\GroupHisobotExport;
 use App\Exports\GroupPaymentExport;
 use App\Exports\GroupUserExport;
 use App\Exports\KassaHistoryExport;
+use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller{
@@ -39,11 +42,11 @@ class ReportController extends Controller{
         }elseif($type == "group_payments"){
             return Excel::download(new GroupPaymentExport, "guruh-uchun-tulovlar-".$time.".xlsx");
         }elseif($type == "group_hisobots"){
-            // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
+            return Excel::download(new GroupHisobotExport, "hisobot-".$time.".xlsx");
         }elseif($type == "group_davomads"){
-            // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
+            return Excel::download(new GroupDavomadExport, "bolalar-davomadi-".$time.".xlsx");
         }elseif($type == "users"){
-            // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
+            return Excel::download(new UsersExport, "hodimlar-".$time.".xlsx");
         }elseif($type == "user_davomads"){
             // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
         }elseif($type == "user_leads"){
