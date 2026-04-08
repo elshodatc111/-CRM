@@ -62,12 +62,17 @@
   <ul id="reports-nav" class="nav-content collapse {{ request()->routeIs(['reports']) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
     <li>
       <a href="#" class="nav-link {{ request()->routeIs(['report01']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>{{ __('menu.report01') }}</span>
+        <i class="bi bi-circle"></i><span>Bolalar</span>
       </a>
     </li>
     <li>
       <a href="#" class="nav-link {{ request()->routeIs(['report2']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>{{ __('menu.report2') }}</span>
+        <i class="bi bi-circle"></i><span>Hodimlar</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link {{ request()->routeIs(['report2']) ? '' : 'collapsed' }}">
+        <i class="bi bi-circle"></i><span>Kassa</span>
       </a>
     </li>
   </ul>
@@ -80,13 +85,23 @@
   </a>
   <ul id="chart-nav" class="nav-content collapse {{ request()->routeIs(['charts','charts01','charts02']) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
     <li>
-      <a href="#" class="nav-link {{ request()->routeIs(['charts01']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>{{ __('menu.charts01') }}</span>
+      <a href="#" class="nav-link {{ request()->routeIs(['charts02']) ? '' : 'collapsed' }}">
+        <i class="bi bi-circle"></i><span>Lead</span>
       </a>
     </li>
     <li>
       <a href="#" class="nav-link {{ request()->routeIs(['charts02']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>{{ __('menu.charts02') }}</span>
+        <i class="bi bi-circle"></i><span>Bolalar</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link {{ request()->routeIs(['charts01']) ? '' : 'collapsed' }}">
+        <i class="bi bi-circle"></i><span>To'lovlar</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link {{ request()->routeIs(['charts01']) ? '' : 'collapsed' }}">
+        <i class="bi bi-circle"></i><span>Moliya</span>
       </a>
     </li>
   </ul>
@@ -100,11 +115,6 @@
     <li>
       <a href="{{ route('setting_salary') }}" class="nav-link {{ request()->routeIs(['setting_salary']) ? '' : 'collapsed' }}">
         <i class="bi bi-circle"></i><span>{{ __('menu.salary') }}</span>
-      </a>
-    </li>
-    <li>
-      <a href="#" class="nav-link {{ request()->routeIs(['setting01']) ? '' : 'collapsed' }}">
-        <i class="bi bi-circle"></i><span>{{ __('menu.setting01') }}</span>
       </a>
     </li>
   </ul>

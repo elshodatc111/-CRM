@@ -17,6 +17,8 @@ Route::group([
     
     Route::middleware(['auth'])->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+        Route::post('/profile', [AuthController::class, 'passwordUpdate'])->name('password_update');
         Route::middleware(['role:superadmin,direktor,admin'])->prefix('admin')->group(function () {
             # Home
             Route::get('/', [HomeController::class, 'index'])->name('home');

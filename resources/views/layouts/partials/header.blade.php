@@ -52,15 +52,14 @@
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile shadow mt-3 border-0">
                 <li class="dropdown-header text-center p-3">
                     <h6 class="mb-1 text-dark">{{ Auth::user()->name }}</h6>
-                    <small class="text-muted">{{ Auth::user()->phone }}</small>
+                    <small class="text-muted">{{ Auth::user()->phone }}</small><br>
                     <div class="badge bg-light text-primary border mt-2">{{ Auth::user()->role }}</div>
                 </li>
                 <li><hr class="dropdown-divider m-0"></li>
-                
                 <li>
-                    <a class="dropdown-item d-flex align-items-center py-2" href="#">
+                    <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('profile') }}">
                         <i class="bi bi-person-vcard me-2 text-primary"></i>
-                        <span>{{ __('header.my_profile') }}</span>
+                        <span>{{ __('menu.my_profile') }}</span>
                     </a>
                 </li>
                 <li><hr class="dropdown-divider m-0"></li>
@@ -68,7 +67,7 @@
                     <a class="dropdown-item d-flex align-items-center py-2 text-danger" href="#" 
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bi bi-box-arrow-right me-2"></i>
-                        <span>{{ __('header.sign_out') }}</span>
+                        <span>{{ __('menu.sign_out') }}</span>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf

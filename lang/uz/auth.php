@@ -18,4 +18,21 @@ return [
 
     'failed' => "Login yoki parol noto‘g‘ri",
     'role_access_denied' => "Ushbu tizimga kirish uchun sizda yetarli huquq mavjud emas",
+
+    'current_password_current_password' => 'Joriy parol noto‘g‘ri kiritildi.',
+    'password_confirmed' => 'Yangi parollar bir-biriga mos kelmadi.',
+    'password_min' => 'Yangi parol kamida 8 ta belgidan iborat bo‘lishi kerak.',
+    'password_update' => 'Parolingiz muvaffaqiyatli yangilandi!',
+    'pass_update' => "Parolni yangilash",
+    'j_parol' => "Joriy parol",
+    'n_parol' => "Yangi parol",
+    't_parol' => "Yangi parolni tasdiqlang",
+    'fio' => "FIO",
+    'phone' => "Telefon raqami",
+    'phone_two' => "Qo‘shimcha telefon raqami",
+    'addres' => "Yashash manzili",
+    'tkun' => "Tug‘ilgan sana",
+    'pus_num' => "Pasport raqami",
+    'role' => "Lavozimi",
+
 ];

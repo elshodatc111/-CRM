@@ -15,4 +15,6 @@ return [
     'charts' => "Analytics",
     'setting' => "Settings",
     'salary' => "Salary",
+    'sign_out' => "Sign Out",
+    'my_profile' => "My Profile",
 ];

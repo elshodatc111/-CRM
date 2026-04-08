@@ -18,4 +18,20 @@ return [
 
     'failed' => "Incorrect login or password",
     'role_access_denied' => "You do not have permission to access this system",
+
+    'current_password_current_password' => 'The current password is incorrect.',
+    'password_confirmed' => 'The new passwords do not match.',
+    'password_min' => 'The new password must be at least 8 characters.',
+    'password_update' => 'Your password has been successfully updated!',
+    'pass_update' => "Update Password",
+    'j_parol' => "Current Password",
+    'n_parol' => "New Password",
+    't_parol' => "Confirm New Password",
+    'fio' => "Full Name",
+    'phone' => "Phone Number",
+    'phone_two' => "Additional Phone Number",
+    'addres' => "Residential Address",
+    'tkun' => "Date of Birth",
+    'pus_num' => "Passport Number",
+    'role' => "Position",
 ];

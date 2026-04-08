@@ -15,4 +15,6 @@ return [
     'charts' => "Statistika",
     'setting' => "Sozlamalar",
     'salary' => "Ish haqi",
+    'sign_out' => "Chiqish",
+    'my_profile' => "Profil"
 ];
