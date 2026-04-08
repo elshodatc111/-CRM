@@ -33,7 +33,7 @@
                                 <div class="card-body">
                                     <div class="pt-4 pb-2 text-center">
                                         <div class="logo-container mb-3">
-                                            <i class="bi bi-person-heart text-primary" style="font-size: 3rem;"></i>
+                                            <img src="{{ asset('assets/img/logo.png') }}" alt="">
                                         </div>
                                         <h5 class="card-title text-center pb-0 fs-4">{{ __('auth.welcome') }}</h5>
                                     </div>
