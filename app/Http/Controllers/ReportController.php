@@ -13,7 +13,11 @@ use App\Exports\GroupHisobotExport;
 use App\Exports\GroupPaymentExport;
 use App\Exports\GroupUserExport;
 use App\Exports\KassaHistoryExport;
+use App\Exports\UserDavomadExport;
+use App\Exports\UserLeadExport;
+use App\Exports\UserPaymentHodimExport;
 use App\Exports\UsersExport;
+use App\Exports\UserShikoyatHodimExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller{
@@ -48,17 +52,15 @@ class ReportController extends Controller{
         }elseif($type == "users"){
             return Excel::download(new UsersExport, "hodimlar-".$time.".xlsx");
         }elseif($type == "user_davomads"){
-            // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
+            return Excel::download(new UserDavomadExport, "hodimlar-davomadi-".$time.".xlsx");
         }elseif($type == "user_leads"){
-            // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
+            return Excel::download(new UserLeadExport, "hodim-lead-".$time.".xlsx");
         }elseif($type == "user_payments"){
-            // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
+            return Excel::download(new UserPaymentHodimExport, "ish-haqi-tulovlari-".$time.".xlsx");
         }elseif($type == "user_shikoyats"){
-            // return Excel::download(new BalansHistoryExport, "balans-history-".$time.".xlsx");
-        }else{
-            return redirect()->back()->with('success', 'not fount error 404');
+            return Excel::download(new UserShikoyatHodimExport, "shikoyatlar-".$time.".xlsx");
         }
-        dd($type);
+        return redirect()->back()->with('success', 'not fount error 404');
     }
 
 }
