@@ -67,6 +67,7 @@ Route::group([
             Route::post('/groups/update',[GroupController::class, 'updateUpdate'])->name('groups_update');
             Route::post('/groups/delete',[GroupController::class, 'deleteGroup'])->name('groups_delete');
             Route::post('/groups/delete/child',[GroupController::class, 'deleteChild'])->name('groups_delete_child');
+            Route::post('/groups/davomad',[GroupController::class, 'groupdavomad'])->name('groups_davomadi');
             # Group Davomad
             Route::get('/davomad/groups',[GroupDavomadController::class, 'davomad'])->name('groups_davomad');
             Route::get('/davomad/groups/show/{id}',[GroupDavomadController::class, 'davomadShow'])->name('groups_davomad_show');

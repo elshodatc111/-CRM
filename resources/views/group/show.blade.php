@@ -133,9 +133,32 @@
       <div class="col-lg-12">
         <div class="card info-card welcome-card">
           <div class="card-body">
-            <h5 class="card-title">
-              {{ __('group_show.groups_childs') }}
-            </h5>
+            <div class="row">
+              <div class="col-lg-6">
+                <h5 class="card-title">
+                  {{ __('group_show.groups_childs') }}
+                </h5>
+              </div>
+              <div class="col-lg-6">
+                <form action="{{ route('groups_davomadi') }}" method="post">
+                  @csrf 
+                  <input type="hidden" name="group_id" value="{{ $group['id'] }}">
+                  <div class="row pt-3">
+                    <div class="col-6">
+                      <select name="monch" required class="form-select">
+                        <option value="">{{ __('emploes_lead_page.select') }}</option>
+                        @foreach ($months as $item)
+                          <option value="{{ $item }}">{{ $item }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <button class="btn btn-primary w-100">{{ __('emploes_lead_page.davomad_tarixi') }}</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
             <table class="table table-bordered" style="font-size: 12px;">
               <thead>
                 <tr class="text-center">

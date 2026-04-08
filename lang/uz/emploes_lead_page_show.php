@@ -43,4 +43,6 @@ return [
     'role' => 'Lavozim',
     'note_success' => 'Eslatma muvaffaqiyatli qo‘shildi.',
     'cancel_success' => 'Ariza muvaffaqiyatli rad etildi.',
+    'davomad_tarixi' => "Davomad tarixi",
+    'bolalar' => "Bolalar",
 ];

@@ -51,4 +51,5 @@ return [
     'status' => "Status",
     'registered' => "Registered",
     'qabul' => "Accepted",
+    'davomad_tarixi' => "History of attendance",
 ];

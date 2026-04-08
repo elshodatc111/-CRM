@@ -7,13 +7,52 @@ use App\Http\Requests\Group\StoreGroupRequest;
 use App\Models\Child;
 use App\Models\Group;
 use App\Models\GroupChild;
+use App\Models\GroupDavomad;
 use App\Models\GroupUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class GroupController extends Controller{
+
+    public function groupdavomad(Request $request){
+        $groupId = $request->group_id;
+        $monthYear = $request->monch;
+        $daysInMonth = Carbon::parse($monthYear)->daysInMonth;
+        $startDate = Carbon::parse($monthYear)->startOfMonth();
+        $endDate = Carbon::parse($monthYear)->endOfMonth();
+        
+        $child_ids = GroupDavomad::where('group_id', $groupId)->whereBetween('date', [$startDate, $endDate])->distinct()->pluck('child_id')->toArray();
+        $dav = [];
+        $kunlar = [];
+        for($i=1;$i<=$daysInMonth;$i++){
+            if($i<10){
+                $kun = "0".$i;
+            }else{
+                $kun = $i;
+            }
+            $kunlar[$i] = $kun;
+            $day = $monthYear."-".$i;
+            foreach ($child_ids as $key => $value) {
+                $childId =$value;
+                $davomad = GroupDavomad::where('group_id',$groupId)->where('child_id',$childId)->where('date',$day)->first();
+                $dav[$key][$i]['name'] = Child::find($childId)->name;
+                $dav[$key][$i]['status'] = $davomad->status??'-';
+            }
+        }
+        $array = [
+            'groupId' => $groupId,
+            'group_name' => Group::find($groupId)->group_name,
+            'monch' => $monthYear,
+            'kunlar' => $kunlar,
+            'davomad' => $dav
+        ];
+        return view('group.get_davomad',compact('array'));
+    }
+
+
     
     public function index(){
         $groups = Group::where('status','aktiv')->get();
@@ -42,7 +81,11 @@ class GroupController extends Controller{
             }
         }
         $child = GroupChild::where('group_id',$id)->orderby('is_active','desc')->get();
-        return view('group.show',compact('group','tarbiyachilar','newUser','child'));
+        $months = [];
+        for ($i = 0; $i < 12; $i++) {
+            $months[] = Carbon::now()->subMonths($i)->format('Y-m');
+        }
+        return view('group.show',compact('group','tarbiyachilar','newUser','child','months'));
     }
 
     public function store(StoreGroupRequest $request){

@@ -50,5 +50,6 @@ return [
     'new_emploesLead' => 'Новая заявка кандидата',
     'status' => "Статус",
     'registered' => "Зарегистрирован",
-    'qabul' => "Принял",
+    'qabul' => "Принял",    
+    'davomad_tarixi' => "История посещаемости",
 ];

@@ -51,4 +51,5 @@ return [
     'status' => "Holati",
     'registered' => "Ro‘yxatga olindi",
     'qabul' => "Qabul qilindi",
+    'davomad_tarixi' => "Davomad tarixi",
 ];

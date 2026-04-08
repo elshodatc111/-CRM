@@ -43,4 +43,6 @@ return [
     'role' => 'Position',
     'note_success' => 'Note added successfully.',
     'cancel_success' => 'Application rejected successfully.',
+    'davomad_tarixi' => "Attendance history",
+    'bolalar' => "Children",
 ];
