@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\GroupDavomadController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingSalaryController;
@@ -98,7 +99,11 @@ Route::group([
             # Report
             Route::get('/report', [ReportController::class, 'index'])->name('report');
             Route::post('/report', [ReportController::class, 'report'])->name('report_post');
-
+            # Chart
+            Route::get('/chart/lead', [ChartController::class, 'lead'])->name('chart_lead');
+            Route::get('/chart/child', [ChartController::class, 'child'])->name('chart_child');
+            Route::get('/chart/payment', [ChartController::class, 'payment'])->name('chart_payment');
+            Route::get('/chart/moliya', [ChartController::class, 'moliya'])->name('chart_moliya');
         });
         
     });

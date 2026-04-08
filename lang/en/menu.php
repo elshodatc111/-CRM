@@ -17,4 +17,8 @@ return [
     'salary' => "Salary",
     'sign_out' => "Sign Out",
     'my_profile' => "My Profile",
+    'chart_lead' => "Leads",
+    'chart_child' => "Children",
+    'chart_payment' => "Payments",
+    'chart_moliya' => "Finance",
 ];

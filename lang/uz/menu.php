@@ -16,5 +16,9 @@ return [
     'setting' => "Sozlamalar",
     'salary' => "Ish haqi",
     'sign_out' => "Chiqish",
-    'my_profile' => "Profil"
+    'my_profile' => "Profil",
+    'chart_lead' => "Lead",
+    'chart_child' => "Bolalar",
+    'chart_payment' => "To'lovlar",
+    'chart_moliya' => "Moliya",
 ];

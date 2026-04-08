@@ -17,4 +17,8 @@ return [
     'salary' => "Заработная плата",
     'sign_out' => "Выйти",
     'my_profile' => "Профиль",
+    'chart_lead' => "Лиды",
+    'chart_child' => "Дети", 
+    'chart_payment' => "Платежи",
+    'chart_moliya' => "Финансы",
 ];
