@@ -17,18 +17,146 @@
 
     <div class="card info-card welcome-card">
       <div class="card-body">
-        <h5 class="card-title">Sarlovha</h5>
-        
-        Kunlik davomad oxirgi 10 kun
+        <h5 class="card-title">{{ __('charts.kunlik_davomad') }}</h5>
+        <canvas id="kunlikDavomad" style="max-height: 400px;"></canvas>
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const ctx = document.querySelector('#kunlikDavomad').getContext('2d');
+            const dayLabels = @json(collect($tenDay['days'])->pluck('short_date'));
+            const dataKeldi = @json($tenDay['keldi']);
+            const dataKechikdi = @json($tenDay['kechikdi']);
+            const dataKelmadi = @json($tenDay['kelmadi']);
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: dayLabels,
+                datasets: [
+                  {
+                    label: "Keldi",
+                    data: dataKeldi,
+                    backgroundColor: 'rgba(46, 202, 106, 0.7)', // Yashil
+                    borderColor: 'rgb(46, 202, 106)',
+                    borderWidth: 1
+                  },
+                  {
+                    label: 'Kechikdi',
+                    data: dataKechikdi,
+                    backgroundColor: 'rgba(255, 159, 64, 0.7)', // To'q sariq
+                    borderColor: 'rgb(255, 159, 64)',
+                    borderWidth: 1
+                  },
+                  {
+                    label: 'Kelmadi',
+                    data: dataKelmadi,
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)', // Qizil
+                    borderColor: 'rgb(255, 99, 132)',
+                    borderWidth: 1
+                  },
+                ]
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  tooltip: {
+                    callbacks: {
+                      label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) label += ': ';
+                        if (context.parsed.y !== null) {
+                          label += new Intl.NumberFormat('uz-UZ').format(context.parsed.y);
+                        }
+                        return label;
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      callback: function(value) {
+                        return new Intl.NumberFormat('uz-UZ').format(value);
+                      }
+                    }
+                  }
+                }
+              }
+            });
+          });
+        </script>
       </div>
     </div>
 
     
     <div class="card info-card welcome-card">
       <div class="card-body">
-        <h5 class="card-title">Sarlovha</h5>
-        
-        Kunlik davomad oxirgi 10 oy
+        <h5 class="card-title">{{ __('charts.oylik_davomad') }}</h5>
+        <canvas id="oylikDavomad" style="max-height: 400px;"></canvas>
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const ctx = document.querySelector('#oylikDavomad').getContext('2d');
+            const dayLabels = @json(collect($tenMonth['months'])->pluck('short_date'));
+            const dataKeldi = @json($tenMonth['keldi']);
+            const dataKechikdi = @json($tenMonth['kechikdi']);
+            const dataKelmadi = @json($tenMonth['kelmadi']);
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: dayLabels,
+                datasets: [
+                  {
+                    label: "Keldi",
+                    data: dataKeldi,
+                    backgroundColor: 'rgba(46, 202, 106, 0.7)', // Yashil
+                    borderColor: 'rgb(46, 202, 106)',
+                    borderWidth: 1
+                  },
+                  {
+                    label: 'Kechikdi',
+                    data: dataKechikdi,
+                    backgroundColor: 'rgba(255, 159, 64, 0.7)', // To'q sariq
+                    borderColor: 'rgb(255, 159, 64)',
+                    borderWidth: 1
+                  },
+                  {
+                    label: 'Kelmadi',
+                    data: dataKelmadi,
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)', // Qizil
+                    borderColor: 'rgb(255, 99, 132)',
+                    borderWidth: 1
+                  },
+                ]
+              },
+              options: {
+                responsive: true,
+                plugins: {
+                  tooltip: {
+                    callbacks: {
+                      label: function(context) {
+                        let label = context.dataset.label || '';
+                        if (label) label += ': ';
+                        if (context.parsed.y !== null) {
+                          label += new Intl.NumberFormat('uz-UZ').format(context.parsed.y);
+                        }
+                        return label;
+                      }
+                    }
+                  }
+                },
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    ticks: {
+                      callback: function(value) {
+                        return new Intl.NumberFormat('uz-UZ').format(value);
+                      }
+                    }
+                  }
+                }
+              }
+            });
+          });
+        </script>
       </div>
     </div>
 

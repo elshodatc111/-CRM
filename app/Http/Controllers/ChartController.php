@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BalansHistory;
 use App\Models\ChildLead;
 use App\Models\ChildPayment;
+use App\Models\GroupDavomad;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -159,16 +161,136 @@ class ChartController extends Controller{
         return view('chart.payment',compact('tenDayData','tenMonthData'));
     }
     # END PAYMENT
-
-    #Start CHILD DAVOMAD
+    #START CHILD DAVOMAD
+    public function tenDayDavomad(){
+        $dates = [];
+        $keldi = [];
+        $kelmadi = [];
+        $kechikdi = [];
+        foreach (range(9, 0) as $i) {
+            $date = now()->subDays($i);
+            $dateString = $date->format('Y-m-d');
+            $dates[] = [
+                'full_date'  => $dateString,
+                'short_date' => $date->format('M-d'),
+            ];
+            $dailyQuery = GroupDavomad::whereDate('date', $dateString);
+            $keldi[]    = (clone $dailyQuery)->where('status', 'keldi')->count();
+            $kelmadi[]  = (clone $dailyQuery)->where('status', 'kelmadi')->count();
+            $kechikdi[] = (clone $dailyQuery)->where('status', 'kechikdi')->count();
+        }
+        return [
+            'days'     => $dates,
+            'keldi'    => $keldi,
+            'kechikdi' => $kechikdi,
+            'kelmadi'  => $kelmadi,
+        ];
+    }
+    public function tenMonthDavomad(){
+        $months = [];
+        $keldi = [];
+        $kelmadi = [];
+        $kechikdi = [];
+        foreach (range(9, 0) as $i) {
+            $date = now()->subMonths($i);
+            $startOfMonth = $date->copy()->startOfMonth()->format('Y-m-d');
+            $endOfMonth   = $date->copy()->endOfMonth()->format('Y-m-d');
+            $months[] = [
+                'full_date'  => $date->format('Y-m'),
+                'short_date' => $date->format('Y-M'),
+            ];
+            $monthlyQuery = GroupDavomad::whereBetween('date', [$startOfMonth, $endOfMonth]);
+            $keldi[]    = (clone $monthlyQuery)->where('status', 'keldi')->count();
+            $kelmadi[]  = (clone $monthlyQuery)->where('status', 'kelmadi')->count();
+            $kechikdi[] = (clone $monthlyQuery)->where('status', 'kechikdi')->count();
+        }
+        return [
+            'months'   => $months,
+            'keldi'    => $keldi,
+            'kechikdi' => $kechikdi,
+            'kelmadi'  => $kelmadi,
+        ];
+    }
     public function child(){
-        return view('chart.child');
+        $tenDay = $this->tenDayDavomad();
+        $tenMonth = $this->tenMonthDavomad();
+        return view('chart.child',compact('tenDay','tenMonth'));
     }
-    #END CHILD DAVOMAD
-
-
+    #END CHILD DAVOMAD 'kassaToBalans','kassaCost','balansToKassa','balansOut','balansCost','return','salary','subToBalans'
+    public function tenDayMoliya(){
+        $dates = [];
+        $tulovlar = [];
+        $xarajatlar = [];
+        $qaytarildi = [];
+        $daromad = [];
+        $ishHaqi = [];
+        $subToBalans = [];
+        foreach (range(9, 0) as $i) {
+            $date = now()->subDays($i);
+            $dateString = $date->format('Y-m-d');
+            $dates[] = [
+                'full_date'  => $dateString,
+                'short_date' => $date->format('M-d'),
+            ];
+            //$dailyQuery = BalansHistory::where('status','success')->whereDate('created_at', $dateString);
+            $dailyQuery = BalansHistory::where('status', 'success')->whereRaw("DATE(created_at) = ?", [$dateString]);
+            $tulovlar[]    = (clone $dailyQuery)->where('type', 'kassaToBalans')->sum('amount');
+            $xarajatlar[]  = (clone $dailyQuery)->whereIn('type', ['balansCost', 'kassaCost'])->sum('amount');
+            $qaytarildi[] = (clone $dailyQuery)->where('type', 'return')->sum('amount');
+            $daromad[] = (clone $dailyQuery)->where('type', 'balansOut')->sum('amount');
+            $ishHaqi[] = (clone $dailyQuery)->where('type', 'salary')->sum('amount');
+            $subToBalans[] = (clone $dailyQuery)->where('type', 'subToBalans')->sum('amount');
+        }
+        return [
+            'days'     => $dates,
+            'tulovlar'    => $tulovlar,
+            'xarajatlar' => $xarajatlar,
+            'qaytarildi'  => $qaytarildi,
+            'daromad' => $daromad,
+            'ishHaqi' => $ishHaqi,
+            'subToBalans' => $subToBalans,
+        ];
+    }
+    public function tenMonthMoliya(){
+        $months = [];
+        $tulovlar = [];
+        $xarajatlar = [];
+        $qaytarildi = [];
+        $daromad = [];
+        $ishHaqi = [];
+        $subToBalans = [];
+        foreach (range(9, 0) as $i) {
+            $date = now()->subMonths($i);
+            $startOfMonth = $date->copy()->startOfMonth()->toDateTimeString();
+            $endOfMonth   = $date->copy()->endOfMonth()->toDateTimeString();
+            $months[] = [
+                'full_date'  => $date->format('Y-m'),
+                'short_date' => $date->format('Y-M'),
+            ];
+            $monthlyQuery = BalansHistory::where('status', 'success')->whereBetween('created_at', [$startOfMonth, $endOfMonth]);
+            $tulovlar[]    = (clone $monthlyQuery)->where('type', 'kassaToBalans')->sum('amount') ?? 0;
+            $xarajatlar[]  = (clone $monthlyQuery)->whereIn('type', ['balansCost', 'kassaCost'])->sum('amount') ?? 0;
+            $qaytarildi[]  = (clone $monthlyQuery)->where('type', 'return')->sum('amount') ?? 0;
+            $daromad[]     = (clone $monthlyQuery)->where('type', 'balansOut')->sum('amount') ?? 0;
+            $ishHaqi[]     = (clone $monthlyQuery)->where('type', 'salary')->sum('amount') ?? 0;
+            $subToBalans[] = (clone $monthlyQuery)->where('type', 'subToBalans')->sum('amount') ?? 0;
+        }
+        return [
+            'months'      => $months,
+            'tulovlar'    => $tulovlar,
+            'xarajatlar'  => $xarajatlar,
+            'qaytarildi'  => $qaytarildi,
+            'daromad'     => $daromad,
+            'ishHaqi'     => $ishHaqi,
+            'subToBalans' => $subToBalans,
+        ];
+    }
+    #START MOLIYA
     public function moliya(){
-        return view('chart.moliya');
+        $tenMoliya = $this->tenDayMoliya();
+        $tenMonchMoliya = $this->tenMonthMoliya();
+        //dd($tenMonchMoliya);
+        return view('chart.moliya',compact('tenMoliya','tenMonchMoliya'));
     }
-    
+    #END MOLIYA
 }
