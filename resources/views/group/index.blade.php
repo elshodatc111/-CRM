@@ -28,36 +28,38 @@
         <div class="card info-card welcome-card">
           <div class="card-body">
             <h5 class="card-title">{{ __('menu.groups') }}</h5>
-            <div class="table-responsive">
-              <table class="table table-bordered" style="font-size: 14px">
-                <thead>
-                  <tr class="text-center">
-                    <th>#</th>
-                    <th> {{ __('groups.group_name') }}</th>
-                    <th>{{ __('groups.group_price') }}</th>
-                    <th>{{ __('groups.child_count') }}</th>
-                    <th>{{ __('groups.user_count') }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @forelse($group as $item)
-                  <tr>
-                    <td class="text-center">{{ $loop->index+1 }}</td>
-                    <td>
-                      <a href="{{ route('groups_show',$item['id']) }}">{{ $item['group_name'] }}</a>
-                    </td>
-                    <td class="text-center">{{ number_format($item['group_price'], 0, '.', ' ') }} UZS</td>
-                    <td class="text-center">{{ $item['childs'] }}</td>
-                    <td class="text-center">{{ $item['users'] }}</td>
-                  </tr>
-                  @empty
-                    <tr>
-                      <td class="text-center" colspan="5">{{ __('groups.not_fount') }}</td>
-                    </tr>
-                  @endforelse
-                </tbody>
-              </table>
-            </div>
+              <div class="notes-wrapper" style="max-height: 500px; overflow-y: auto; overflow-x: hidden;height: 500px;">
+                <div class="table-responsive">
+                  <table class="table table-bordered" style="font-size: 14px">
+                    <thead>
+                      <tr class="text-center">
+                        <th>#</th>
+                        <th> {{ __('groups.group_name') }}</th>
+                        <th>{{ __('groups.group_price') }}</th>
+                        <th>{{ __('groups.child_count') }}</th>
+                        <th>{{ __('groups.user_count') }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @forelse($group as $item)
+                      <tr>
+                        <td class="text-center">{{ $loop->index+1 }}</td>
+                        <td>
+                          <a href="{{ route('groups_show',$item['id']) }}">{{ $item['group_name'] }}</a>
+                        </td>
+                        <td class="text-center">{{ number_format($item['group_price'], 0, '.', ' ') }} UZS</td>
+                        <td class="text-center">{{ $item['childs'] }}</td>
+                        <td class="text-center">{{ $item['users'] }}</td>
+                      </tr>
+                      @empty
+                        <tr>
+                          <td class="text-center" colspan="5">{{ __('groups.not_fount') }}</td>
+                        </tr>
+                      @endforelse
+                    </tbody>
+                  </table>
+                </div>
+              </div>
           </div>
         </div>
       </div>      

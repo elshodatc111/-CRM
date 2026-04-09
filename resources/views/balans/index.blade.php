@@ -70,63 +70,65 @@
         <div class="row g-3">
           <div class="col-12 col-xl-12 border-xl-end">
             <h5 class="card-title">{{ __('moliya.balans_history') }}</h5>
-            <div class="table-responsive">
-              <table class="table text-center table-bordered" style="font-size: 12px">
-                <thead>
-                  <th>#</th>
-                  <th>{{ __('moliya.amaliyot_type') }}</th>
-                  <th>{{ __('moliya.summa') }}</th>
-                  <th>{{ __('moliya.summa_type') }}</th>
-                  <th>{{ __('moliya.amaliyot_about') }}</th>
-                  <th>{{ __('moliya.direktor') }}</th>
-                  <th>{{ __('moliya.amaliyot_time') }}</th>
-                </thead>
-                <tbody>
-                  @forelse($history as $item)
-                  <tr>
-                    <td>{{ $loop->index+1 }}</td>
-                    <td>
-                      @if($item->type=='kassaToBalans')
-                        <b class="m-0 p-0 text-primary">{{ __('moliya.kassadan_chiqim') }}</b>
-                      @elseif($item->type=='kassaCost')
-                        <b class="m-0 p-0 text-danger">{{ __('moliya.kassadan_xarajat') }}</b>
-                      @elseif($item->type=='balansToKassa')
-                        <b class="m-0 p-0 text-info">{{ __('moliya.balansToKassa') }}</b>
-                      @elseif($item->type=='balansOut')
-                        <b class="m-0 p-0 text-success">{{ __('moliya.daromad') }}</b>
-                      @elseif($item->type=='balansCost')
-                        <b class="m-0 p-0 text-danger">{{ __('moliya.balansdan_xarajat') }}</b>
-                      @elseif($item->type=='return')
-                        <b class="m-0 p-0 text-danger">{{ __('moliya.payment_return') }}</b>
-                      @elseif($item->type=='salary')
-                        <b class="m-0 p-0 text-warning">{{ __('moliya.ish_haqi_tolov') }}</b>
-                      @elseif($item->type=='subToBalans')
-                        <b class="m-0 p-0 text-primary">{{ __('moliya.subsidya') }}</b>
-                      @endif
-                    </td>
-                    <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
-                    <td>
-                      @if($item->amount_type=='cash')
-                        {{ __('moliya.cash') }}
-                      @elseif($item->amount_type=='card')
-                        {{ __('moliya.card') }}
-                      @elseif($item->amount_type=='bank')
-                        {{ __('moliya.bank') }}
-                      @elseif($item->amount_type=='sub')
-                        {{ __('moliya.subsidya') }}
-                      @endif
-                    </td>
-                    <td style="text-align: left">{{ $item->description }}</td>
-                    <td>{{ $item->admin->name }}</td>
-                    <td>{{ $item->created_at->format('Y-m-d H:i') }}</td>
-                  </tr>
-                  @empty
-                  <tr>
-                    <td class="text-center" colspan="7">{{ __('moliya.not_found_amaliyot') }}</td>
-                  </tr>
-                  @endforelse
-                </tbody>
-              </table>
+            <div class="notes-wrapper" style="max-height: 500px; overflow-y: auto; overflow-x: hidden;height: 500px;">
+              <div class="table-responsive">
+                <table class="table text-center table-bordered" style="font-size: 12px">
+                  <thead>
+                    <th>#</th>
+                    <th>{{ __('moliya.amaliyot_type') }}</th>
+                    <th>{{ __('moliya.summa') }}</th>
+                    <th>{{ __('moliya.summa_type') }}</th>
+                    <th>{{ __('moliya.amaliyot_about') }}</th>
+                    <th>{{ __('moliya.direktor') }}</th>
+                    <th>{{ __('moliya.amaliyot_time') }}</th>
+                  </thead>
+                  <tbody>
+                    @forelse($history as $item)
+                    <tr>
+                      <td>{{ $loop->index+1 }}</td>
+                      <td>
+                        @if($item->type=='kassaToBalans')
+                          <b class="m-0 p-0 text-primary">{{ __('moliya.kassadan_chiqim') }}</b>
+                        @elseif($item->type=='kassaCost')
+                          <b class="m-0 p-0 text-danger">{{ __('moliya.kassadan_xarajat') }}</b>
+                        @elseif($item->type=='balansToKassa')
+                          <b class="m-0 p-0 text-info">{{ __('moliya.balansToKassa') }}</b>
+                        @elseif($item->type=='balansOut')
+                          <b class="m-0 p-0 text-success">{{ __('moliya.daromad') }}</b>
+                        @elseif($item->type=='balansCost')
+                          <b class="m-0 p-0 text-danger">{{ __('moliya.balansdan_xarajat') }}</b>
+                        @elseif($item->type=='return')
+                          <b class="m-0 p-0 text-danger">{{ __('moliya.payment_return') }}</b>
+                        @elseif($item->type=='salary')
+                          <b class="m-0 p-0 text-warning">{{ __('moliya.ish_haqi_tolov') }}</b>
+                        @elseif($item->type=='subToBalans')
+                          <b class="m-0 p-0 text-primary">{{ __('moliya.subsidya') }}</b>
+                        @endif
+                      </td>
+                      <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
+                      <td>
+                        @if($item->amount_type=='cash')
+                          {{ __('moliya.cash') }}
+                        @elseif($item->amount_type=='card')
+                          {{ __('moliya.card') }}
+                        @elseif($item->amount_type=='bank')
+                          {{ __('moliya.bank') }}
+                        @elseif($item->amount_type=='sub')
+                          {{ __('moliya.subsidya') }}
+                        @endif
+                      </td>
+                      <td style="text-align: left">{{ $item->description }}</td>
+                      <td>{{ $item->admin->name }}</td>
+                      <td>{{ $item->created_at->format('Y-m-d H:i') }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                      <td class="text-center" colspan="7">{{ __('moliya.not_found_amaliyot') }}</td>
+                    </tr>
+                    @endforelse
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -159,7 +161,7 @@
               <label for="amount_type" class="mb-2">{{ __('moliya.xarajat_type') }}</label>
               <select name="amount_type" required class="form-select">
                 <option value="">{{ __('moliya.tanlang') }}</option>
-                <option value="cash">{{ __('moliya.card') }}</option>
+                <option value="cash">{{ __('moliya.cash') }}</option>
                 <option value="card">{{ __('moliya.card') }}</option>
                 <option value="bank">{{ __('moliya.bank') }}</option>
                 <option value="sub">{{ __('moliya.subsidya') }}</option>
@@ -199,8 +201,7 @@
               <label for="amount_type" class="mb-2">{{ __('moliya.daromad_type') }}</label>
               <select name="amount_type" required class="form-select">
                 <option value="">{{ __('moliya.tanlang') }}</option>
-                <option value="">{{ __('moliya.tanlang') }}</option>
-                <option value="cash">{{ __('moliya.card') }}</option>
+                <option value="cash">{{ __('moliya.cash') }}</option>
                 <option value="card">{{ __('moliya.card') }}</option>
                 <option value="bank">{{ __('moliya.bank') }}</option>
                 <option value="sub">{{ __('moliya.subsidya') }}</option>
@@ -231,7 +232,7 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
-          <label for="amount" class="mb-2">{{ __('kassa.kassa_return_amount') }}</label>
+          <label for="amount" class="mb-2">{{ __('moliya.kassa_return_amount') }}</label>
           <input type="text" name="amount" required class="form-control" id="amount3">
           <input type="hidden" name="amount_type" value="cash">
           <label for="description" class="my-2">{{ __('moliya.return_about') }}</label>
@@ -260,7 +261,7 @@
         <div class="modal-body p-4">
           <label for="amount" class="mb-2">{{ __('moliya.sub_amount') }}</label>
           <input type="text" name="amount" required class="form-control" id="amount4">
-          <label for="description" class="my-2">{{ __('sub_about') }}</label>
+          <label for="description" class="my-2">{{ __('moliya.sub_about') }}</label>
           <textarea name="description" required class="form-control"></textarea>
         </div>
         <div class="modal-footer bg-light">

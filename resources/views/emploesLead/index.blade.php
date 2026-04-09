@@ -30,60 +30,61 @@
         <div class="card info-card welcome-card">
           <div class="card-body">
             <h5 class="card-title">{{ __('menu.emploesLead') }}</h5>
-            
-            <div class="table-responsive">
-              <table class="table table-bordered database"  style="font-size: 13px;">
-                <thead>
-                  <tr class="text-center bg-light">
-                    <th>#</th>
-                    <th>{{ __('emploes_lead_page.fio') }}</th>
-                    <th>{{ __('emploes_lead_page.phone') }}</th>
-                    <th>{{ __('emploes_lead_page.position') }}</th>
-                    <th>{{ __('emploes_lead_page.status') }}</th>
-                    <th>{{ __('emploes_lead_page.registered') }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @forelse($userLead as $key => $item)
-                    <tr>
-                      <td class="text-center">{{ ++$key }}</td>
-                      <td><a href="{{ route('emploesLead_show', $item->id) }}" class="text-decoration-none">{{ $item->name }}</a></td>
-                      <td class="text-center">{{ $item->phone }}</td>
-                      <td class="text-center">
-                        @if ($item->role=='tarbiyachi')
-                          <span class="badge bg-info text-dark">{{ __('emploes_lead_page.tarbiyachi') }}</span>
-                        @elseif ($item->role=='yordamchi')
-                          <span class="badge bg-warning text-dark">{{ __('emploes_lead_page.yordamchi') }}</span>
-                        @elseif ($item->role=='teacher')
-                          <span class="badge bg-success">{{ __('emploes_lead_page.teacher') }}</span>
-                        @elseif ($item->role=='oshpaz')
-                          <span class="badge bg-danger">{{ __('emploes_lead_page.oshpaz') }}</span>
-                        @elseif ($item->role=='farrosh')
-                          <span class="badge bg-primary">{{ __('emploes_lead_page.farrosh') }}</span>
-                        @elseif ($item->role=='xodim')
-                          <span class="badge bg-secondary">{{ __('emploes_lead_page.xodim') }}</span>
-                        @endif
-                      </td>
-                      <td class="text-center">
-                        @if($item->status === 'new')
-                        <span class="badge bg-primary">{{ __('emploes_lead_page.new') }}</span>
-                        @elseif($item->status === 'pending')
-                        <span class="badge bg-warning text-dark">{{ __('emploes_lead_page.pending') }}</span>
-                        @elseif($item->status === 'success')
-                        <span class="badge bg-success">{{ __('emploes_lead_page.qabul') }}</span>
-                        @else
-                        <span class="badge bg-secondary">{{ __('emploes_lead_page.rejected') }}</span>
-                        @endif
-                      </td>
-                      <td class="text-center">{{ $item->created_at->format('d.m.Y H:i') }}</td>
+            <div class="notes-wrapper" style="max-height: 500px; overflow-y: auto; overflow-x: hidden;height: 500px;">            
+              <div class="table-responsive">
+                <table class="table table-bordered database"  style="font-size: 13px;">
+                  <thead>
+                    <tr class="text-center bg-light">
+                      <th>#</th>
+                      <th>{{ __('emploes_lead_page.fio') }}</th>
+                      <th>{{ __('emploes_lead_page.phone') }}</th>
+                      <th>{{ __('emploes_lead_page.position') }}</th>
+                      <th>{{ __('emploes_lead_page.status') }}</th>
+                      <th>{{ __('emploes_lead_page.registered') }}</th>
                     </tr>
-                  @empty
-                    <tr>
-                      <td colspan="6" class="text-center text-muted">{{ __('emploes_lead_page.empty') }}</td>
-                    </tr>
-                  @endforelse
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    @forelse($userLead as $key => $item)
+                      <tr>
+                        <td class="text-center">{{ ++$key }}</td>
+                        <td><a href="{{ route('emploesLead_show', $item->id) }}" class="text-decoration-none">{{ $item->name }}</a></td>
+                        <td class="text-center">{{ $item->phone }}</td>
+                        <td class="text-center">
+                          @if ($item->role=='tarbiyachi')
+                            <span class="badge bg-info text-dark">{{ __('emploes_lead_page.tarbiyachi') }}</span>
+                          @elseif ($item->role=='yordamchi')
+                            <span class="badge bg-warning text-dark">{{ __('emploes_lead_page.yordamchi') }}</span>
+                          @elseif ($item->role=='teacher')
+                            <span class="badge bg-success">{{ __('emploes_lead_page.teacher') }}</span>
+                          @elseif ($item->role=='oshpaz')
+                            <span class="badge bg-danger">{{ __('emploes_lead_page.oshpaz') }}</span>
+                          @elseif ($item->role=='farrosh')
+                            <span class="badge bg-primary">{{ __('emploes_lead_page.farrosh') }}</span>
+                          @elseif ($item->role=='xodim')
+                            <span class="badge bg-secondary">{{ __('emploes_lead_page.xodim') }}</span>
+                          @endif
+                        </td>
+                        <td class="text-center">
+                          @if($item->status === 'new')
+                          <span class="badge bg-primary">{{ __('emploes_lead_page.new') }}</span>
+                          @elseif($item->status === 'pending')
+                          <span class="badge bg-warning text-dark">{{ __('emploes_lead_page.pending') }}</span>
+                          @elseif($item->status === 'success')
+                          <span class="badge bg-success">{{ __('emploes_lead_page.qabul') }}</span>
+                          @else
+                          <span class="badge bg-secondary">{{ __('emploes_lead_page.rejected') }}</span>
+                          @endif
+                        </td>
+                        <td class="text-center">{{ $item->created_at->format('d.m.Y H:i') }}</td>
+                      </tr>
+                    @empty
+                      <tr>
+                        <td colspan="6" class="text-center text-muted">{{ __('emploes_lead_page.empty') }}</td>
+                      </tr>
+                    @endforelse
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

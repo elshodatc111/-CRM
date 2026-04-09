@@ -92,77 +92,79 @@
             <div class="row g-3">
               <div class="col-12 col-xl-12 border-xl-end">
                 <h5 class="card-title">{{ __('kassa.tasdiqlash_kutilmoqda') }}</h5>
-                <div class="table-responsive">
-                  <table class="table text-center table-bordered" style="font-size: 12px">
-                    <thead>
-                      <th>#</th>
-                      <th>{{ __('kassa.type') }}</th>
-                      <th>{{ __('kassa.summa') }}</th>
-                      <th>{{ __('kassa.tulov_turi') }}</th>
-                      <th>{{ __('kassa.amaliyot_about') }}</th>
-                      <th>{{ __('kassa.amaliyot_time') }}</th>
-                      <th>{{ __('kassa.amaliyotchi') }}</th>
-                      <th>{{ __('kassa.amallar') }}</th>
-                    </thead>
-                    <tbody>
-                      @forelse($history as $item)
-                        <tr>
-                          <td class="text-center">{{ $loop->iteration }}</td>
-                          <td>
-                            @if($item->type=='payment')
-                              <span class="badge bg-success">{{ __('kassa.payment') }}</span>
-                            @elseif($item->type=='cost')
-                              <span class="badge bg-danger">{{ __('kassa.kassadan_xarajat') }}</span>
-                            @else
-                              <span class="badge bg-primary">{{ __('kassa.kassadan_chiqim') }}</span>
-                            @endif
-                          </td>
-                          <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
-                          <td>
-                            @php
-                              $types = ['cash' => ['text-primary', 'Naqd'], 'card' => ['text-info', 'Karta'], 'bank' => ['text-dark', 'Bank']];
-                              $currentType = $types[$item->amount_type] ?? ['text-muted', 'Noma\'lum'];
-                            @endphp
-                            <b class="{{ $currentType[0] }} m-0 p-0"> {{ $currentType[1] }} </b>
-                          </td>
-                          <td>{{ $item->start_comment }}</td>
-                          <td>{{ $item->created_at->format("Y-m-d H:i") }}</td>
-                          <td>{{ $item->startAdmin->name ?? 'Noma\'lum' }}</td>
-                          <td class="text-center">
-                            <div class="d-flex justify-content-center gap-2">
-                              @if(auth()->user()->role == 'direktor' || auth()->user()->role == 'superadmin')
-                                <form action="{{ route('kassa_success') }}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="kassaHistoryId" value="{{ $item->id }}">
-                                    <button type="button" onclick="confirmAction(this, 'Amaliyotni tasdiqlaysizmi?')" class="btn btn-success p-0 px-1" title="Tasdiqlash">
-                                      <i class="bi bi-check-lg"></i>
-                                    </button>
-                                </form>
+                <div class="notes-wrapper" style="max-height: 300px; overflow-y: auto; overflow-x: hidden;height: 300px;">
+                  <div class="table-responsive">
+                    <table class="table text-center table-bordered" style="font-size: 12px">
+                      <thead>
+                        <th>#</th>
+                        <th>{{ __('kassa.type') }}</th>
+                        <th>{{ __('kassa.summa') }}</th>
+                        <th>{{ __('kassa.tulov_turi') }}</th>
+                        <th>{{ __('kassa.amaliyot_about') }}</th>
+                        <th>{{ __('kassa.amaliyot_time') }}</th>
+                        <th>{{ __('kassa.amaliyotchi') }}</th>
+                        <th>{{ __('kassa.amallar') }}</th>
+                      </thead>
+                      <tbody>
+                        @forelse($history as $item)
+                          <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>
+                              @if($item->type=='payment')
+                                <span class="badge bg-success">{{ __('kassa.payment') }}</span>
+                              @elseif($item->type=='cost')
+                                <span class="badge bg-danger">{{ __('kassa.kassadan_xarajat') }}</span>
+                              @else
+                                <span class="badge bg-primary">{{ __('kassa.kassadan_chiqim') }}</span>
                               @endif
-                              <form action="{{ route('kassa_cancel') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="kassaHistoryId" value="{{ $item->id }}">
-                                <button type="button" onclick="confirmAction(this, 'Amaliyotni bekor qilmoqchimisiz?')" class="btn btn-danger p-0 px-1" title="Bekor qilish">
-                                  <i class="bi bi-x-lg"></i>
-                                </button>
-                              </form>
-                            </div>
-                          </td>
-                        </tr>
-                      @empty
-                        <tr>
-                          <td class="text-center" colspan="8">{{ __('kassa.not_found_amaliyot') }}</td>
-                        </tr>
-                      @endforelse
-                    </tbody>
-                  </table>
-                  <script>
-                    function confirmAction(button, message) {
-                      if (confirm(message)) {
-                        button.closest('form').submit();
+                            </td>
+                            <td>{{ number_format($item->amount, 0, '.', ' ') }} UZS</td>
+                            <td>
+                              @php
+                                $types = ['cash' => ['text-primary', 'Naqd'], 'card' => ['text-info', 'Karta'], 'bank' => ['text-dark', 'Bank']];
+                                $currentType = $types[$item->amount_type] ?? ['text-muted', 'Noma\'lum'];
+                              @endphp
+                              <b class="{{ $currentType[0] }} m-0 p-0"> {{ $currentType[1] }} </b>
+                            </td>
+                            <td>{{ $item->start_comment }}</td>
+                            <td>{{ $item->created_at->format("Y-m-d H:i") }}</td>
+                            <td>{{ $item->startAdmin->name ?? 'Noma\'lum' }}</td>
+                            <td class="text-center">
+                              <div class="d-flex justify-content-center gap-2">
+                                @if(auth()->user()->role == 'direktor' || auth()->user()->role == 'superadmin')
+                                  <form action="{{ route('kassa_success') }}" method="post">
+                                      @csrf
+                                      <input type="hidden" name="kassaHistoryId" value="{{ $item->id }}">
+                                      <button type="button" onclick="confirmAction(this, 'Amaliyotni tasdiqlaysizmi?')" class="btn btn-success p-0 px-1" title="Tasdiqlash">
+                                        <i class="bi bi-check-lg"></i>
+                                      </button>
+                                  </form>
+                                @endif
+                                <form action="{{ route('kassa_cancel') }}" method="post">
+                                  @csrf
+                                  <input type="hidden" name="kassaHistoryId" value="{{ $item->id }}">
+                                  <button type="button" onclick="confirmAction(this, 'Amaliyotni bekor qilmoqchimisiz?')" class="btn btn-danger p-0 px-1" title="Bekor qilish">
+                                    <i class="bi bi-x-lg"></i>
+                                  </button>
+                                </form>
+                              </div>
+                            </td>
+                          </tr>
+                        @empty
+                          <tr>
+                            <td class="text-center" colspan="8">{{ __('kassa.not_found_amaliyot') }}</td>
+                          </tr>
+                        @endforelse
+                      </tbody>
+                    </table>
+                    <script>
+                      function confirmAction(button, message) {
+                        if (confirm(message)) {
+                          button.closest('form').submit();
+                        }
                       }
-                    }
-                  </script>
+                    </script>
+                  </div>
                 </div>
               </div>
             </div>

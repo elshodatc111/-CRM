@@ -28,46 +28,48 @@
         <div class="card info-card welcome-card">
           <div class="card-body">
             <h5 class="card-title">{{ __('emploes_page.employees_list') }}</h5>
-            <div class="table-responsive">
-              <table class="table table-bordered" style="font-size: 12px;">
-                <thead>
-                  <tr class="text-center bg-light">
-                    <th>#</th>
-                    <th>{{ __('emploes_page.fio') }}</th>
-                    <th>{{ __('emploes_page.phone') }}</th>
-                    <th>{{ __('emploes_page.position') }}</th>
-                    <th>{{ __('emploes_page.status') }}</th>
-                    <th>{{ __('emploes_page.hired_date') }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  @forelse ($emploes as $emploe)
-                    <tr class="text-center align-middle">
-                      <td>{{ $loop->iteration }}</td>
-                      <td style="text-align: left">
-                        <a href="{{ route('emploes_show', $emploe['id']) }}" class="fw-bold text-primary">
-                          {{ $emploe->name }}
-                        </a>
-                      </td>
-                      <td>{{ $emploe->phone }}</td>
-                      <td>{{ __('emploes_page.roles.' . $emploe->role) }}</td>
-                      <td>
-                        <span class="badge {{ $emploe->status == true ? 'bg-success' : 'bg-danger' }}">
-                           {{ __('emploes_page.status_' . ($emploe->status ?? 'true')) }}
-                        </span>
-                      </td>
-                      <td>{{ $emploe->created_at->format('d.m.Y') }}</td>
-                    </tr>
-                  @empty
-                    <tr>
-                      <td colspan="6" class="text-center py-3 text-muted">
-                        {{ __('emploes_page.no_data') }}
-                      </td>
-                    </tr>
-                  @endforelse
-                </tbody>
-              </table>
-            </div>
+              <div class="notes-wrapper" style="max-height: 500px; overflow-y: auto; overflow-x: hidden;height: 500px;">
+                <div class="table-responsive">
+                  <table class="table table-bordered" style="font-size: 12px;">
+                    <thead>
+                      <tr class="text-center bg-light">
+                        <th>#</th>
+                        <th>{{ __('emploes_page.fio') }}</th>
+                        <th>{{ __('emploes_page.phone') }}</th>
+                        <th>{{ __('emploes_page.position') }}</th>
+                        <th>{{ __('emploes_page.status') }}</th>
+                        <th>{{ __('emploes_page.hired_date') }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @forelse ($emploes as $emploe)
+                        <tr class="text-center align-middle">
+                          <td>{{ $loop->iteration }}</td>
+                          <td style="text-align: left">
+                            <a href="{{ route('emploes_show', $emploe['id']) }}" class="fw-bold text-primary">
+                              {{ $emploe->name }}
+                            </a>
+                          </td>
+                          <td>{{ $emploe->phone }}</td>
+                          <td>{{ __('emploes_page.roles.' . $emploe->role) }}</td>
+                          <td>
+                            <span class="badge {{ $emploe->status == true ? 'bg-success' : 'bg-danger' }}">
+                              {{ __('emploes_page.status_' . ($emploe->status ?? 'true')) }}
+                            </span>
+                          </td>
+                          <td>{{ $emploe->created_at->format('d.m.Y') }}</td>
+                        </tr>
+                      @empty
+                        <tr>
+                          <td colspan="6" class="text-center py-3 text-muted">
+                            {{ __('emploes_page.no_data') }}
+                          </td>
+                        </tr>
+                      @endforelse
+                    </tbody>
+                  </table>
+                </div>
+              </div>
           </div>
         </div>
       </div>
